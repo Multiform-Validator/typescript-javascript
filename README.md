@@ -103,8 +103,8 @@ This package contains various modules for validating different types of data. Be
 #### Example using Reactjs:
 
 ![Example using Reactjs](https://raw.githubusercontent.com/Multiform-Validator/docs/main/images/exampleWithReactjs.png)
-![Showing error options](https://raw.githubusercontent.com/Multiform-Validator/docs/main/images/images/options.png)
-![Showing error in browser](https://raw.githubusercontent.com/Multiform-Validator/docs/main/images/images/showErro.png)
+![Showing error options](https://raw.githubusercontent.com/Multiform-Validator/docs/main/images/options.png)
+![Showing error in browser](https://raw.githubusercontent.com/Multiform-Validator/docs/main/images/showErro.png)
 
 ### For better information, read the documentation
 
