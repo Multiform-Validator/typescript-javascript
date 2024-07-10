@@ -9,7 +9,7 @@
 
 This npm package provides JavaScript functions to validate various forms fields.
 
-Documentation: https://multiform-validator.vercel.app
+Documentation: https://multiformvalidator.netlify.app
 
 Feel free to find bugs and report them to me. Your feedback is highly appreciated. Hugs from Gabriel Logan!
 
@@ -144,7 +144,7 @@ validator.FUNCTION_NAME.errorMsg = 'ErrorMsg' // You can customize errors
 ```
 
 ## Documentation
-### https://multiform-validator.vercel.app
+### https://multiformvalidator.netlify.app
 
 ```javascript
 
