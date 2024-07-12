@@ -16,17 +16,21 @@ Feel free to find bugs and report them to me. Your feedback is highly appreciate
 ## CDNs
 
 jsDelivr:
+
 ```bash
 https://cdn.jsdelivr.net/npm/multiform-validator@2.1.3/dist/bundle.min.js
 ```
+
 ```html
 <script src="https://cdn.jsdelivr.net/npm/multiform-validator@2.1.3/dist/bundle.min.js"></script>
 ```
 
 unpkg:
+
 ```bash
 https://unpkg.com/multiform-validator@2.1.3/dist/bundle.js
 ```
+
 ```html
 <script src="https://unpkg.com/multiform-validator@2.1.3/dist/bundle.js"></script>
 ```
@@ -36,13 +40,11 @@ https://unpkg.com/multiform-validator@2.1.3/dist/bundle.js
 ```html
 <script src="https://cdn.jsdelivr.net/npm/multiform-validator@2.1.3/dist/bundle.min.js"></script>
 <script>
-
-	const emailResult = isEmail('123456');
-	const cpfResult = cpfIsValid('123456');
+	const emailResult = isEmail("123456");
+	const cpfResult = cpfIsValid("123456");
 
 	console.log(emailResult); // returns false
 	console.log(cpfResult.isValid); // returns false
-
 </script>
 ```
 
@@ -100,6 +102,7 @@ This package contains various modules for validating different types of data. Be
 - **validateUSPhoneNumber**: US phone number validation.
 
 ### You can use it in React Native, Angular, any javascript framework or any javascript or typescript code.
+
 #### Example using Reactjs:
 
 ![Example using Reactjs](https://raw.githubusercontent.com/Multiform-Validator/docs/main/images/exampleWithReactjs.png)
@@ -109,19 +112,17 @@ This package contains various modules for validating different types of data. Be
 ### For better information, read the documentation
 
 ```javascript
-
-const validator = require('multiform-validator');
+const validator = require("multiform-validator");
 // or
-import validator from 'multiform-validator';
+import validator from "multiform-validator";
 
-or
+or;
 
 // Attention, FUNCTION_NAME is not a valid function name! It is just an example of how to import the functions.
 
-const { FUNCTION_NAME } = require('multiform-validator');
+const { FUNCTION_NAME } = require("multiform-validator");
 // or
-import { FUNCTION_NAME } from 'multiform-validator';
-
+import { FUNCTION_NAME } from "multiform-validator";
 ```
 
 ```javascript
@@ -144,32 +145,36 @@ validator.FUNCTION_NAME.errorMsg = 'ErrorMsg' // You can customize errors
 ```
 
 ## Documentation
+
 ### https://multiformvalidator.netlify.app
 
 ```javascript
-
-const { validateEmail } = require('multiform-validator');
+const { validateEmail } = require("multiform-validator");
 // or
-import { validateEmail } from 'multiform-validator';
+import { validateEmail } from "multiform-validator";
 
 // It has many more validations, you can read the documentation or
 // do several tests to learn how to use the library in the best possible way.
 
 // Two last parameters are optional
-console.log(validateEmail('email@email.com', { maxLength: 30, country: 'br' }).isValid); // returns false
-console.log(validateEmail('email@email.com.br', { maxLength: 30, country: 'br' }).isValid); // returns true
-console.log(validateEmail('email@email.com', { maxLength: 30 }).isValid); // returns true
+console.log(
+	validateEmail("email@email.com", { maxLength: 30, country: "br" }).isValid,
+); // returns false
+console.log(
+	validateEmail("email@email.com.br", { maxLength: 30, country: "br" }).isValid,
+); // returns true
+console.log(validateEmail("email@email.com", { maxLength: 30 }).isValid); // returns true
 
 // All examples return default messages, below is an example setting your own messages
 
 // If you want to use a default parameter, use null.
 
-const validationResult = validateEmail('email@email.com', { maxLength: 30 });
+const validationResult = validateEmail("email@email.com", { maxLength: 30 });
 
 if (validationResult.isValid) {
-console.log('0 errors');
+	console.log("0 errors");
 } else {
-console.log(validationResult.errorMsg); // returns the error
+	console.log(validationResult.errorMsg); // returns the error
 }
 
 // or
@@ -180,11 +185,10 @@ const validationResult = validateEmail("1email@email.com", {
 });
 
 if (validationResult.isValid) {
-console.log('0 errors');
+	console.log("0 errors");
 } else {
-console.log(validationResult.errorMsg); // Return  'This is an invalid email with my own errors'
+	console.log(validationResult.errorMsg); // Return  'This is an invalid email with my own errors'
 }
-
 ```
 
 Feel free to explore the various functions and experiment with different inputs to understand their behavior. If you encounter any issues or have suggestions, don't hesitate to reach out to me. Your feedback is valuable and helps improve the package. Happy coding!
