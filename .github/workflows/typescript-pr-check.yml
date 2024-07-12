@@ -20,8 +20,9 @@ jobs:
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
+          cache: 'npm'
 
-      - name: Test
-        run: |
-          yarn install
-          yarn pr-check
+      - name: Install dependencies
+        run: yarn install
+      - name: Run tests
+        run: yarn pr-check
