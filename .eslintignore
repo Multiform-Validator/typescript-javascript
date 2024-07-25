@@ -7,3 +7,5 @@ jestTestFile.js
 BackupCopia
 .eslintrc.js
 jest.config.js
+*.js
+*.mjs

@@ -1,10 +1,10 @@
 const path = require("path");
 
-module.exports = {
+const commonjsWebpackConfig = {
 	mode: "production", // production mode
 	entry: "./index.ts", // entry point of your application
 	output: {
-		filename: "bundle.js", // output file name
+		filename: "cjs/index.js", // output file name
 		path: path.resolve(__dirname, "dist"), // output folder
 		libraryTarget: "umd", // this allows your module to be used via require() and as a global
 		globalObject: "this", // this ensures that 'this' is 'window' in a browser environment
@@ -12,7 +12,7 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.tsx?$/,
+				test: /\.ts?$/,
 				use: "ts-loader",
 				exclude: /node_modules/,
 			},
@@ -21,4 +21,6 @@ module.exports = {
 	resolve: {
 		extensions: [".ts"],
 	},
-};
+}
+
+module.exports = [commonjsWebpackConfig]; // export the webpack config
