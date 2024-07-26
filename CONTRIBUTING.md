@@ -5,6 +5,7 @@ The multiform-validator is a powerful Multilanguage library for validating form 
 ## How to Contribute
 
 1. **Fork the Repository**
+
    - Fork the multiform-validator repository to your GitHub account.
 
 2. **Clone the Repository**
@@ -12,8 +13,8 @@ The multiform-validator is a powerful Multilanguage library for validating form 
      ```
      git clone https://github.com/gabriel-logan/multiform-validator.git
      ```
-     
-4. **Commit and Push**
+3. **Commit and Push**
+
    - Commit your changes and push them to the forked repository:
      ```
      git add .
@@ -21,7 +22,7 @@ The multiform-validator is a powerful Multilanguage library for validating form 
      git push origin my-feature
      ```
 
-5. **Open a Pull Request (PR)**
+4. **Open a Pull Request (PR)**
    - Go to the forked repository on GitHub and open a PR to the main branch of the project.
 
 ## Contribution Guidelines
