@@ -17,6 +17,8 @@ Feel free to find bugs and report them to me. Your feedback is highly appreciate
 
 jsDelivr:
 
+CJS:
+
 ```bash
 https://cdn.jsdelivr.net/npm/multiform-validator@2.2.0/dist/cjs/index.min.js
 ```
@@ -27,12 +29,14 @@ https://cdn.jsdelivr.net/npm/multiform-validator@2.2.0/dist/cjs/index.min.js
 
 unpkg:
 
+CJS:
+
 ```bash
-https://unpkg.com/multiform-validator@2.2.0/dist/cjs/index.js
+https://unpkg.com/multiform-validator@2.2.1/dist/cjs/index.cjs
 ```
 
 ```html
-<script src="https://unpkg.com/multiform-validator@2.2.0/dist/cjs/index.js"></script>
+<script src="https://unpkg.com/multiform-validator@2.2.1/dist/cjs/index.cjs"></script>
 ```
 
 ### Example of use with CDN
