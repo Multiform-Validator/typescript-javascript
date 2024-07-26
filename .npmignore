@@ -53,3 +53,5 @@ gitpush.exe
 jestTestFile.js
 .github/
 dist/types/
+CONTRIBUTING.md
+test.*

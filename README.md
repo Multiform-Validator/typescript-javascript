@@ -18,27 +18,27 @@ Feel free to find bugs and report them to me. Your feedback is highly appreciate
 jsDelivr:
 
 ```bash
-https://cdn.jsdelivr.net/npm/multiform-validator@2.1.8/dist/bundle.min.js
+https://cdn.jsdelivr.net/npm/multiform-validator@2.1.9/dist/index.min.js
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/multiform-validator@2.1.8/dist/bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/multiform-validator@2.1.9/dist/index.min.js"></script>
 ```
 
 unpkg:
 
 ```bash
-https://unpkg.com/multiform-validator@2.1.8/dist/bundle.js
+https://unpkg.com/multiform-validator@2.1.9/dist/index.js
 ```
 
 ```html
-<script src="https://unpkg.com/multiform-validator@2.1.8/dist/bundle.js"></script>
+<script src="https://unpkg.com/multiform-validator@2.1.9/dist/index.js"></script>
 ```
 
 ### Example of use with CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/multiform-validator@2.1.8/dist/bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/multiform-validator@2.1.9/dist/index.min.js"></script>
 <script>
 	const emailResult = isEmail("123456");
 	const cpfResult = cpfIsValid("123456");

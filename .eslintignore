@@ -9,3 +9,5 @@ BackupCopia
 jest.config.js
 *.js
 *.mjs
+*.html
+*.cjs
