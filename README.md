@@ -15,9 +15,23 @@ Feel free to find bugs and report them to me. Your feedback is highly appreciate
 
 ## CDNs
 
+### ESM:
+
 jsDelivr:
 
-CJS:
+```bash
+https://cdn.jsdelivr.net/npm/multiform-validator@2.2.3/+esm
+```
+
+```html
+<script type="module">
+	import multiform-validator from "https://cdn.jsdelivr.net/npm/multiform-validator@2.2.3/+esm"
+</script>
+```
+
+### CJS:
+
+jsDelivr:
 
 ```bash
 https://cdn.jsdelivr.net/npm/multiform-validator@2.2.0/dist/cjs/index.min.js
@@ -29,23 +43,37 @@ https://cdn.jsdelivr.net/npm/multiform-validator@2.2.0/dist/cjs/index.min.js
 
 unpkg:
 
-CJS:
-
 ```bash
-https://unpkg.com/multiform-validator@2.2.1/dist/cjs/index.cjs
+https://unpkg.com/multiform-validator@2.2.0/dist/cjs/index.js
 ```
 
 ```html
-<script src="https://unpkg.com/multiform-validator@2.2.1/dist/cjs/index.cjs"></script>
+<script src="https://unpkg.com/multiform-validator@2.2.0/dist/cjs/index.js"></script>
 ```
 
 ### Example of use with CDN
+
+using cjs:
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/multiform-validator@2.2.0/dist/cjs/index.min.js"></script>
 <script>
 	const emailResult = isEmail("123456");
 	const cpfResult = cpfIsValid("123456");
+
+	console.log(emailResult); // returns false
+	console.log(cpfResult.isValid); // returns false
+</script>
+```
+or
+
+using esm:
+
+```html
+<script type="module">
+	import multiformValidator from "https://cdn.jsdelivr.net/npm/multiform-validator@2.2.3/+esm";
+	const emailResult = multiformValidator.isEmail("123456");
+	const cpfResult = multiformValidator.cpfIsValid("123456");
 
 	console.log(emailResult); // returns false
 	console.log(cpfResult.isValid); // returns false
