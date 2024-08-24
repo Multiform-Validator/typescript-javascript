@@ -10,7 +10,6 @@ const defaultErrorMsg: string[] = [
 	"Username cannot contain spaces",
 	"Cannot start with a number",
 	"Cannot contain only numbers",
-	"Unknown error",
 ];
 
 interface OptionsParams {
@@ -47,7 +46,6 @@ const defaultOptionsParams: OptionsParams = {
   'Username cannot contain spaces',
   'Cannot start with a number',
   'Cannot contain only numbers',
-  'Unknown error'
 ];
  *
  * Create a list of errors separated by commas in strings
@@ -112,97 +110,91 @@ function validateUsername(
 	if (minLenthUsername < 1 || maxLenthUsername < 1) {
 		throw new Error("Size parameters cannot be less than one");
 	} // Nenhum dos dois pode ser menor que 1
-	try {
-		if (regexHasSpaces.test(username)) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(3),
-			};
-		}
-		if (regexOnlyNumbers.test(username)) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(5),
-			};
-		}
-		if (regexStartsWithNumber.test(username)) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(4),
-			};
-		}
-		if (username.length < minLenthUsername) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(1),
-			};
-		} // Tamanho n pode ser menor q o min
-		if (username.length > maxLenthUsername) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(2),
-			};
-		} // Tamanho da palavra não pode ser maior que o tamanho máximo
 
-		// Define os caracteres especiais
-		const specialChars: string[] = [
-			"!",
-			"@",
-			"#",
-			"$",
-			"%",
-			"^",
-			"&",
-			"*",
-			"(",
-			")",
-			"-",
-			"_",
-			"=",
-			"+",
-			"[",
-			"]",
-			"{",
-			"}",
-			"|",
-			"\\",
-			";",
-			":",
-			"'",
-			'"',
-			",",
-			".",
-			"<",
-			">",
-			"/",
-			"?",
-		];
-
-		// Cria um objeto para contar a ocorrência de cada caractere especial
-		const charCount: { [key: string]: number } = {};
-
-		// Itera sobre a string para contar os caracteres especiais
-		for (const char of username) {
-			if (specialChars.includes(char)) {
-				charCount[char] = (charCount[char] || 0) + 1;
-				if (charCount[char] > 2) {
-					return {
-						isValid: false,
-						errorMsg: "Username cannot contain multiple special characters",
-					};
-				}
-			}
-		}
-
-		return {
-			isValid: true,
-			errorMsg: null,
-		};
-	} catch (error) {
+	if (regexHasSpaces.test(username)) {
 		return {
 			isValid: false,
-			errorMsg: getErrorMessage(6),
+			errorMsg: getErrorMessage(3),
 		};
 	}
+	if (regexOnlyNumbers.test(username)) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(5),
+		};
+	}
+	if (regexStartsWithNumber.test(username)) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(4),
+		};
+	}
+	if (username.length < minLenthUsername) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(1),
+		};
+	} // Tamanho n pode ser menor q o min
+	if (username.length > maxLenthUsername) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(2),
+		};
+	} // Tamanho da palavra não pode ser maior que o tamanho máximo
+
+	// Define os caracteres especiais
+	const specialChars: string[] = [
+		"!",
+		"@",
+		"#",
+		"$",
+		"%",
+		"^",
+		"&",
+		"*",
+		"(",
+		")",
+		"-",
+		"_",
+		"=",
+		"+",
+		"[",
+		"]",
+		"{",
+		"}",
+		"|",
+		"\\",
+		";",
+		":",
+		"'",
+		'"',
+		",",
+		".",
+		"<",
+		">",
+		"/",
+		"?",
+	];
+
+	// Cria um objeto para contar a ocorrência de cada caractere especial
+	const charCount: { [key: string]: number } = {};
+
+	// Itera sobre a string para contar os caracteres especiais
+	for (const char of username) {
+		if (specialChars.includes(char)) {
+			charCount[char] = (charCount[char] || 0) + 1;
+			if (charCount[char] > 2) {
+				return {
+					isValid: false,
+					errorMsg: "Username cannot contain multiple special characters",
+				};
+			}
+		}
+	}
+
+	return {
+		isValid: true,
+		errorMsg: null,
+	};
 }
 export default validateUsername;

@@ -60,4 +60,16 @@ describe("cpfIsValid", () => {
 		expect(result.isValid).toBe(false);
 		expect(result.errorMsg).toBe("CPF is not valid");
 	});
+
+	it("should return isValid as false and the correct error message when CPF is null or empty", () => {
+		let result = cpfIsValid("");
+		expect(result.isValid).toBe(false);
+
+		expect(() => cpfIsValid(null as any)).toThrow("The input should be a string.");
+	});
+
+	it("should return isValid as false and the correct error message when CPF does not have 11 digits after cleaning", () => {
+		const result = cpfIsValid("123.456.789-0");
+		expect(result.isValid).toBe(false);
+	});
 });

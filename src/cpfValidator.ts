@@ -2,7 +2,6 @@ const defaultErrorMsg: string[] = [
 	"CPF invalid",
 	"CPF must have 11 numerical digits",
 	"CPF is not valid",
-	"Unknown error",
 ];
 
 /**
@@ -29,6 +28,7 @@ function cpfIsValid(
 	if (typeof cpf !== "string") {
 		throw new TypeError("The input should be a string.");
 	}
+
 	if (errorMsg) {
 		if (!Array.isArray(errorMsg)) throw new TypeError("Must be an Array");
 		for (let index: number = 0; index < errorMsg.length; index += 1) {
@@ -45,56 +45,49 @@ function cpfIsValid(
 		return errorMessage != null ? errorMessage : defaultErrorMsg[index];
 	}
 
-	try {
-		if (!cpf) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(0),
-			};
-		}
+	if (!cpf) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(0),
+		};
+	}
 
-		const cpfClean: string = cpf.replace(/\D+/g, "");
+	const cpfClean: string = cpf.replace(/\D+/g, "");
 
-		if (/^(\d)\1{10}$/.test(cpfClean)) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(2),
-			};
-		}
-
-		if (cpfClean.length !== 11) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(1),
-			};
-		}
-
-		const cpfArray: number[] = cpfClean.split("").map(Number);
-		const validator: (sum: number) => number = (sum: number) =>
-			sum % 11 < 2 ? 0 : 11 - (sum % 11);
-		const sum1: number = cpfArray
-			.slice(0, 9)
-			.reduce((acc, val, i) => acc + val * (10 - i), 0);
-		const sum2: number = cpfArray
-			.slice(0, 10)
-			.reduce((acc, val, i) => acc + val * (11 - i), 0);
-
-		if (cpfArray[9] === validator(sum1) && cpfArray[10] === validator(sum2)) {
-			return {
-				isValid: true,
-				errorMsg: null,
-			};
-		}
+	if (/^(\d)\1{10}$/.test(cpfClean)) {
 		return {
 			isValid: false,
 			errorMsg: getErrorMessage(2),
 		};
-	} catch (err) {
+	}
+
+	if (cpfClean.length !== 11) {
 		return {
 			isValid: false,
-			errorMsg: getErrorMessage(3),
+			errorMsg: getErrorMessage(1),
 		};
 	}
+
+	const cpfArray: number[] = cpfClean.split("").map(Number);
+	const validator: (sum: number) => number = (sum: number) =>
+		sum % 11 < 2 ? 0 : 11 - (sum % 11);
+	const sum1: number = cpfArray
+		.slice(0, 9)
+		.reduce((acc, val, i) => acc + val * (10 - i), 0);
+	const sum2: number = cpfArray
+		.slice(0, 10)
+		.reduce((acc, val, i) => acc + val * (11 - i), 0);
+
+	if (cpfArray[9] === validator(sum1) && cpfArray[10] === validator(sum2)) {
+		return {
+			isValid: true,
+			errorMsg: null,
+		};
+	}
+	return {
+		isValid: false,
+		errorMsg: getErrorMessage(2),
+	};
 }
 
 export default cpfIsValid;

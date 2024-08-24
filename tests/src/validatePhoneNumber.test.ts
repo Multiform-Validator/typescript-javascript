@@ -32,4 +32,16 @@ describe("validatePhoneNumber", () => {
 			"All values within the array must be strings or null/undefined.",
 		);
 	});
+
+	it("should throw an error when errorMsg is not an array or null", () => {
+		expect(() => validatePhoneNumber("(555) 123-4567", "Custom error" as any)).toThrow(
+			"errorMsg must be an Array or null",
+		);
+	});
+
+	it("should throw an error when the input is not a string", () => {
+		expect(() => validatePhoneNumber(123 as unknown as string)).toThrow(
+			"The input should be a string.",
+		);
+	});
 });

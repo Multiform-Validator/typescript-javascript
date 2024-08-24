@@ -17,4 +17,10 @@ describe("validatePassportNumber", () => {
 		const result = validatePassportNumber("123");
 		expect(result).toEqual({ isValid: false, country: null });
 	});
+
+	it("should throw an error when the input is not a string", () => {
+		expect(() => validatePassportNumber(123 as unknown as string)).toThrow(
+			"The input should be a string.",
+		);
+	});
 });

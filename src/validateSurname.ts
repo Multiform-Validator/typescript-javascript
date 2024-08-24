@@ -6,7 +6,6 @@ const defaultErrorMsg: string[] = [
 	"Surname cannot contain special characters",
 	"This surname is not valid",
 	"Surname too big, try again",
-	"Unknown error",
 ];
 
 interface OptionsParams {
@@ -40,7 +39,6 @@ const defaultOptionsParams: OptionsParams = {
   'Surname cannot contain special characters',
   'This surname is not valid',
   'Surname too big, try again',
-  'Unknown error',
 ];
  * @returns An object with 'isValid' (boolean) and 'errorMsg' (string) properties.
  */
@@ -56,8 +54,9 @@ function validateSurname(
 	// caso contrario retorna um ERRO
 
 	if (errorMsg) {
-		if (!Array.isArray(errorMsg))
+		if (!Array.isArray(errorMsg)) {
 			throw new Error("errorMsg must be an Array or null");
+		}
 		for (let index: number = 0; index < errorMsg.length; index += 1) {
 			if (errorMsg[index] != null && typeof errorMsg[index] !== "string") {
 				throw new TypeError(
@@ -98,60 +97,53 @@ function validateSurname(
 		};
 	}
 
-	try {
-		if (surname.length > maxNameLength) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(4),
-			};
-		}
-		if (surname.length < minNameLength) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(3),
-			};
-		}
-
-		if (surname.match(/\d/)) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(1),
-			};
-		}
-
-		if (surname.match(/[^\w\s]/)) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(2),
-			};
-		}
-
-		// Check if all characters in the surname are repeated
-		if (new Set(surname).size === 1) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(3), // Assuming 'Surname is not allowed.' refers to all characters being repeated.
-			};
-		}
-
-		// Check if the surname contains at least 3 consecutive characters that are the same
-		const consecutiveCharsRegex: RegExp = /(\w)\1\1/;
-		if (consecutiveCharsRegex.test(surname)) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(3), // You can set the appropriate error message for this case.
-			};
-		}
-
-		return {
-			isValid: true,
-			errorMsg: null,
-		};
-	} catch (error) {
+	if (surname.length > maxNameLength) {
 		return {
 			isValid: false,
-			errorMsg: getErrorMessage(5),
+			errorMsg: getErrorMessage(4),
 		};
 	}
+	if (surname.length < minNameLength) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(3),
+		};
+	}
+
+	if (surname.match(/\d/)) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(1),
+		};
+	}
+
+	if (surname.match(/[^\w\s]/)) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(2),
+		};
+	}
+
+	// Check if all characters in the surname are repeated
+	if (new Set(surname).size === 1) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(3), // Assuming 'Surname is not allowed.' refers to all characters being repeated.
+		};
+	}
+
+	// Check if the surname contains at least 3 consecutive characters that are the same
+	const consecutiveCharsRegex: RegExp = /(\w)\1\1/;
+	if (consecutiveCharsRegex.test(surname)) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(3), // You can set the appropriate error message for this case.
+		};
+	}
+
+	return {
+		isValid: true,
+		errorMsg: null,
+	};
 }
 export default validateSurname;

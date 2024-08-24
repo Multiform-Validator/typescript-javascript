@@ -77,4 +77,14 @@ describe("validateName", () => {
 		expect(result2.isValid).toBe(true);
 		expect(result3.isValid).toBe(true);
 	});
+
+	it("should throw an error when errorMsg not be an Array or null", () => {
+		expect(() =>
+			validateName("John", {
+				minLength: 1,
+				maxLength: 20,
+				errorMsg: "error" as unknown as string[],
+			}),
+		).toThrow("errorMsg must be an Array or null");
+	});
 });

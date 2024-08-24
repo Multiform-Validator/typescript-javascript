@@ -13,14 +13,20 @@ describe("cnpjIsValid function", () => {
 		expect(result.errorMsg).toBe("CNPJ is not valid");
 	});
 
-	test("should invalidate a CNPJ with incorrect length", () => {
-		const result = cnpjIsValid("1234567890123");
+	test("should invalidate a CNPJ with non-digit characters", () => {
+		const result = cnpjIsValid("72.501.263/0001-4A");
+		expect(result.isValid).toBe(false);
+		expect(result.errorMsg).toBe("CNPJ is not valid");
+	});
+
+	test("should return false if cnpj length is not 14 or 18", () => {
+		const result = cnpjIsValid("123456789012");
 		expect(result.isValid).toBe(false);
 		expect(result.errorMsg).toBe("CNPJ must have 14 numerical digits");
 	});
 
-	test("should invalidate a CNPJ with non-digit characters", () => {
-		const result = cnpjIsValid("72.501.263/0001-4A");
+	test("should return false if cnpj has valid length but invalid verifier digits", () => {
+		const result = cnpjIsValid("12.345.678/0001-00");
 		expect(result.isValid).toBe(false);
 		expect(result.errorMsg).toBe("CNPJ is not valid");
 	});
@@ -63,6 +69,12 @@ describe("cnpjIsValid function", () => {
 	});
 
 	test("should return false when all digits are repeated", () => {
+		const result = cnpjIsValid("11.111.111/1111-11");
+		expect(result.isValid).toBe(false);
+		expect(result.errorMsg).toBe("CNPJ is not valid");
+	});
+
+	test("should return false when all digits are the same", () => {
 		const result = cnpjIsValid("11.111.111/1111-11");
 		expect(result.isValid).toBe(false);
 		expect(result.errorMsg).toBe("CNPJ is not valid");

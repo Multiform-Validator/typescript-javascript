@@ -72,4 +72,20 @@ describe("getOnlyEmail", () => {
 		);
 		expect(result).toBe("alexa@google.com");
 	});
+
+	it('should clean the domain from the email when cleanDomain is true', () => {
+		const result = getOnlyEmail(
+			"Entre em contato com a equipe:	alexa@google.com.br",
+			{ cleanDomain: true }
+		);
+		expect(result).toBe("alexa@google.com.br");
+	});
+
+	it('should clean the domain from the email using a custom domain list', () => {
+		const result = getOnlyEmail(
+			"Entre em contato com a equipe:	alexa@google.custom",
+			{ cleanDomain: [".custom"] }
+		);
+		expect(result).toBe("alexa@google.custom");
+	});
 });

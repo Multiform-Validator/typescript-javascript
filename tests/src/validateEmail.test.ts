@@ -74,4 +74,35 @@ describe("validateEmail", () => {
 		expect(result.isValid).toBe(false);
 		expect(result.errorMsg).toBe("Email cannot be greater than 400 characters");
 	});
+
+	it("should return false when an empty string is passed", () => {
+		const result = validateEmail("");
+		expect(result.isValid).toBe(false);
+		expect(result.errorMsg).toBe("Email cannot be empty");
+	});
+
+	it("should throw an error when errorMsg is not an array or null", () => {
+		// @ts-ignore
+		expect(() => validateEmail("jor@dio.com", { errorMsg: 123 })).toThrow("errorMsg must be an Array or null");
+	});
+
+	it("should throw an error if any element of the errorMsg array is different from string or null", () => {
+		expect(() => validateEmail("jd@dio.com", { errorMsg: [123 as any] })).toThrow("All values within the array must be strings or null/undefined.");
+	})
+
+	it("should throw an error when maxLength must be a number and cannot be less than 1", () => {
+		expect(() => validateEmail("aa@dao.com", { maxLength: 0 })).toThrow("maxLength must be a number and cannot be less than 1");
+	});
+
+	it("should invalidate an email that does not end with the country code", () => {
+		const result = validateEmail("test@gmail.com", { country: "us" });
+		expect(result.isValid).toBe(false);
+		expect(result.errorMsg).toBe("This email is not valid in the country");
+	});
+
+	it("should validate an email that ends with the country code", () => {
+		const result = validateEmail("test@gmail.com.us", { country: "us" });
+		expect(result.isValid).toBe(true);
+		expect(result.errorMsg).toBe(null);
+	});
 });

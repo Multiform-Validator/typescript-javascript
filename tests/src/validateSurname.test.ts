@@ -87,4 +87,18 @@ describe("validateSurname", () => {
 		expect(result2.isValid).toBe(true);
 		expect(result3.isValid).toBe(true);
 	});
+
+	it("should throw an error when errorMsg is not an array or null", () => {
+		expect(() => validateSurname("Johnson", {
+			errorMsg: "Custom error" as unknown as (string | null)[],
+		})).toThrow(
+			"errorMsg must be an Array or null",
+		);
+	});
+
+	it("should throw an error when the input is not a string", () => {
+		expect(() => validateSurname(123 as unknown as string)).toThrow(
+			"The input should be a string.",
+		);
+	});
 });

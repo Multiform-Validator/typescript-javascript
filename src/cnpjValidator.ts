@@ -27,7 +27,6 @@ const defaultErrorMsg: string[] = [
 	"CNPJ invalid",
 	"CNPJ must have 14 numerical digits",
 	"CNPJ is not valid",
-	"Unknown error",
 ];
 
 /**
@@ -39,7 +38,7 @@ const defaultErrorMsg: string[] = [
  * If you want to use a default parameter, use null or leave Empty.
  *
  * Default:
- * ['CNPJ invalid', 'CNPJ must have 14 numerical digits', 'CNPJ is not valid', 'Unknown error']
+ * ['CNPJ invalid', 'CNPJ must have 14 numerical digits', 'CNPJ is not valid']
  * .
  *
  * Create a list of errors separated by commas in strings
@@ -75,48 +74,39 @@ function cnpjIsValid(
 		return errorMessage != null ? errorMessage : defaultErrorMsg[index];
 	}
 
-	try {
-		if (!cnpj) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(0), // 'CNPJ invalid'
-			};
-		}
-		// Check if the CNPJ has 14 digits
-		if (cnpj.length !== 14 && cnpj.length !== 18) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(1), // 'CNPJ must have 14 numerical digits'
-			};
-		}
-		// Remove any non-digit characters from the CNPJ string
-		const cnpjClean: string = cnpj.replace(/\D+/g, "");
-		// Convert the CNPJ string to an array of digits
-		const cnpjArray: number[] = cnpjClean.split("").map(Number);
-		// Calculate the first and second verifiers
-		const firstVerifier: number = calculateFirstVerifier(
-			cnpjArray.slice(0, 12),
-		);
-		const secondVerifier: number = calculateSecondVerifier(
-			cnpjArray.slice(0, 12).concat(firstVerifier),
-			firstVerifier,
-		);
-		// Check if the calculated verifiers match the ones in the CNPJ
-		if (cnpjArray[12] === firstVerifier && cnpjArray[13] === secondVerifier) {
-			return {
-				isValid: true,
-				errorMsg: null,
-			};
-		}
+	if (!cnpj) {
 		return {
 			isValid: false,
-			errorMsg: getErrorMessage(2), // 'CNPJ is not valid'
-		};
-	} catch (error) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(3), // 'Unknown error'
+			errorMsg: getErrorMessage(0), // 'CNPJ invalid'
 		};
 	}
+	// Check if the CNPJ has 14 digits
+	if (cnpj.length !== 14 && cnpj.length !== 18) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(1), // 'CNPJ must have 14 numerical digits'
+		};
+	}
+	// Remove any non-digit characters from the CNPJ string
+	const cnpjClean: string = cnpj.replace(/\D+/g, "");
+	// Convert the CNPJ string to an array of digits
+	const cnpjArray: number[] = cnpjClean.split("").map(Number);
+	// Calculate the first and second verifiers
+	const firstVerifier: number = calculateFirstVerifier(cnpjArray.slice(0, 12));
+	const secondVerifier: number = calculateSecondVerifier(
+		cnpjArray.slice(0, 12).concat(firstVerifier),
+		firstVerifier,
+	);
+	// Check if the calculated verifiers match the ones in the CNPJ
+	if (cnpjArray[12] === firstVerifier && cnpjArray[13] === secondVerifier) {
+		return {
+			isValid: true,
+			errorMsg: null,
+		};
+	}
+	return {
+		isValid: false,
+		errorMsg: getErrorMessage(2), // 'CNPJ is not valid'
+	};
 }
 export default cnpjIsValid;

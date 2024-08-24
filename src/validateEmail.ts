@@ -7,7 +7,6 @@ const defaultErrorMsg: string[] = [
 	"Email too big, try again",
 	"This email is not valid in the country",
 	"Email domain is not allowed.",
-	"Unknown error",
 ];
 
 const validDomainsDefault: string[] = [
@@ -55,7 +54,7 @@ const defaultOptionsParams: OptionsParams = {
  * If you want to use a default parameter, use null.
  *
  * Default:
- * ['Email cannot be empty', 'This e-mail is not valid', 'Email cannot be greater than ${maxEmailLength} characters', 'This email is not valid in the country','Email domain is not allowed.', 'Unknown error']
+ * ['Email cannot be empty', 'This e-mail is not valid', 'Email cannot be greater than ${maxEmailLength} characters', 'This email is not valid in the country','Email domain is not allowed.']
  *
  * Create a list of errors separated by commas in strings
  *
@@ -110,6 +109,12 @@ function validateEmail(
 		}
 	}
 
+	if (maxLength || maxLength === 0) {
+		if (maxLength < 1 || typeof maxLength !== "number") {
+			throw new Error("maxLength must be a number and cannot be less than 1");
+		}
+	}
+
 	const maxEmailLength: number = maxLength || 400;
 
 	// Função interna para obter a mensagem de erro
@@ -130,47 +135,37 @@ function validateEmail(
 		};
 	}
 
-	if (maxEmailLength < 1 || typeof maxEmailLength !== "number")
-		throw new Error("maxLength must be a number and cannot be less than 1");
-
-	try {
-		// Check domain only if regex is defined (validDomains is true or validDomains is an array)
-		if (!regex.test(email)) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(4),
-			};
-		}
-		if (!isEmail(email)) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(1),
-			};
-		}
-		if (email.length > maxEmailLength) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(2),
-			};
-		}
-		// If country is provided, check if the email ends with the country code
-		if (country) {
-			if (!email.endsWith(`.${country}`)) {
-				return {
-					isValid: false,
-					errorMsg: getErrorMessage(3),
-				};
-			}
-		}
-		return {
-			isValid: true,
-			errorMsg: null,
-		};
-	} catch (error) {
+	// Check domain only if regex is defined (validDomains is true or validDomains is an array)
+	if (!regex.test(email)) {
 		return {
 			isValid: false,
-			errorMsg: getErrorMessage(5),
+			errorMsg: getErrorMessage(4),
 		};
 	}
+	if (!isEmail(email)) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(1),
+		};
+	}
+	if (email.length > maxEmailLength) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(2),
+		};
+	}
+	// If country is provided, check if the email ends with the country code
+	if (country) {
+		if (!email.endsWith(`.${country}`)) {
+			return {
+				isValid: false,
+				errorMsg: getErrorMessage(3),
+			};
+		}
+	}
+	return {
+		isValid: true,
+		errorMsg: null,
+	};
 }
 export default validateEmail;

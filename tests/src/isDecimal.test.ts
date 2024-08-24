@@ -73,7 +73,7 @@ describe("isDecimal", () => {
 	});
 
 	it("should throw error when the input is a function", () => {
-		function func() {}
+		function func() { }
 
 		expect(() => isDecimal(func() as any) as any).toThrow(errorToThrow);
 	});
@@ -115,13 +115,13 @@ describe("isDecimal", () => {
 	});
 
 	it("should throw error when the input is a class", () => {
-		class A {}
+		class A { }
 
 		expect(() => isDecimal(A as any)).toThrow(errorToThrow);
 	});
 
 	it("should throw error when the input is a class instance", () => {
-		class A {}
+		class A { }
 
 		expect(() => isDecimal(new A() as any)).toThrow(errorToThrow);
 	});
@@ -183,7 +183,7 @@ describe("isDecimal", () => {
 	});
 
 	it("should throw error when the input is a function", () => {
-		function func() {}
+		function func() { }
 
 		expect(() => isDecimal(func as any)).toThrow(
 			"Input value must be a string or a number.",
@@ -194,5 +194,25 @@ describe("isDecimal", () => {
 		expect(() => isDecimal(Symbol() as any)).toThrow(
 			"Input value must be a string or a number.",
 		);
+	});
+
+	it("should return false when the input contains both decimal separators", () => {
+		const result = isDecimal("1.234,56");
+		expect(result).toBe(false);
+	});
+
+	it("should return false when the input contains both decimal separators in reverse order", () => {
+		const result = isDecimal("1,234.56");
+		expect(result).toBe(false);
+	});
+
+	it("should return false when the input starts with a negative sign and has another negative sign elsewhere", () => {
+		const result = isDecimal("-1-23.45");
+		expect(result).toBe(false);
+	});
+
+	it("should return true when the input starts with a negative sign and has only one negative sign at the beginning", () => {
+		const result = isDecimal("-123.45");
+		expect(result).toBe(true);
 	});
 });

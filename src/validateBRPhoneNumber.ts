@@ -3,17 +3,16 @@ import { ValidateFunctions } from "./types";
 const defaultErrorMsg: string[] = [
 	"Field phone number cannot be empty",
 	"Invalid phone number",
-	"Unknown error",
 ];
 /**
  * @param phoneNumber
  * @param errorMsg optional
  * @example validateBRPhoneNumber('(11) 98765-4321');
- * @example validateBRPhoneNumber('(11) 98765-4321', ['Invalid phone number', 'Invalid format', 'Unknown error']);
+ * @example validateBRPhoneNumber('(11) 98765-4321', ['Invalid phone number', 'Invalid format']);
  * @description This function returns three errors in the following order:
  *
  * Default:
- * ['Field phone number cannot be empty', 'Invalid phone number', 'Unknown error']
+ * ['Field phone number cannot be empty', 'Invalid phone number']
  *
  * Create a list of errors separated by commas in strings
  * @returns An object with 'isValid' (boolean) and 'errorMsg' (string) properties.
@@ -51,22 +50,15 @@ function validateBRPhoneNumber(
 	}
 	// Regular expression to validate Brazilian phone numbers
 	const brPhoneNumberRegex: RegExp = /^\(\d{2}\) \d{5}-\d{4}$/;
-	try {
-		if (!brPhoneNumberRegex.test(phoneNumber)) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(1),
-			};
-		}
-		return {
-			isValid: true,
-			errorMsg: null,
-		};
-	} catch (error) {
+	if (!brPhoneNumberRegex.test(phoneNumber)) {
 		return {
 			isValid: false,
-			errorMsg: getErrorMessage(2),
+			errorMsg: getErrorMessage(1),
 		};
 	}
+	return {
+		isValid: true,
+		errorMsg: null,
+	};
 }
 export default validateBRPhoneNumber;

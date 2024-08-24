@@ -96,27 +96,6 @@ function getOnlyEmail(
 	}
 
 	return multiple ? matches : matches[0];
-	/**
-	 * 		const cleanedEmails: string[] = matches.map((email) => {
-      for (const domain of domainsToClean) {
-        const index: number = email.lastIndexOf(domain);
-        if (index !== -1) {
-          return email.substring(0, index + domain.length);
-        }
-      }
-      return email;
-    });
-
-		const cleanedEmails2: string[] = cleanedEmails.map((email) => {
-      for (const domain of domainsToClean) {
-        const index: number = email.indexOf(domain);
-        if (index !== -1) {
-          return email.substring(0, index + domain.length);
-        }
-      }
-      return email;
-		});
-	 */
 }
 
 export default getOnlyEmail;

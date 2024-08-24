@@ -12,4 +12,9 @@ describe("isDate", () => {
 			"Input value must be a string.",
 		);
 	});
+
+	it("should throw an error when the input is a empty string", () => {
+		expect(() => isDate("")).toThrow("Input value must not be an empty string.");
+		expect(() => isDate(" ")).toThrow("Input value must not be an empty string.");
+	});
 });

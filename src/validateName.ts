@@ -6,7 +6,6 @@ const defaultErrorMsg: string[] = [
 	"Name cannot contain special characters",
 	"This name is not valid",
 	"Name too big, try again",
-	"Unknown error",
 ];
 
 interface OptionsParams {
@@ -40,7 +39,6 @@ const defaultOptionsParams: OptionsParams = {
   'Name cannot contain special characters',
   'This name is not valid',
   'Name too big, try again',
-  'Unknown error',
 ];
  * @returns An object with 'isValid' (boolean) and 'errorMsg' (string) properties.
  */
@@ -95,61 +93,55 @@ function validateName(
 			errorMsg: getErrorMessage(0),
 		};
 	}
-	try {
-		if (name.length > maxNameLength) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(4),
-			};
-		}
-		if (name.length < minNameLength) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(3),
-			};
-		}
-
-		if (name.match(/\d/)) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(1),
-			};
-		}
-
-		if (name.match(/[^\w\s]/)) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(2),
-			};
-		}
-
-		// Check if all characters in the name are repeated
-		if (new Set(name).size === 1) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(3), // Assuming 'Name is not allowed.' refers to all characters being repeated.
-			};
-		}
-
-		// Check if the name contains at least 3 consecutive characters that are the same
-		const consecutiveCharsRegex: RegExp = /(\w)\1\1/;
-		if (consecutiveCharsRegex.test(name)) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(3), // You can set the appropriate error message for this case.
-			};
-		}
-
-		return {
-			isValid: true,
-			errorMsg: null,
-		};
-	} catch (error) {
+	if (name.length > maxNameLength) {
 		return {
 			isValid: false,
-			errorMsg: getErrorMessage(5),
+			errorMsg: getErrorMessage(4),
 		};
 	}
+
+	if (name.length < minNameLength) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(3),
+		};
+	}
+
+	if (name.match(/\d/)) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(1),
+		};
+	}
+
+	if (name.match(/[^\w\s]/)) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(2),
+		};
+	}
+
+	// Check if all characters in the name are repeated
+	if (new Set(name).size === 1) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(3), // Assuming 'Name is not allowed.' refers to all characters being repeated.
+		};
+	}
+
+	// Check if the name contains at least 3 consecutive characters that are the same
+	const consecutiveCharsRegex: RegExp = /(\w)\1\1/;
+	if (consecutiveCharsRegex.test(name)) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(3), // You can set the appropriate error message for this case.
+		};
+	}
+
+	return {
+		isValid: true,
+		errorMsg: null,
+	};
 }
 
 export default validateName;

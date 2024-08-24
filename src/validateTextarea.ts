@@ -3,7 +3,6 @@ import { ValidateFunctions } from "./types";
 const defaultErrorMsg: string[] = [
 	"This textarea is too big",
 	"Can not be empty",
-	"Unknown error",
 ];
 
 interface OptionsParams {
@@ -27,7 +26,6 @@ const defaultOptionsParams: OptionsParams = {
  * [
   'Textarea cannot exceed ${maxTextAreaLength} characters',
   'Can not be empty',
-  'Unknown error',
 ];
  * @returns An object with 'isValid' (boolean) and 'errorMsg' (string) properties.
  */
@@ -78,22 +76,15 @@ function validateTextarea(
 		};
 	}
 
-	try {
-		if (textarea.length > maxTextAreaLength) {
-			return {
-				isValid: false,
-				errorMsg: getErrorMessage(0),
-			};
-		}
-		return {
-			isValid: true,
-			errorMsg: null,
-		};
-	} catch (error) {
+	if (textarea.length > maxTextAreaLength) {
 		return {
 			isValid: false,
-			errorMsg: getErrorMessage(2),
+			errorMsg: getErrorMessage(0),
 		};
 	}
+	return {
+		isValid: true,
+		errorMsg: null,
+	};
 }
 export default validateTextarea;
