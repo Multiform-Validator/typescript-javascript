@@ -49,98 +49,87 @@ function validateName(
 	if (typeof name !== "string") {
 		throw new TypeError("The input should be a string.");
 	}
-	// Check para saber se as mensagens que sao passadas sao validas
-	// caso contrario retorna um ERRO
+
+	validateErrorMsg(errorMsg);
+
+	const minNameLength: number = minLength ?? 1;
+	const maxNameLength: number = maxLength ?? 20;
+
+	validateLengths(minNameLength, maxNameLength);
+
+	const getErrorMessage: (index: number) => string =
+		createErrorMessageGetter(errorMsg);
+
+	if (!name) {
+		return createInvalidResult(getErrorMessage(0));
+	}
+	if (name.length > maxNameLength) {
+		return createInvalidResult(getErrorMessage(4));
+	}
+	if (name.length < minNameLength) {
+		return createInvalidResult(getErrorMessage(3));
+	}
+	if (RegExp(/\d/).exec(name)) {
+		return createInvalidResult(getErrorMessage(1));
+	}
+	if (RegExp(/[^\w\s]/).exec(name)) {
+		return createInvalidResult(getErrorMessage(2));
+	}
+	if (new Set(name).size === 1) {
+		return createInvalidResult(getErrorMessage(3));
+	}
+	if (/(\w)\1\1/.test(name)) {
+		return createInvalidResult(getErrorMessage(3));
+	}
+
+	return {
+		isValid: true,
+		errorMsg: null,
+	};
+}
+
+function validateErrorMsg(errorMsg: (string | null)[] | undefined): void {
 	if (errorMsg) {
 		if (!Array.isArray(errorMsg))
 			throw new Error("errorMsg must be an Array or null");
-		for (let index: number = 0; index < errorMsg.length; index += 1) {
-			if (errorMsg[index] != null && typeof errorMsg[index] !== "string") {
+		for (const element of errorMsg) {
+			if (element != null && typeof element !== "string") {
 				throw new TypeError(
 					"All values within the array must be strings or null/undefined.",
 				);
 			}
 		}
 	}
+}
 
-	// Função interna para obter a mensagem de erro
-	function getErrorMessage(index: number): string {
-		const errorMessage: string | null = errorMsg ? errorMsg[index] : null;
-		return errorMessage != null ? errorMessage : defaultErrorMsg[index];
-	}
-
-	const minNameLength: number = minLength || 1;
-	const maxNameLength: number = maxLength || 20;
-
+function validateLengths(minLength: number, maxLength: number): void {
 	if (
-		maxNameLength < 1 ||
-		minNameLength < 1 ||
-		typeof minNameLength !== "number" ||
-		typeof maxNameLength !== "number"
+		maxLength < 1 ||
+		minLength < 1 ||
+		typeof minLength !== "number" ||
+		typeof maxLength !== "number"
 	) {
 		throw new Error(
 			"maxLength or minLength must be a number and cannot be less than 1",
 		);
 	}
 
-	if (minNameLength > maxNameLength) {
+	if (minLength > maxLength) {
 		throw new Error("minLength cannot be greater than maxLength");
 	}
+}
 
-	if (!name) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(0),
-		};
-	}
-	if (name.length > maxNameLength) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(4),
-		};
-	}
+function createErrorMessageGetter(errorMsg: (string | null)[] | undefined) {
+	return function getErrorMessage(index: number): string {
+		const errorMessage: string | null = errorMsg ? errorMsg[index] : null;
+		return errorMessage ?? defaultErrorMsg[index];
+	};
+}
 
-	if (name.length < minNameLength) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(3),
-		};
-	}
-
-	if (name.match(/\d/)) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(1),
-		};
-	}
-
-	if (name.match(/[^\w\s]/)) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(2),
-		};
-	}
-
-	// Check if all characters in the name are repeated
-	if (new Set(name).size === 1) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(3), // Assuming 'Name is not allowed.' refers to all characters being repeated.
-		};
-	}
-
-	// Check if the name contains at least 3 consecutive characters that are the same
-	const consecutiveCharsRegex: RegExp = /(\w)\1\1/;
-	if (consecutiveCharsRegex.test(name)) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(3), // You can set the appropriate error message for this case.
-		};
-	}
-
+function createInvalidResult(errorMsg: string): ValidateFunctions {
 	return {
-		isValid: true,
-		errorMsg: null,
+		isValid: false,
+		errorMsg,
 	};
 }
 

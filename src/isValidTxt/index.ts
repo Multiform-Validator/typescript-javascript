@@ -7,11 +7,11 @@ export default function isValidTxt(fileBuffer: Buffer): boolean {
 	if (fileBuffer.length === 0) {
 		return false;
 	}
-	for (let i: number = 0; i < fileBuffer.length; i++) {
+	for (const element of fileBuffer) {
 		if (
-			(fileBuffer[i] < 0x20 || fileBuffer[i] > 0x7e) &&
-			fileBuffer[i] !== 0x0a &&
-			fileBuffer[i] !== 0x0d
+			(element < 0x20 || element > 0x7e) &&
+			element !== 0x0a &&
+			element !== 0x0d
 		) {
 			return false;
 		}

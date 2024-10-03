@@ -83,40 +83,63 @@ function validatePassword(
 	if (typeof password !== "string") {
 		throw new TypeError("The input should be a string.");
 	}
-	// Check para saber se as mensagens que sao passadas sao validas
-	// caso contrario retorna um ERRO
+
+	validateErrorMsg(errorMsg);
+
+	const minLenthPassword: number = minLength ?? 1;
+	const maxLenthPassword: number = maxLength ?? Infinity;
+
+	validateLengthParams(minLenthPassword, maxLenthPassword);
+
+	const errorMessage: string | null = validatePasswordLength(
+		password,
+		minLenthPassword,
+		maxLenthPassword,
+		errorMsg,
+	);
+	if (errorMessage) {
+		return {
+			isValid: false,
+			errorMsg: errorMessage,
+		};
+	}
+
+	const optionErrorMessage: string | null = validatePasswordOptions(
+		password,
+		options,
+		errorMsg,
+	);
+	if (optionErrorMessage) {
+		return {
+			isValid: false,
+			errorMsg: optionErrorMessage,
+		};
+	}
+
+	return {
+		isValid: true,
+		errorMsg: null,
+	};
+}
+
+function validateErrorMsg(errorMsg: (string | null)[] | undefined) {
 	if (errorMsg) {
 		if (!Array.isArray(errorMsg))
 			throw new Error("errorMsg must be an Array or null");
-		for (let index: number = 0; index < errorMsg.length; index += 1) {
-			if (errorMsg[index] != null && typeof errorMsg[index] !== "string") {
+		for (const element of errorMsg) {
+			if (element != null && typeof element !== "string") {
 				throw new TypeError(
 					"All values within the array must be strings or null/undefined.",
 				);
 			}
 		}
 	}
+}
 
-	const minLenthPassword: number = minLength || 1;
-	const maxLenthPassword: number = maxLength || Infinity;
-
-	// Função interna para obter a mensagem de erro
-	function getErrorMessage(index: number): string {
-		const errorMessage: string | null = errorMsg
-			? errorMsg[index]
-			: defaultErrorMsg[index];
-		if (
-			errorMessage === "This password is too long" ||
-			errorMessage === "password too short"
-		) {
-			if (maxLenthPassword === Infinity) {
-				return `Password must be greater than ${minLenthPassword} characters`;
-			}
-			return `Password must be between ${minLenthPassword} and ${maxLenthPassword} characters`;
-		}
-		return errorMessage != null ? errorMessage : defaultErrorMsg[index];
-	}
-
+function validateLengthParams(
+	minLenthPassword: number,
+	maxLenthPassword: number,
+) {
 	if (
 		typeof minLenthPassword !== "number" ||
 		typeof maxLenthPassword !== "number"
@@ -126,52 +149,67 @@ function validatePassword(
 
 	if (minLenthPassword > maxLenthPassword) {
 		throw new Error("the minimum size cannot be larger than the maximum");
-	} // Verifica se o min é maior que o max
+	}
 
 	if (minLenthPassword < 1 || maxLenthPassword < 1) {
 		throw new Error("No size can be smaller than 1");
-	} // Nenhum dos dois pode ser menor que 1
+	}
+}
 
+function validatePasswordLength(
+	password: string,
+	minLenthPassword: number,
+	maxLenthPassword: number,
+	errorMsg: (string | null)[] | undefined,
+): string | null {
 	if (password.length > maxLenthPassword) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(0),
-		};
-	} // Tamanho da palavra não pode ser maior que o tamanho máximo
+		return getErrorMessage(0, minLenthPassword, maxLenthPassword, errorMsg);
+	}
 	if (password.length < minLenthPassword) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(1),
-		};
-	} // Tamanho n pode ser menor q o min
+		return getErrorMessage(1, minLenthPassword, maxLenthPassword, errorMsg);
+	}
+	return null;
+}
+
+function validatePasswordOptions(
+	password: string,
+	options: Options | undefined,
+	errorMsg: (string | null)[] | undefined,
+): string | null {
 	if (options?.requireUppercase && !/[A-Z]/.test(password)) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(2), // Requer pelo menos uma letra maiuscula
-		};
+		return getErrorMessage(2, 0, 0, errorMsg);
 	}
 	if (options?.requireSpecialChar && !/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(3), // Requer pelo menos uma especial caracter
-		};
+		return getErrorMessage(3, 0, 0, errorMsg);
 	}
 	if (options?.requireNumber && !/\d/.test(password)) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(4), // Requer pelo menos um numero
-		};
+		return getErrorMessage(4, 0, 0, errorMsg);
 	}
 	if (options?.requireString && !/[a-zA-Z]/.test(password)) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(5), // Requer pelo menos uma letra
-		};
+		return getErrorMessage(5, 0, 0, errorMsg);
 	}
-	return {
-		isValid: true,
-		errorMsg: null,
-	};
+	return null;
+}
+
+function getErrorMessage(
+	index: number,
+	minLenthPassword: number,
+	maxLenthPassword: number,
+	errorMsg: (string | null)[] | undefined,
+): string {
+	const errorMessage: string | null = errorMsg
+		? errorMsg[index]
+		: defaultErrorMsg[index];
+	if (
+		errorMessage === "This password is too long" ||
+		errorMessage === "password too short"
+	) {
+		if (maxLenthPassword === Infinity) {
+			return `Password must be greater than ${minLenthPassword} characters`;
+		}
+		return `Password must be between ${minLenthPassword} and ${maxLenthPassword} characters`;
+	}
+	return errorMessage ?? defaultErrorMsg[index];
 }
 
 export default validatePassword;

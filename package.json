@@ -1,6 +1,6 @@
 {
 	"name": "multiform-validator",
-	"version": "2.2.4",
+	"version": "2.2.5",
 	"description": "Javascript library made to validate, several form fields, such as: email, images, phone, password, cpf etc.",
 	"main": "./dist/cjs/index.cjs",
 	"module": "./dist/esm/index.mjs",

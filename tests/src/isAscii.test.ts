@@ -6,6 +6,10 @@ describe("isAscii", () => {
 		expect(result).toBe(true);
 	});
 
+	it("should return true when the input is an empty string", () => {
+		expect(() => isAscii(" ")).toThrow("Input value must not be an empty string.");
+	});
+
 	it("should return false when the input is not ASCII", () => {
 		const result = isAscii("日本語日本語");
 		expect(result).toBe(false);

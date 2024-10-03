@@ -58,46 +58,113 @@ function validateUsername(
 	if (typeof username !== "string") {
 		throw new TypeError("The input should be a string.");
 	}
-	// Check para saber se as mensagens que sao passadas sao validas
-	// caso contrario retorna um ERRO
+
+	validateErrorMsg(errorMsg);
+
+	const minLenthUsername: number = minLength ?? 1;
+	const maxLenthUsername: number = maxLength ?? Infinity;
+
+	if (!username) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(
+				0,
+				errorMsg,
+				minLenthUsername,
+				maxLenthUsername,
+			),
+		};
+	}
+
+	validateLengthParams(minLenthUsername, maxLenthUsername);
+
+	if (regexHasSpaces.test(username)) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(
+				3,
+				errorMsg,
+				minLenthUsername,
+				maxLenthUsername,
+			),
+		};
+	}
+	if (regexOnlyNumbers.test(username)) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(
+				5,
+				errorMsg,
+				minLenthUsername,
+				maxLenthUsername,
+			),
+		};
+	}
+	if (regexStartsWithNumber.test(username)) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(
+				4,
+				errorMsg,
+				minLenthUsername,
+				maxLenthUsername,
+			),
+		};
+	}
+	if (username.length < minLenthUsername) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(
+				1,
+				errorMsg,
+				minLenthUsername,
+				maxLenthUsername,
+			),
+		};
+	}
+	if (username.length > maxLenthUsername) {
+		return {
+			isValid: false,
+			errorMsg: getErrorMessage(
+				2,
+				errorMsg,
+				minLenthUsername,
+				maxLenthUsername,
+			),
+		};
+	}
+
+	if (containsMultipleSpecialChars(username)) {
+		return {
+			isValid: false,
+			errorMsg: "Username cannot contain multiple special characters",
+		};
+	}
+
+	return {
+		isValid: true,
+		errorMsg: null,
+	};
+}
+
+function validateErrorMsg(errorMsg: (string | null)[] | undefined): void {
 	if (errorMsg) {
 		if (!Array.isArray(errorMsg))
 			throw new Error("errorMsg must be an Array or null");
-		for (let index: number = 0; index < errorMsg.length; index += 1) {
-			if (errorMsg[index] != null && typeof errorMsg[index] !== "string") {
+		for (const element of errorMsg) {
+			if (element != null && typeof element !== "string") {
 				throw new TypeError(
 					"All values within the array must be strings or null/undefined.",
 				);
 			}
 		}
 	}
-	const minLenthUsername: number = minLength || 1;
-	const maxLenthUsername: number = maxLength || Infinity;
+}
 
-	// Função interna para obter a mensagem de erro
-	function getErrorMessage(index: number): string {
-		const errorMessage: string | null = errorMsg
-			? errorMsg[index]
-			: defaultErrorMsg[index];
-		if (
-			errorMessage === "username too short" ||
-			errorMessage === "This username is too long"
-		) {
-			if (maxLenthUsername === Infinity) {
-				return `Username must be greater than ${maxLenthUsername} characters`;
-			}
-			return `Username must be between ${minLenthUsername} and ${maxLenthUsername} characters`;
-		}
-		return errorMessage != null ? errorMessage : defaultErrorMsg[index];
-	}
-
-	if (!username) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(0),
-		};
-	}
-
+function validateLengthParams(
+	minLenthUsername: number,
+	maxLenthUsername: number,
+): void {
 	if (
 		typeof minLenthUsername !== "number" ||
 		typeof maxLenthUsername !== "number"
@@ -106,43 +173,34 @@ function validateUsername(
 	}
 	if (minLenthUsername > maxLenthUsername) {
 		throw new Error("Minimum cannot be greater than maximum");
-	} // Verifica se o min é maior que o max
+	}
 	if (minLenthUsername < 1 || maxLenthUsername < 1) {
 		throw new Error("Size parameters cannot be less than one");
-	} // Nenhum dos dois pode ser menor que 1
+	}
+}
 
-	if (regexHasSpaces.test(username)) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(3),
-		};
+function getErrorMessage(
+	index: number,
+	errorMsg: (string | null)[] | undefined,
+	minLenthUsername: number,
+	maxLenthUsername: number,
+): string {
+	const errorMessage: string | null = errorMsg
+		? errorMsg[index]
+		: defaultErrorMsg[index];
+	if (
+		errorMessage === "username too short" ||
+		errorMessage === "This username is too long"
+	) {
+		if (maxLenthUsername === Infinity) {
+			return `Username must be greater than ${maxLenthUsername} characters`;
+		}
+		return `Username must be between ${minLenthUsername} and ${maxLenthUsername} characters`;
 	}
-	if (regexOnlyNumbers.test(username)) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(5),
-		};
-	}
-	if (regexStartsWithNumber.test(username)) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(4),
-		};
-	}
-	if (username.length < minLenthUsername) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(1),
-		};
-	} // Tamanho n pode ser menor q o min
-	if (username.length > maxLenthUsername) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(2),
-		};
-	} // Tamanho da palavra não pode ser maior que o tamanho máximo
+	return errorMessage ?? defaultErrorMsg[index];
+}
 
-	// Define os caracteres especiais
+function containsMultipleSpecialChars(username: string): boolean {
 	const specialChars: string[] = [
 		"!",
 		"@",
@@ -176,25 +234,16 @@ function validateUsername(
 		"?",
 	];
 
-	// Cria um objeto para contar a ocorrência de cada caractere especial
 	const charCount: { [key: string]: number } = {};
 
-	// Itera sobre a string para contar os caracteres especiais
 	for (const char of username) {
 		if (specialChars.includes(char)) {
 			charCount[char] = (charCount[char] || 0) + 1;
 			if (charCount[char] > 2) {
-				return {
-					isValid: false,
-					errorMsg: "Username cannot contain multiple special characters",
-				};
+				return true;
 			}
 		}
 	}
-
-	return {
-		isValid: true,
-		errorMsg: null,
-	};
+	return false;
 }
 export default validateUsername;

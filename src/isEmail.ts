@@ -35,35 +35,38 @@ function isEmail(email: string): boolean {
 
 	// Check if email starts with a special character
 	const startsWithSpecialChar: RegExp = /^[^a-zA-Z0-9]/;
-	if (startsWithSpecialChar.test(email)) return false;
+	if (startsWithSpecialChar.test(email)) {
+		return false;
+	}
 
 	const regex: RegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-	if (Number(email[0])) return false;
+	if (Number(email[0])) {
+		return false;
+	}
 
-	if (!regex.test(email)) return false;
+	if (!regex.test(email)) {
+		return false;
+	}
 
 	const antesDoArroba: number = email.indexOf("@");
 
 	const depoisDoArroba: number = email.indexOf("@") + 1;
 
-	const depoisDoUltimoPonto: number = email.lastIndexOf(".");
-
-	if (Number(email[depoisDoArroba])) return false;
-
-	if (Number(email[depoisDoUltimoPonto])) return false;
-
-	if (email.substring(0, antesDoArroba).includes("..")) return false;
-
-	if (email.substring(0, antesDoArroba).endsWith(".")) return false;
-
-	const parts: string[] = email.split(".");
-	if (parts.length > 2 && parts[parts.length - 2] === parts[parts.length - 3]) {
+	if (Number(email[depoisDoArroba])) {
 		return false;
 	}
 
-	// Check if there is more than one @
-	if (email.split("@").length - 1 > 1) {
+	if (email.substring(0, antesDoArroba).includes("..")) {
+		return false;
+	}
+
+	if (email.substring(0, antesDoArroba).endsWith(".")) {
+		return false;
+	}
+
+	const parts: string[] = email.split(".");
+	if (parts.length > 2 && parts[parts.length - 2] === parts[parts.length - 3]) {
 		return false;
 	}
 

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import cpfIsValid from "./src/cpfValidator";
 import cnpjIsValid from "./src/cnpjValidator";
 import getOnlyEmail from "./src/getOnlyEmail";

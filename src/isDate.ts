@@ -24,9 +24,14 @@ function isDate(value: string): boolean {
 		return false;
 	}
 	// Check if the date string is in a valid format (e.g., 'YYYY-MM-DD', 'MM/DD/YYYY', 'MMMM D, YYYY')
-	const dateStringRegex: RegExp =
-		/^(?:\d{4}[-/]\d{2}[-/]\d{2}|\d{2}[-/]\d{2}[-/]\d{4}|[A-Za-z]+\s\d{1,2}, \d{4})$/;
-	if (!dateStringRegex.test(value)) {
+	const dateStringRegex1: RegExp = /^\d{4}[-/]\d{2}[-/]\d{2}$/; // 'YYYY-MM-DD' or 'YYYY/MM/DD'
+	const dateStringRegex2: RegExp = /^\d{2}[-/]\d{2}[-/]\d{4}$/; // 'MM-DD-YYYY' or 'MM/DD/YYYY'
+	const dateStringRegex3: RegExp = /^[A-Za-z]+\s\d{1,2}, \d{4}$/; // 'MMMM D, YYYY'
+	if (
+		!dateStringRegex1.test(value) &&
+		!dateStringRegex2.test(value) &&
+		!dateStringRegex3.test(value)
+	) {
 		return false;
 	}
 	// Additional checks for the month and day values

@@ -41,8 +41,8 @@ function validateTextarea(
 	if (errorMsg) {
 		if (!Array.isArray(errorMsg))
 			throw new Error("errorMsg must be an Array or null");
-		for (let index: number = 0; index < errorMsg.length; index += 1) {
-			if (errorMsg[index] != null && typeof errorMsg[index] !== "string") {
+		for (const element of errorMsg) {
+			if (element != null && typeof element !== "string") {
 				throw new TypeError(
 					"All values within the array must be strings or null/undefined.",
 				);
@@ -50,7 +50,7 @@ function validateTextarea(
 		}
 	}
 
-	const maxTextAreaLength: number = maxLength || 50;
+	const maxTextAreaLength: number = maxLength ?? 50;
 
 	// Função interna para obter a mensagem de erro
 	function getErrorMessage(index: number): string {
@@ -61,7 +61,7 @@ function validateTextarea(
 		if (errorMessage === "This textarea is too big") {
 			return `Textarea cannot exceed ${maxTextAreaLength} characters`;
 		}
-		return errorMessage != null ? errorMessage : defaultErrorMsg[index];
+		return errorMessage ?? defaultErrorMsg[index];
 	}
 
 	if (maxTextAreaLength < 1 || typeof maxTextAreaLength !== "number") {

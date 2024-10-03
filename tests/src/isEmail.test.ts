@@ -363,4 +363,12 @@ describe("isEmail", () => {
 	it("returns false for email with invalid TLD", () => {
 		expect(isEmail("foo@bar.c")).toBe(false);
 	});
+
+	it("should return false when has more than one @", () => {
+		expect(isEmail("foo@bar.com@")).toBe(false);
+	});
+
+	it("should return false when has number after last dot", () => {
+		expect(isEmail("foo@bar.com.1")).toBe(false);
+	});
 });

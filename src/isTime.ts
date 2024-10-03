@@ -16,7 +16,7 @@ function isTime(time: string): boolean {
 	}
 	// Regular expression to validate time in the format "hh:mm" or "hh:mm AM/PM" or "hh:mm:ss" or "hh:mm:ss AM/PM"
 	const timeRegex: RegExp =
-		/^(?:2[0-3]|1\d|0?[0-9]):[0-5]\d(?::[0-5]\d)?(?: [APap][Mm])?$/;
+		/^(?:2[0-3]|1\d|0?\d):[0-5]\d(?::[0-5]\d)?(?: [APap][Mm])?$/;
 
 	return timeRegex.test(time);
 }

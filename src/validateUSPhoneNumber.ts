@@ -25,8 +25,8 @@ function validateUSPhoneNumber(
 	if (errorMsg) {
 		if (!Array.isArray(errorMsg))
 			throw new Error("errorMsg must be an Array or null");
-		for (let index: number = 0; index < errorMsg.length; index += 1) {
-			if (errorMsg[index] != null && typeof errorMsg[index] !== "string") {
+		for (const element of errorMsg) {
+			if (element != null && typeof element !== "string") {
 				throw new TypeError(
 					"All values within the array must be strings or null/undefined.",
 				);
@@ -39,7 +39,7 @@ function validateUSPhoneNumber(
 	// Internal function to get the error message
 	function getErrorMessage(index: number): string {
 		const errorMessage: string | null = errorMsg ? errorMsg[index] : null;
-		return errorMessage != null ? errorMessage : defaultErrorMsg[index];
+		return errorMessage ?? defaultErrorMsg[index];
 	}
 
 	if (!phoneNumber) {

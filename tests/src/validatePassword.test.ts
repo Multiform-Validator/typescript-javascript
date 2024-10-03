@@ -149,4 +149,32 @@ describe("validatePassword", () => {
 			}),
 		).toThrow("All values within the array must be strings or null/undefined.");
 	});
+
+	it("should throw an error if errorMsg is not an array", () => {
+		expect(() =>
+			validatePassword("Passw0rd!", {
+				minLength: 8,
+				maxLength: 20,
+				errorMsg: 123 as any,
+			}),
+		).toThrow("errorMsg must be an Array or null");
+	});
+
+	it("should throw an error if maxLength or minLength is not a number", () => {
+		expect(() =>
+			validatePassword("Passw0rd!", {
+				minLength: 8,
+				maxLength: "20" as any,
+			}),
+		).toThrow("maxLength and/or minLength must be a number");
+	});
+
+	it("should throw an error if minLength or maxLength is less than 1", () => {
+		expect(() =>
+			validatePassword("Passw0rd!", {
+				minLength: 0,
+				maxLength: 20,
+			}),
+		).toThrow("No size can be smaller than 1");
+	});
 });

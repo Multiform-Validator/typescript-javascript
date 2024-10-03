@@ -13,7 +13,6 @@ import {
 	isAscii,
 	isBase64,
 	isDate,
-	isDecimal,
 	isEmpty,
 	isMD5,
 	isPort,

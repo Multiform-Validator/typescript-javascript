@@ -20,16 +20,16 @@ function validatePassportNumber(
 		country: string;
 		regex: RegExp;
 	}[] = [
-		{ country: "United States", regex: /^[0-9]{9}$/ },
-		{ country: "United Kingdom", regex: /^[A-Z]{2}[0-9]{6}$/ },
-		{ country: "Germany", regex: /^[A-Z]{2}[0-9]{8}$/ },
-		{ country: "Canada", regex: /^[A-Z][0-9]{7}$/ },
-		{ country: "Australia", regex: /^[A-Z][0-9]{7}$/ },
-		{ country: "Brazil", regex: /^[0-9]{9}$/ },
-		{ country: "France", regex: /^[A-Z]{2}[0-9]{7}$/ },
-		{ country: "Italy", regex: /^[A-Z][0-9]{7}$/ },
-		{ country: "India", regex: /^[A-Z][0-9]{7}$/ },
-		{ country: "China", regex: /^[A-Z][0-9]{8}$/ },
+		{ country: "United States", regex: /^\d{9}$/ },
+		{ country: "United Kingdom", regex: /^[A-Z]{2}\d{6}$/ },
+		{ country: "Germany", regex: /^[A-Z]{2}\d{8}$/ },
+		{ country: "Canada", regex: /^[A-Z]\d{7}$/ },
+		{ country: "Australia", regex: /^[A-Z]\d{7}$/ },
+		{ country: "Brazil", regex: /^\d{9}$/ },
+		{ country: "France", regex: /^[A-Z]{2}\d{7}$/ },
+		{ country: "Italy", regex: /^[A-Z]\d{7}$/ },
+		{ country: "India", regex: /^[A-Z]\d{7}$/ },
+		{ country: "China", regex: /^[A-Z]\d{8}$/ },
 	];
 	// Verificar o formato do passaporte antes de verificar o país
 	for (const format of passportFormats) {
