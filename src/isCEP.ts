@@ -16,10 +16,6 @@ function isCEP(cep: string): boolean {
 	if (cepString.length !== 8) {
 		return false;
 	}
-	// Check if the CEP is a valid number (all digits)
-	if (Number.isNaN(cepString)) {
-		return false;
-	}
 
 	return true;
 }

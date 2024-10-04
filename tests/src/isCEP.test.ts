@@ -31,4 +31,9 @@ describe("isCEP", () => {
 			"Input value must be a string.",
 		);
 	});
+
+	it("should return false when is not all numbers", () => {
+		const result = isCEP("1234567aa");
+		expect(result).toBe(false);
+	});
 });

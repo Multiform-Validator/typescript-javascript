@@ -223,4 +223,16 @@ describe("isDecimal", () => {
 		const result = isDecimal("-123.45");
 		expect(result).toBe(true);
 	});
+
+	it("should return false if has multiple separators", () => {
+		const result = isDecimal("14.56.78");
+		const result2 = isDecimal("14,56,78");
+		expect(result).toBe(false);
+		expect(result2).toBe(false);
+	});
+
+	it("should return false when have invalid negative sign", () => {
+		const result = isDecimal("123.-45");
+		expect(result).toBe(false);
+	});
 });

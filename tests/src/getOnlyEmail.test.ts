@@ -34,6 +34,26 @@ describe("getOnlyEmail", () => {
 		]);
 	});
 
+	// multiple true, cleanDomain false
+	test("multiple true, cleanDomain false", () => {
+		const result = getOnlyEmail(
+			"Entre em contato com a equipe: john@gmail.com, jon2@gmail.com,",
+			{ multiple: true, cleanDomain: false },
+		);
+
+		expect(result).toEqual(["john@gmail.com", "jon2@gmail.com"]);
+	});
+
+	// multiple false, cleanDomain true
+	test("multiple false, cleanDomain true", () => {
+		const result = getOnlyEmail(
+			"Entre em contato com a equipe: john@gmail.com, jon2@gmail.com,",
+			{ multiple: false, cleanDomain: true },
+		);
+
+		expect(result).toEqual("john@gmail.com");
+	});
+
 	it("should return unique emails when repeatEmail is false", () => {
 		const result = getOnlyEmail(
 			"Entre em contato com a equipe: joao@empresa.com, joao@empresa.com, joao@empresa.com",

@@ -76,10 +76,6 @@ function validateSurname(
 		return createErrorResponse(2, errorMsg);
 	}
 
-	if (new Set(surname).size === 1) {
-		return createErrorResponse(3, errorMsg);
-	}
-
 	if (/(\w)\1\1/.test(surname)) {
 		return createErrorResponse(3, errorMsg);
 	}

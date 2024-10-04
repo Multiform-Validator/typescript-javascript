@@ -1,3 +1,4 @@
+import { ValidateFunctions } from "../../src/types";
 import validateSurname from "../../src/validateSurname";
 
 describe("validateSurname", () => {
@@ -20,6 +21,34 @@ describe("validateSurname", () => {
 			isValid: false,
 			errorMsg: "Surname cannot contain numbers",
 		});
+	});
+
+	it("should return false if the surname is empty", () => {
+		const result: ValidateFunctions = validateSurname("");
+		expect(result.isValid).toBe(false);
+		expect(result.errorMsg).toBe("Surname cannot be empty");
+	});	
+
+
+	it("should return false if (/(\\w)\\1\\1/.test(surname)) is true", () => {
+		const result: ValidateFunctions = validateSurname("Johnnn");
+		expect(result.isValid).toBe(false);
+		expect(result.errorMsg).toBe("This surname is not valid");
+	});
+
+	it("should throw an error if maxLength or minLength less than 1", () => {
+		expect(() => validateSurname("John", { minLength: 0, maxLength: 20 })).toThrow(
+			"maxLength or minLength must be a number and cannot be less than 1",
+		);
+		expect(() => validateSurname("John", { minLength: 1, maxLength: 0 })).toThrow(
+			"maxLength or minLength must be a number and cannot be less than 1",
+		);
+	});
+
+	it("should throw an error if minLength is greater than maxLength", () => {
+		expect(() => validateSurname("John", { minLength: 20, maxLength: 1 })).toThrow(
+			"minLength cannot be greater than maxLength",
+		);
 	});
 
 	it("returns error for surname with special characters", () => {

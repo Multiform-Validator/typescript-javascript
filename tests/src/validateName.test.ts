@@ -7,10 +7,37 @@ describe("validateName", () => {
 		expect(result.isValid).toBe(true);
 	});
 
+	it("should return false if the name is empty", () => {
+		const result: ValidateFunctions = validateName("");
+		expect(result.isValid).toBe(false);
+		expect(result.errorMsg).toBe("Name cannot be empty");
+	});	
+
 	it("should return isValid as false for names with numbers", () => {
 		const result: ValidateFunctions = validateName("John123");
 		expect(result.isValid).toBe(false);
 		expect(result.errorMsg).toBe("Name cannot contain numbers");
+	});
+
+	it("should return false if (/(\\w)\\1\\1/.test(name)) is true", () => {
+		const result: ValidateFunctions = validateName("Johnnn");
+		expect(result.isValid).toBe(false);
+		expect(result.errorMsg).toBe("This name is not valid");
+	});
+
+	it("should throw an error if maxLength or minLength less than 1", () => {
+		expect(() => validateName("John", { minLength: 0, maxLength: 20 })).toThrow(
+			"maxLength or minLength must be a number and cannot be less than 1",
+		);
+		expect(() => validateName("John", { minLength: 1, maxLength: 0 })).toThrow(
+			"maxLength or minLength must be a number and cannot be less than 1",
+		);
+	});
+
+	it("should throw an error if minLength is greater than maxLength", () => {
+		expect(() => validateName("John", { minLength: 20, maxLength: 1 })).toThrow(
+			"minLength cannot be greater than maxLength",
+		);
 	});
 
 	it("should return isValid as false for names with special characters", () => {

@@ -8,6 +8,14 @@ describe("validatePassword", () => {
 		expect(result).toEqual({ isValid: true, errorMsg: null });
 	});
 
+	it("should use default error message if errorMsg passed is not valid", () => {
+		const result = validatePassword("Passw0rd!", {
+			minLength: 8,
+			errorMsg: null as any,
+		});
+		expect(result.isValid).toBe(true);
+	});
+
 	it("validates password with maximum length", () => {
 		const result = validatePassword("Passw0rd!", {
 			maxLength: 10,

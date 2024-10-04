@@ -5,6 +5,11 @@ describe("validateEmail", () => {
 		expect(() => validateEmail(123 as any)).toThrow(TypeError);
 	});
 
+	it("should return defaultErrorMsg when errorMsg is null", () => {
+		const result = validateEmail("foo@bar.com", { errorMsg: null as any });
+		expect(result.isValid).toBeTruthy();
+	});
+
 	it("should validate a correct email", () => {
 		const result = validateEmail("test@gmail.com");
 		expect(result.isValid).toBe(true);

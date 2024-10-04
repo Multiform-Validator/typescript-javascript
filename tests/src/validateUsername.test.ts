@@ -1,9 +1,55 @@
 import validateUsername from "../../src/validateUsername";
 
 describe("validateUsername", () => {
+	it("should throw an error for non-string inputs", () => {
+		expect(() => validateUsername(123 as any)).toThrow("The input should be a string.");
+	});
 	it("validates username with correct length", () => {
 		const result = validateUsername("User123", { minLength: 3, maxLength: 25 });
 		expect(result).toEqual({ isValid: true, errorMsg: null });
+	});
+
+	it("should throw an error if errorMsg is not an array", () => {
+		expect(() =>
+			validateUsername("User123", {
+				minLength: 3,
+				maxLength: 25,
+				errorMsg: "Error message" as any,
+			}),
+		).toThrow("errorMsg must be an Array or null");
+	});
+
+	it("should throw an error if maxLength or minlength is NaN", () => {
+		expect(() =>
+			validateUsername("User123", {
+				minLength: 'a' as any,
+				maxLength: 25,
+			}),
+		).toThrow("maxLength or minLength must be a number");
+		expect(() =>
+			validateUsername("User123", {
+				minLength: 3,
+				maxLength: 'a' as any,
+			}),
+		).toThrow("maxLength or minLength must be a number");
+	});
+	
+	it("should throw an error if minLength is greater than maxLength", () => {
+		expect(() =>
+			validateUsername("User123", {
+				minLength: 20,
+				maxLength: 1,
+			}),
+		).toThrow("Minimum cannot be greater than maximum");
+	});
+
+	it("should throw an error if maxLength or minLength less than 1", () => {
+		expect(() =>
+			validateUsername("User123", {
+				minLength: 0,
+				maxLength: 20,
+			}),
+		).toThrow("Size parameters cannot be less than one");
 	});
 
 	it("returns error for empty username", () => {

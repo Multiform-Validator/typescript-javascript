@@ -75,9 +75,6 @@ function validateName(
 	if (RegExp(/[^\w\s]/).exec(name)) {
 		return createInvalidResult(getErrorMessage(2));
 	}
-	if (new Set(name).size === 1) {
-		return createInvalidResult(getErrorMessage(3));
-	}
 	if (/(\w)\1\1/.test(name)) {
 		return createInvalidResult(getErrorMessage(3));
 	}

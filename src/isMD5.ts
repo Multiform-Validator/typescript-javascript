@@ -17,14 +17,8 @@ function isMD5(value: string): boolean {
 		return false;
 	}
 
-	const md5Regex: RegExp = /^[a-fA-F0-9]{32}$/;
-
-	if (!md5Regex.test(trimmedValue)) {
-		return false;
-	}
-
-	const allZeroRegex: RegExp = /^0{32}$/;
-	if (allZeroRegex.test(trimmedValue)) {
+	const allDigitsEqualRegex: RegExp = /^(\d)\1+$/;
+	if (allDigitsEqualRegex.test(trimmedValue)) {
 		return false;
 	}
 

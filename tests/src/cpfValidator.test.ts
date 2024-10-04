@@ -7,6 +7,16 @@ describe("cpfIsValid", () => {
 		expect(result.errorMsg).toBe("CPF is not valid");
 	});
 
+	test("errorMessage should be default if pass an empty array", () => {
+		const result = cpfIsValid("12345678902", []);
+		expect(result.isValid).toBe(false);
+	});
+
+	test("errorMessage should be default if errorMsg[index] is falsy", () => {
+		const result = cpfIsValid("12345678902", null);
+		expect(result.isValid).toBe(false);
+	});
+
 	it("should return isValid as true and errorMsg as null when CPF is valid", () => {
 		const result = cpfIsValid("12345678909");
 		expect(result.isValid).toBe(true);

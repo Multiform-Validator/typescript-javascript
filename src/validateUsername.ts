@@ -166,8 +166,9 @@ function validateLengthParams(
 	maxLenthUsername: number,
 ): void {
 	if (
-		typeof minLenthUsername !== "number" ||
-		typeof maxLenthUsername !== "number"
+		(typeof minLenthUsername !== "number" ||
+			typeof maxLenthUsername !== "number") &&
+		(!Number.isNaN(minLenthUsername) || !Number.isNaN(maxLenthUsername))
 	) {
 		throw new Error("maxLength or minLength must be a number");
 	}
@@ -192,9 +193,6 @@ function getErrorMessage(
 		errorMessage === "username too short" ||
 		errorMessage === "This username is too long"
 	) {
-		if (maxLenthUsername === Infinity) {
-			return `Username must be greater than ${maxLenthUsername} characters`;
-		}
 		return `Username must be between ${minLenthUsername} and ${maxLenthUsername} characters`;
 	}
 	return errorMessage ?? defaultErrorMsg[index];

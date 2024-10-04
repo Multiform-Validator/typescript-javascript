@@ -33,14 +33,6 @@ function isDecimal(value: string | number): boolean {
 		return false;
 	}
 
-	if (hasMultipleSeparators(getValued)) {
-		return false;
-	}
-
-	if (hasInvalidNegativeSign(getValued)) {
-		return false;
-	}
-
 	return true;
 }
 
@@ -68,16 +60,4 @@ function isValidDecimal(value: string): boolean {
 	return decimalRegex.test(value);
 }
 
-function hasMultipleSeparators(value: string): boolean {
-	const decimalSeparator: Separators = value.includes(".") ? "." : ",";
-	const otherSeparator: Separators = decimalSeparator === "." ? "," : ".";
-	return value.includes(decimalSeparator) && value.includes(otherSeparator);
-}
-
-function hasInvalidNegativeSign(value: string): boolean {
-	return value.startsWith("-") && value.lastIndexOf("-") > 0;
-}
-
 export default isDecimal;
-
-type Separators = "." | ",";
