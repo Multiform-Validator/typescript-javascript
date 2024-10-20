@@ -73,7 +73,9 @@ describe("isDecimal", () => {
 	});
 
 	it("should throw error when the input is a function", () => {
-		function func() { /* document why this function 'func' is empty */  }
+		function func() {
+			/* document why this function 'func' is empty */
+		}
 
 		expect(() => isDecimal(func() as any) as any).toThrow(errorToThrow);
 	});
@@ -191,7 +193,9 @@ describe("isDecimal", () => {
 	});
 
 	it("should throw error when the input is a function", () => {
-		function func() { /* document why this function 'func' is empty */  }
+		function func() {
+			/* document why this function 'func' is empty */
+		}
 
 		expect(() => isDecimal(func as any)).toThrow(
 			"Input value must be a string or a number.",

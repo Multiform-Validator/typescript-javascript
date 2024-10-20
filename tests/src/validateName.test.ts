@@ -11,7 +11,7 @@ describe("validateName", () => {
 		const result: ValidateFunctions = validateName("");
 		expect(result.isValid).toBe(false);
 		expect(result.errorMsg).toBe("Name cannot be empty");
-	});	
+	});
 
 	it("should return isValid as false for names with numbers", () => {
 		const result: ValidateFunctions = validateName("John123");

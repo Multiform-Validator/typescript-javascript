@@ -2,7 +2,9 @@ import validateUsername from "../../src/validateUsername";
 
 describe("validateUsername", () => {
 	it("should throw an error for non-string inputs", () => {
-		expect(() => validateUsername(123 as any)).toThrow("The input should be a string.");
+		expect(() => validateUsername(123 as any)).toThrow(
+			"The input should be a string.",
+		);
 	});
 	it("validates username with correct length", () => {
 		const result = validateUsername("User123", { minLength: 3, maxLength: 25 });
@@ -22,18 +24,18 @@ describe("validateUsername", () => {
 	it("should throw an error if maxLength or minlength is NaN", () => {
 		expect(() =>
 			validateUsername("User123", {
-				minLength: 'a' as any,
+				minLength: "a" as any,
 				maxLength: 25,
 			}),
 		).toThrow("maxLength or minLength must be a number");
 		expect(() =>
 			validateUsername("User123", {
 				minLength: 3,
-				maxLength: 'a' as any,
+				maxLength: "a" as any,
 			}),
 		).toThrow("maxLength or minLength must be a number");
 	});
-	
+
 	it("should throw an error if minLength is greater than maxLength", () => {
 		expect(() =>
 			validateUsername("User123", {

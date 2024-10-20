@@ -171,32 +171,56 @@ describe("isValidVideo", () => {
 		expect(result1).toBe(false);
 	});
 
-	test('validateMp4 should return true for specific byte sequence', () => {
+	test("validateMp4 should return true for specific byte sequence", () => {
 		const fileBuffer = Buffer.from([
-			0x00, 0x00, 0x00, 0x18, // First 4 bytes
-			0x66, 0x74, 0x79, 0x70  // Next 4 bytes
+			0x00,
+			0x00,
+			0x00,
+			0x18, // First 4 bytes
+			0x66,
+			0x74,
+			0x79,
+			0x70, // Next 4 bytes
 		]);
 
 		const result = isValidVideo(fileBuffer);
 		expect(result).toBe(true);
 	});
 
-	test('validateMp4 should return true for byte sequence 1', () => {
+	test("validateMp4 should return true for byte sequence 1", () => {
 		const fileBuffer = Buffer.from([
-			0x00, 0x00, 0x00, 0x20, // First 4 bytes
-			0x66, 0x74, 0x79, 0x70, // Next 4 bytes
-			0x6d, 0x70, 0x34, 0x32  // Last 4 bytes
+			0x00,
+			0x00,
+			0x00,
+			0x20, // First 4 bytes
+			0x66,
+			0x74,
+			0x79,
+			0x70, // Next 4 bytes
+			0x6d,
+			0x70,
+			0x34,
+			0x32, // Last 4 bytes
 		]);
 
 		const result = isValidVideo(fileBuffer);
 		expect(result).toBe(true);
 	});
 
-	test('validateMp4 should return true for byte sequence 2', () => {
+	test("validateMp4 should return true for byte sequence 2", () => {
 		const fileBuffer = Buffer.from([
-			0x00, 0x00, 0x00, 0x1c, // First 4 bytes
-			0x66, 0x74, 0x79, 0x70, // Next 4 bytes
-			0x69, 0x73, 0x6f, 0x6d  // Last 4 bytes
+			0x00,
+			0x00,
+			0x00,
+			0x1c, // First 4 bytes
+			0x66,
+			0x74,
+			0x79,
+			0x70, // Next 4 bytes
+			0x69,
+			0x73,
+			0x6f,
+			0x6d, // Last 4 bytes
 		]);
 
 		const result = isValidVideo(fileBuffer);

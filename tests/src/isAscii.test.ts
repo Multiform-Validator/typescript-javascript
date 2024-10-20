@@ -7,7 +7,9 @@ describe("isAscii", () => {
 	});
 
 	it("should return true when the input is an empty string", () => {
-		expect(() => isAscii(" ")).toThrow("Input value must not be an empty string.");
+		expect(() => isAscii(" ")).toThrow(
+			"Input value must not be an empty string.",
+		);
 	});
 
 	it("should return false when the input is not ASCII", () => {

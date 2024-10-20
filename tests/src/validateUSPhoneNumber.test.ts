@@ -34,9 +34,9 @@ describe("validateUSPhoneNumber", () => {
 	});
 
 	it("should throw an error when errorMsg is not an array or null", () => {
-		expect(() => validateUSPhoneNumber("(555) 123-4567", "error msg" as any)).toThrow(
-			"errorMsg must be an Array or null",
-		);
+		expect(() =>
+			validateUSPhoneNumber("(555) 123-4567", "error msg" as any),
+		).toThrow("errorMsg must be an Array or null");
 	});
 
 	it("should throw an error when the input is not a string", () => {

@@ -2,9 +2,9 @@ import validateTextarea from "../../src/validateTextarea";
 
 describe("validateTextarea", () => {
 	it("should throw an error when the input is not a string", () => {
-		expect(() =>
-			validateTextarea(12345678 as any),
-		).toThrow("The input should be a string.");
+		expect(() => validateTextarea(12345678 as any)).toThrow(
+			"The input should be a string.",
+		);
 	});
 
 	it("should throw an error when errorMsg is not an array", () => {
@@ -23,13 +23,17 @@ describe("validateTextarea", () => {
 				isRequired: true,
 				maxLength: -1,
 			}),
-		).toThrow("maxLength or minLength must be a number and cannot be less than 1");
+		).toThrow(
+			"maxLength or minLength must be a number and cannot be less than 1",
+		);
 		expect(() =>
 			validateTextarea("This is a valid textarea.", {
 				isRequired: true,
 				maxLength: "a" as any,
 			}),
-		).toThrow("maxLength or minLength must be a number and cannot be less than 1");
+		).toThrow(
+			"maxLength or minLength must be a number and cannot be less than 1",
+		);
 	});
 
 	it("validates textarea with correct length", () => {

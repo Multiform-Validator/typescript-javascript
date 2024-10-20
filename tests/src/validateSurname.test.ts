@@ -27,8 +27,7 @@ describe("validateSurname", () => {
 		const result: ValidateFunctions = validateSurname("");
 		expect(result.isValid).toBe(false);
 		expect(result.errorMsg).toBe("Surname cannot be empty");
-	});	
-
+	});
 
 	it("should return false if (/(\\w)\\1\\1/.test(surname)) is true", () => {
 		const result: ValidateFunctions = validateSurname("Johnnn");
@@ -37,18 +36,22 @@ describe("validateSurname", () => {
 	});
 
 	it("should throw an error if maxLength or minLength less than 1", () => {
-		expect(() => validateSurname("John", { minLength: 0, maxLength: 20 })).toThrow(
+		expect(() =>
+			validateSurname("John", { minLength: 0, maxLength: 20 }),
+		).toThrow(
 			"maxLength or minLength must be a number and cannot be less than 1",
 		);
-		expect(() => validateSurname("John", { minLength: 1, maxLength: 0 })).toThrow(
+		expect(() =>
+			validateSurname("John", { minLength: 1, maxLength: 0 }),
+		).toThrow(
 			"maxLength or minLength must be a number and cannot be less than 1",
 		);
 	});
 
 	it("should throw an error if minLength is greater than maxLength", () => {
-		expect(() => validateSurname("John", { minLength: 20, maxLength: 1 })).toThrow(
-			"minLength cannot be greater than maxLength",
-		);
+		expect(() =>
+			validateSurname("John", { minLength: 20, maxLength: 1 }),
+		).toThrow("minLength cannot be greater than maxLength");
 	});
 
 	it("returns error for surname with special characters", () => {
@@ -118,11 +121,11 @@ describe("validateSurname", () => {
 	});
 
 	it("should throw an error when errorMsg is not an array or null", () => {
-		expect(() => validateSurname("Johnson", {
-			errorMsg: "Custom error" as unknown as (string | null)[],
-		})).toThrow(
-			"errorMsg must be an Array or null",
-		);
+		expect(() =>
+			validateSurname("Johnson", {
+				errorMsg: "Custom error" as unknown as (string | null)[],
+			}),
+		).toThrow("errorMsg must be an Array or null");
 	});
 
 	it("should throw an error when the input is not a string", () => {

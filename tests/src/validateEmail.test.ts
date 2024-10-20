@@ -88,15 +88,21 @@ describe("validateEmail", () => {
 
 	it("should throw an error when errorMsg is not an array or null", () => {
 		// @ts-ignore
-		expect(() => validateEmail("jor@dio.com", { errorMsg: 123 })).toThrow("errorMsg must be an Array or null");
+		expect(() => validateEmail("jor@dio.com", { errorMsg: 123 })).toThrow(
+			"errorMsg must be an Array or null",
+		);
 	});
 
 	it("should throw an error if any element of the errorMsg array is different from string or null", () => {
-		expect(() => validateEmail("jd@dio.com", { errorMsg: [123 as any] })).toThrow("All values within the array must be strings or null/undefined.");
-	})
+		expect(() =>
+			validateEmail("jd@dio.com", { errorMsg: [123 as any] }),
+		).toThrow("All values within the array must be strings or null/undefined.");
+	});
 
 	it("should throw an error when maxLength must be a number and cannot be less than 1", () => {
-		expect(() => validateEmail("aa@dao.com", { maxLength: 0 })).toThrow("maxLength must be a number and cannot be less than 1");
+		expect(() => validateEmail("aa@dao.com", { maxLength: 0 })).toThrow(
+			"maxLength must be a number and cannot be less than 1",
+		);
 	});
 
 	it("should invalidate an email that does not end with the country code", () => {

@@ -14,8 +14,12 @@ describe("isDate", () => {
 	});
 
 	it("should throw an error when the input is a empty string", () => {
-		expect(() => isDate("")).toThrow("Input value must not be an empty string.");
-		expect(() => isDate(" ")).toThrow("Input value must not be an empty string.");
+		expect(() => isDate("")).toThrow(
+			"Input value must not be an empty string.",
+		);
+		expect(() => isDate(" ")).toThrow(
+			"Input value must not be an empty string.",
+		);
 	});
 
 	it("should return false if isNaN or !(dateObject instanceof Date)", () => {
