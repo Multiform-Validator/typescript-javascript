@@ -10,7 +10,11 @@ describe("isValidImage", () => {
 		fileBuffer5: Buffer,
 		fileBuffer6: Buffer,
 		fileBuffer7: Buffer,
-		fileBuffer8: Buffer;
+		fileBuffer8: Buffer,
+		fileBuffer9: Buffer,
+		fileBuffer10: Buffer,
+		fileBuffer11: Buffer,
+		fileBuffer12: Buffer;
 
 	beforeAll(() => {
 		fileBuffer1 = fs.readFileSync(
@@ -93,6 +97,47 @@ describe("isValidImage", () => {
 				"valid.gif",
 			),
 		); // Valid GIF image
+		fileBuffer9 = fs.readFileSync(
+			path.join(
+				__dirname,
+				"..",
+				"assets",
+				"isValidImage",
+				"invalid",
+				"fake.png",
+			),
+		); // Invalid Png image
+		fileBuffer10 = fs.readFileSync(
+			path.join(
+				__dirname,
+				"..",
+				"assets",
+				"isValidImage",
+				"invalid",
+				"fake.jpeg",
+			),
+		); // Invalid JPEG image
+		fileBuffer11 = fs.readFileSync(
+			path.join(
+				__dirname,
+				"..",
+				"assets",
+				"isValidImage",
+				"invalid",
+				"fake87a.gif",
+			),
+		); // Invalid GIF 87a image
+
+		fileBuffer12 = fs.readFileSync(
+			path.join(
+				__dirname,
+				"..",
+				"assets",
+				"isValidImage",
+				"invalid",
+				"fake89a.gif",
+			),
+		); // Invalid GIF 89a image
 	});
 
 	it("should return false for an empty buffer", () => {
@@ -201,6 +246,30 @@ describe("isValidImage", () => {
 	it("should return true for a valid GIF image when excluding ICO images", () => {
 		const result = isValidImage(fileBuffer8, { exclude: ["ico"] });
 		expect(result).toBe(true);
+	});
+
+	it("should return false for an invalid PNG image with headers corrects", () => {
+		const result = isValidImage(fileBuffer9, { exclude: ["gif", "ico", "jpeg"]});
+		expect(result).toBe(false);
+	});
+
+	it("should return false if validations break in png image", () => {
+		expect(isValidImage("null" as any)).toBe(false);
+	});
+
+	it("should return false for an invalid JPEG image with headers corrects", () => {
+		const result = isValidImage(fileBuffer10, { exclude: ["gif", "ico", "png"]});
+		expect(result).toBe(false);
+	});
+
+	it("should return false for an invalid GIF image with headers corrects", () => {
+		const result = isValidImage(fileBuffer11, { exclude: ["jpeg", "ico", "png"]});
+		expect(result).toBe(false);
+	});
+
+	it("should return false for an invalid GIF image with headers corrects", () => {
+		const result = isValidImage(fileBuffer12, { exclude: ["jpeg", "ico", "png"]});
+		expect(result).toBe(false);
 	});
 });
 export default isValidImage;

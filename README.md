@@ -20,12 +20,12 @@ Feel free to find bugs and report them to me. Your feedback is highly appreciate
 jsDelivr:
 
 ```bash
-https://cdn.jsdelivr.net/npm/multiform-validator@2.2.3/+esm
+https://cdn.jsdelivr.net/npm/multiform-validator@2.2.7/+esm
 ```
 
 ```html
 <script type="module">
-	import multiform-validator from "https://cdn.jsdelivr.net/npm/multiform-validator@2.2.3/+esm"
+	import multiform-validator from "https://cdn.jsdelivr.net/npm/multiform-validator@2.2.7/+esm"
 </script>
 ```
 
@@ -71,7 +71,7 @@ using esm:
 
 ```html
 <script type="module">
-	import multiformValidator from "https://cdn.jsdelivr.net/npm/multiform-validator@2.2.3/+esm";
+	import multiformValidator from "https://cdn.jsdelivr.net/npm/multiform-validator@2.2.7/+esm";
 	const emailResult = multiformValidator.isEmail("123456");
 	const cpfResult = multiformValidator.cpfIsValid("123456");
 
