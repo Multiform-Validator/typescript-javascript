@@ -171,7 +171,7 @@ function getErrorMessage(
 		? errorMsg[index]
 		: defaultErrorMsg[index];
 	if (errorMessage === "Email too big, try again") {
-		return `Email cannot be greater than ${maxEmailLength} characters`;
+		return `Email cannot be greater than ${maxEmailLength.toString()} characters`;
 	}
 	return errorMessage ?? defaultErrorMsg[index];
 }

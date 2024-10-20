@@ -13,4 +13,4 @@ export interface ValidatePassportNumber {
 	country: string | null;
 }
 
-export type IsValidFunctions = boolean;
+export type IsValidFunctions = boolean; // nosonar
