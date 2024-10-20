@@ -205,9 +205,9 @@ function getErrorMessage(
 		errorMessage === "password too short"
 	) {
 		if (maxLenthPassword === Infinity) {
-			return `Password must be greater than ${minLenthPassword} characters`;
+			return `Password must be greater than ${minLenthPassword.toString()} characters`;
 		}
-		return `Password must be between ${minLenthPassword} and ${maxLenthPassword} characters`;
+		return `Password must be between ${minLenthPassword.toString()} and ${maxLenthPassword.toString()} characters`;
 	}
 	return errorMessage ?? defaultErrorMsg[index];
 }

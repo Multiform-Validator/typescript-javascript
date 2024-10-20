@@ -59,7 +59,7 @@ function validateTextarea(
 			: defaultErrorMsg[index];
 
 		if (errorMessage === "This textarea is too big") {
-			return `Textarea cannot exceed ${maxTextAreaLength} characters`;
+			return `Textarea cannot exceed ${maxTextAreaLength.toString()} characters`;
 		}
 		return errorMessage ?? defaultErrorMsg[index];
 	}

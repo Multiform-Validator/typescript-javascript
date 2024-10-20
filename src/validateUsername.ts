@@ -193,7 +193,7 @@ function getErrorMessage(
 		errorMessage === "username too short" ||
 		errorMessage === "This username is too long"
 	) {
-		return `Username must be between ${minLenthUsername} and ${maxLenthUsername} characters`;
+		return `Username must be between ${minLenthUsername.toString()} and ${maxLenthUsername.toString()} characters`;
 	}
 	return errorMessage ?? defaultErrorMsg[index];
 }
