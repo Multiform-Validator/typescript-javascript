@@ -2,7 +2,7 @@ import { ValidateFunctions } from "./types";
 
 const defaultErrorMsg: string[] = [
 	"This password is too long",
-	"password too short",
+	"Password too short",
 	"Password requires at least one capital letter",
 	"Password requires at least one special character",
 	"Password requires at least one number",
@@ -60,7 +60,7 @@ const defaultOptionsParams: OptionsParams = {
  * Default:
  *   [
   'This password is too long',// Password must be between ${minLenthPassword} and ${maxLenthPassword} characters
-  'password too short',// Password must be between ${minLenthPassword} and ${maxLenthPassword} characters
+  'Password too short',// Password must be between ${minLenthPassword} and ${maxLenthPassword} characters
   'Requires at least one capital letter',
   'Requires at least one special character',
   'Requires at least one number',
@@ -202,7 +202,7 @@ function getErrorMessage(
 		: defaultErrorMsg[index];
 	if (
 		errorMessage === "This password is too long" ||
-		errorMessage === "password too short"
+		errorMessage === "Password too short"
 	) {
 		if (maxLenthPassword === Infinity) {
 			return `Password must be greater than ${minLenthPassword.toString()} characters`;

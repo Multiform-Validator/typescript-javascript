@@ -79,4 +79,22 @@ describe("cnpjIsValid function", () => {
 		expect(result.isValid).toBe(false);
 		expect(result.errorMsg).toBe("CNPJ is not valid");
 	});
+
+	test("should return default error messages when errorMsg['etc', null] is passed", () => {
+		const result = cnpjIsValid("12.345.678/0001-91", ["etc", null]);
+		expect(result.errorMsg).toBe("CNPJ is not valid");
+	});
+
+	test("should return default error messages when errorMsg is null", () => {
+		const result = cnpjIsValid("12.345.678/0001-91", null);
+		expect(result.errorMsg).toBe("CNPJ is not valid");
+	});
+
+	test("should return true for a valid CNPJ where the first verifier is 0", () => {
+		const cnpj = "69.228.768.0159-00";
+		const result = cnpjIsValid(cnpj);
+		expect(result.isValid).toBe(true);
+		expect(result.errorMsg).toBeNull();
+	});
+	
 });

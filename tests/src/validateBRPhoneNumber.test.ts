@@ -42,4 +42,20 @@ describe("validateBRPhoneNumber", () => {
 			errorMsg: null,
 		});
 	});
+	
+	it("should return default error messages when errorMsg['etc', null] is passed", () => {
+		const result = validateBRPhoneNumber("12345678", ["etc", null]);
+		expect(result).toEqual({
+			isValid: false,
+			errorMsg: "Invalid phone number",
+		});
+	});
+
+	it("should return default error messages when errorMsg is null", () => {
+		const result = validateBRPhoneNumber("12345678", null);
+		expect(result).toEqual({
+			isValid: false,
+			errorMsg: "Invalid phone number",
+		});
+	});
 });

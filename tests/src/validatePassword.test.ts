@@ -185,4 +185,23 @@ describe("validatePassword", () => {
 			}),
 		).toThrow("No size can be smaller than 1");
 	});
+
+	it("should return default error messages when errorMsg is undefined", () => {
+		const result = validatePassword("Passw", {
+			minLength: 8,
+			maxLength: 20,
+			errorMsg: undefined,
+		});
+		
+		expect(result.errorMsg).toBe("Password must be between 8 and 20 characters");
+	});
+
+	it("should return default error messages when errorMsg['etc', null] is passed", () => {
+		const result = validatePassword("Passw", {
+			minLength: 8,
+			maxLength: 20,
+			errorMsg: ["etc", null],
+		});
+		expect(result.errorMsg).toBe("Password too short");
+	});
 });

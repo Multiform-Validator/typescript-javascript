@@ -81,4 +81,22 @@ describe("validateTextarea", () => {
 			}),
 		).toThrow("All values within the array must be strings or null/undefined.");
 	});
+
+	it("should return default error messages when errorMsg[null, 'etc'] is passed", () => {
+		const result = validateTextarea("This is a valid textarea.", {
+			isRequired: true,
+			maxLength: 15,
+			errorMsg: [null, "etc"],
+		});
+		expect(result.errorMsg).toBe("This textarea is too big");
+	});
+
+	it("should return default error messages when errorMsg is null", () => {
+		const result = validateTextarea("This is a valid textarea.", {
+			isRequired: true,
+			maxLength: 15,
+			errorMsg: null as any,
+		});
+		expect(result.errorMsg).toBe("Textarea cannot exceed 15 characters");
+	});
 });

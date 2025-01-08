@@ -156,4 +156,31 @@ describe("validateUsername", () => {
 		expect(result2.isValid).toBe(false);
 		expect(result3.isValid).toBe(false);
 	});
+
+	it("should return default error messages when errorMsg['etc', null] is passed", () => {
+		const result = validateUsername("Us", {
+			minLength: 3,
+			maxLength: 25,
+			errorMsg: ["etc", null],
+		});
+		expect(result.errorMsg).toBe("Username too short");
+	});
+
+	it("should return default error messages when errorMsg is null", () => {
+		const result = validateUsername("Us", {
+			minLength: 3,
+			maxLength: 25,
+			errorMsg: null as any,
+		});
+		expect(result.errorMsg).toBe("Username must be between 3 and 25 characters");
+	});
+
+	it("should throw an error if minLength is number but maxLength is not", () => {
+		expect(() =>
+			validateUsername("User123", {
+				minLength: 3,
+				maxLength: "aw" as any,
+			}),
+		).toThrow("maxLength or minLength must be a number");
+	});
 });

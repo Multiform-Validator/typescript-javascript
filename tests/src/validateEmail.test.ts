@@ -116,4 +116,13 @@ describe("validateEmail", () => {
 		expect(result.isValid).toBe(true);
 		expect(result.errorMsg).toBe(null);
 	});
+
+	it("should validate email and return the custom error message and defaultMsgErrors too", () => {
+		const result = validateEmail("1@gmail.com", {
+			errorMsg: ["Custom error message", null, "Custom error message 2"],
+		});
+
+		expect(result.isValid).toBe(false);
+		expect(result.errorMsg).toBe("This e-mail is not valid");
+	});
 });

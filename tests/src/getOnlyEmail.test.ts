@@ -108,4 +108,28 @@ describe("getOnlyEmail", () => {
 		);
 		expect(result).toBe("alexa@google.custom");
 	});
+
+	it("should return the first email when repeatEmail is true and multiple is false", () => {
+		const result = getOnlyEmail(
+			"Entre em contato com a equipe: john@gmail.com, john@gmail.com",
+			{ multiple: false, cleanDomain: false, repeatEmail: true }
+		);
+		expect(result).toBe("john@gmail.com");
+	});
+
+	it("should return the first cleaned email when repeatEmail is true and multiple is false", () => {
+		const result = getOnlyEmail(
+			"Entre em contato com a equipe: john@gmail.comXTRA, alexa@gmail.comXTRA",
+			{ multiple: false, cleanDomain: true, repeatEmail: true }
+		);
+		expect(result).toBe("john@gmail.com");
+	});	
+
+	it("should return all cleaned emails when repeatEmail is true and multiple is true", () => {
+		const result = getOnlyEmail(
+			"Entre em contato com a equipe: john@gmail.comXTRA, alexa@gmail.comXTRA",
+			{ multiple: true, cleanDomain: true, repeatEmail: true }
+		);
+		expect(result).toEqual(["john@gmail.com", "alexa@gmail.com"]);
+	});
 });

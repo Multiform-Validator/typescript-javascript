@@ -51,4 +51,20 @@ describe("isDate", () => {
 		const result = isDate("2022-02-31");
 		expect(result).toBe(false);
 	});
+
+	it("should return false for a date in February of a non-leap year divisible by 100 but not by 400", () => {
+		const result = isDate("1900-02-29");
+		expect(result).toBe(false);
+	});
+
+	it("should return true for February 29 in a leap year divisible by 4 but not by 100", () => {
+		const result = isDate("2024-02-29");
+		expect(result).toBe(true);
+	});
+	
+	it("should return true for February 29 in a leap year divisible by 400", () => {
+		const result = isDate("2000-02-29");
+		expect(result).toBe(true);
+	});
+	
 });

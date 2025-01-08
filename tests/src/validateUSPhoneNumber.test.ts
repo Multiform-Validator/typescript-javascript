@@ -44,4 +44,14 @@ describe("validateUSPhoneNumber", () => {
 			"The input should be a string.",
 		);
 	});
+
+	it("should return default error messages when errorMsg['etc', null] is passed", () => {
+		const result = validateUSPhoneNumber("1234567", ["etc", null]);
+		expect(result.errorMsg).toBe("Invalid phone number");
+	});
+
+	it("should return default error messages when errorMsg is null", () => {
+		const result = validateUSPhoneNumber("1234567", null);
+		expect(result.errorMsg).toBe("Invalid phone number");
+	});
 });

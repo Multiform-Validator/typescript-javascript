@@ -5,7 +5,7 @@ const regexOnlyNumbers: RegExp = /^\d+$/;
 const regexStartsWithNumber: RegExp = /^\d/;
 const defaultErrorMsg: string[] = [
 	"Username cannot be empty",
-	"username too short",
+	"Username too short",
 	"This username is too long",
 	"Username cannot contain spaces",
 	"Cannot start with a number",
@@ -166,9 +166,8 @@ function validateLengthParams(
 	maxLenthUsername: number,
 ): void {
 	if (
-		(typeof minLenthUsername !== "number" ||
-			typeof maxLenthUsername !== "number") &&
-		(!Number.isNaN(minLenthUsername) || !Number.isNaN(maxLenthUsername))
+		typeof minLenthUsername !== "number" ||
+		typeof maxLenthUsername !== "number"
 	) {
 		throw new Error("maxLength or minLength must be a number");
 	}
@@ -190,7 +189,7 @@ function getErrorMessage(
 		? errorMsg[index]
 		: defaultErrorMsg[index];
 	if (
-		errorMessage === "username too short" ||
+		errorMessage === "Username too short" ||
 		errorMessage === "This username is too long"
 	) {
 		return `Username must be between ${minLenthUsername.toString()} and ${maxLenthUsername.toString()} characters`;
