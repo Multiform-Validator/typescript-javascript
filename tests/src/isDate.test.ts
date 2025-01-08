@@ -61,10 +61,9 @@ describe("isDate", () => {
 		const result = isDate("2024-02-29");
 		expect(result).toBe(true);
 	});
-	
+
 	it("should return true for February 29 in a leap year divisible by 400", () => {
 		const result = isDate("2000-02-29");
 		expect(result).toBe(true);
 	});
-	
 });

@@ -192,8 +192,10 @@ describe("validatePassword", () => {
 			maxLength: 20,
 			errorMsg: undefined,
 		});
-		
-		expect(result.errorMsg).toBe("Password must be between 8 and 20 characters");
+
+		expect(result.errorMsg).toBe(
+			"Password must be between 8 and 20 characters",
+		);
 	});
 
 	it("should return default error messages when errorMsg['etc', null] is passed", () => {

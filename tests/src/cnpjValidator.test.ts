@@ -96,5 +96,4 @@ describe("cnpjIsValid function", () => {
 		expect(result.isValid).toBe(true);
 		expect(result.errorMsg).toBeNull();
 	});
-	
 });

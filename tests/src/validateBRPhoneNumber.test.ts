@@ -42,7 +42,7 @@ describe("validateBRPhoneNumber", () => {
 			errorMsg: null,
 		});
 	});
-	
+
 	it("should return default error messages when errorMsg['etc', null] is passed", () => {
 		const result = validateBRPhoneNumber("12345678", ["etc", null]);
 		expect(result).toEqual({

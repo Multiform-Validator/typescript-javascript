@@ -249,7 +249,9 @@ describe("isValidImage", () => {
 	});
 
 	it("should return false for an invalid PNG image with headers corrects", () => {
-		const result = isValidImage(fileBuffer9, { exclude: ["gif", "ico", "jpeg"]});
+		const result = isValidImage(fileBuffer9, {
+			exclude: ["gif", "ico", "jpeg"],
+		});
 		expect(result).toBe(false);
 	});
 
@@ -258,17 +260,23 @@ describe("isValidImage", () => {
 	});
 
 	it("should return false for an invalid JPEG image with headers corrects", () => {
-		const result = isValidImage(fileBuffer10, { exclude: ["gif", "ico", "png"]});
+		const result = isValidImage(fileBuffer10, {
+			exclude: ["gif", "ico", "png"],
+		});
 		expect(result).toBe(false);
 	});
 
 	it("should return false for an invalid GIF image with headers corrects", () => {
-		const result = isValidImage(fileBuffer11, { exclude: ["jpeg", "ico", "png"]});
+		const result = isValidImage(fileBuffer11, {
+			exclude: ["jpeg", "ico", "png"],
+		});
 		expect(result).toBe(false);
 	});
 
 	it("should return false for an invalid GIF image with headers corrects", () => {
-		const result = isValidImage(fileBuffer12, { exclude: ["jpeg", "ico", "png"]});
+		const result = isValidImage(fileBuffer12, {
+			exclude: ["jpeg", "ico", "png"],
+		});
 		expect(result).toBe(false);
 	});
 });

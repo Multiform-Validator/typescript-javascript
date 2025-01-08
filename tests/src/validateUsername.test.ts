@@ -172,7 +172,9 @@ describe("validateUsername", () => {
 			maxLength: 25,
 			errorMsg: null as any,
 		});
-		expect(result.errorMsg).toBe("Username must be between 3 and 25 characters");
+		expect(result.errorMsg).toBe(
+			"Username must be between 3 and 25 characters",
+		);
 	});
 
 	it("should throw an error if minLength is number but maxLength is not", () => {
