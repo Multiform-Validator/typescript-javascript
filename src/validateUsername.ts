@@ -1,26 +1,23 @@
 import { ValidateFunctions } from "./types";
 
-const regexHasSpaces: RegExp = /\s/;
-const regexOnlyNumbers: RegExp = /^\d+$/;
-const regexStartsWithNumber: RegExp = /^\d/;
 const defaultErrorMsg: string[] = [
 	"Username cannot be empty",
 	"Username too short",
 	"This username is too long",
-	"Username cannot contain spaces",
-	"Cannot start with a number",
-	"Cannot contain only numbers",
+	"Invalid username",
 ];
 
 interface OptionsParams {
 	minLength?: number;
 	maxLength?: number;
+	cbValidate?: (username: string) => boolean;
 	errorMsg?: (string | null)[];
 }
 
 const defaultOptionsParams: OptionsParams = {
 	minLength: undefined,
 	maxLength: undefined,
+	cbValidate: undefined,
 	errorMsg: defaultErrorMsg,
 };
 
@@ -28,32 +25,35 @@ const defaultOptionsParams: OptionsParams = {
  * @param username
  * @param minLength optional
  * @param maxLength optional
+ * @param cbValidate optional
  * @param errorMsg optional
  * @default minLength number: 1
  * @default maxLength number: Infinity
- * @example validateUsername('User999', { minLength: 8, maxLength: 20 });
- * @example validateUsername('User999', { minLength: 8, maxLength: 20, errorMsg: ['My own errorsMsg'] });
+ * @default cbValidate function: undefined
  * @info minLength cannot be greater than maxLength
- * @description This function returns 7 errors in the following order,
+ * @description This function returns 4 errors in the following order,
  *
  * If you want to use a default parameter, use null.
  *
  * Default:
- *   [
-  'Username cannot be empty',
-  'Username must be between ${maxLenthUsername} and ${maxLenthUsername} characters',
-  'Username must be between ${maxLenthUsername} and ${maxLenthUsername} characters',
-  'Username cannot contain spaces',
-  'Cannot start with a number',
-  'Cannot contain only numbers',
+ *  [
+  "Username cannot be empty",
+  "Username must be between ${maxLenthUsername} and ${maxLenthUsername} characters",
+  "Username must be between ${maxLenthUsername} and ${maxLenthUsername} characters",
+  "Invalid username",
 ];
  *
  * Create a list of errors separated by commas in strings
- * @returns An object with 'isValid' (boolean) and 'errorMsg' (string) properties.
+ * @returns An object with "isValid" (boolean) and "errorMsg" (string) properties.
  */
 function validateUsername(
 	username: string,
-	{ minLength, maxLength, errorMsg }: OptionsParams = defaultOptionsParams,
+	{
+		minLength,
+		maxLength,
+		cbValidate,
+		errorMsg,
+	}: OptionsParams = defaultOptionsParams,
 ): ValidateFunctions {
 	if (typeof username !== "string") {
 		throw new TypeError("The input should be a string.");
@@ -78,39 +78,6 @@ function validateUsername(
 
 	validateLengthParams(minLenthUsername, maxLenthUsername);
 
-	if (regexHasSpaces.test(username)) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(
-				3,
-				errorMsg,
-				minLenthUsername,
-				maxLenthUsername,
-			),
-		};
-	}
-	if (regexOnlyNumbers.test(username)) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(
-				5,
-				errorMsg,
-				minLenthUsername,
-				maxLenthUsername,
-			),
-		};
-	}
-	if (regexStartsWithNumber.test(username)) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(
-				4,
-				errorMsg,
-				minLenthUsername,
-				maxLenthUsername,
-			),
-		};
-	}
 	if (username.length < minLenthUsername) {
 		return {
 			isValid: false,
@@ -134,10 +101,15 @@ function validateUsername(
 		};
 	}
 
-	if (containsMultipleSpecialChars(username)) {
+	if (cbValidate && !cbValidate(username)) {
 		return {
 			isValid: false,
-			errorMsg: "Username cannot contain multiple special characters",
+			errorMsg: getErrorMessage(
+				3,
+				errorMsg,
+				minLenthUsername,
+				maxLenthUsername,
+			),
 		};
 	}
 
@@ -171,9 +143,11 @@ function validateLengthParams(
 	) {
 		throw new Error("maxLength or minLength must be a number");
 	}
+
 	if (minLenthUsername > maxLenthUsername) {
 		throw new Error("Minimum cannot be greater than maximum");
 	}
+
 	if (minLenthUsername < 1 || maxLenthUsername < 1) {
 		throw new Error("Size parameters cannot be less than one");
 	}
@@ -197,50 +171,4 @@ function getErrorMessage(
 	return errorMessage ?? defaultErrorMsg[index];
 }
 
-function containsMultipleSpecialChars(username: string): boolean {
-	const specialChars: string[] = [
-		"!",
-		"@",
-		"#",
-		"$",
-		"%",
-		"^",
-		"&",
-		"*",
-		"(",
-		")",
-		"-",
-		"_",
-		"=",
-		"+",
-		"[",
-		"]",
-		"{",
-		"}",
-		"|",
-		"\\",
-		";",
-		":",
-		"'",
-		'"',
-		",",
-		".",
-		"<",
-		">",
-		"/",
-		"?",
-	];
-
-	const charCount: { [key: string]: number } = {};
-
-	for (const char of username) {
-		if (specialChars.includes(char)) {
-			charCount[char] = (charCount[char] || 0) + 1;
-			if (charCount[char] > 2) {
-				return true;
-			}
-		}
-	}
-	return false;
-}
 export default validateUsername;
