@@ -20,12 +20,12 @@ Feel free to find bugs and report them to me. Your feedback is highly appreciate
 jsDelivr:
 
 ```bash
-https://cdn.jsdelivr.net/npm/multiform-validator@2.2.9/+esm
+https://cdn.jsdelivr.net/npm/multiform-validator@2.3.1/+esm
 ```
 
 ```html
 <script type="module">
-	import multiform-validator from "https://cdn.jsdelivr.net/npm/multiform-validator@2.2.9/+esm"
+	import multiform-validator from "https://cdn.jsdelivr.net/npm/multiform-validator@2.3.1/+esm"
 </script>
 ```
 
@@ -44,11 +44,11 @@ https://cdn.jsdelivr.net/npm/multiform-validator@2.2.0/dist/cjs/index.min.js
 unpkg:
 
 ```bash
-https://unpkg.com/multiform-validator@2.2.9/dist/cjs/index.cjs
+https://unpkg.com/multiform-validator@2.3.1/dist/cjs/index.cjs
 ```
 
 ```html
-<script src="https://unpkg.com/multiform-validator@2.2.9/dist/cjs/index.cjs"></script>
+<script src="https://unpkg.com/multiform-validator@2.3.1/dist/cjs/index.cjs"></script>
 ```
 
 ### Example of use with CDN
@@ -71,7 +71,7 @@ using esm:
 
 ```html
 <script type="module">
-	import multiformValidator from "https://cdn.jsdelivr.net/npm/multiform-validator@2.2.9/+esm";
+	import multiformValidator from "https://cdn.jsdelivr.net/npm/multiform-validator@2.3.1/+esm";
 	const emailResult = multiformValidator.isEmail("123456");
 	const cpfResult = multiformValidator.cpfIsValid("123456");
 
