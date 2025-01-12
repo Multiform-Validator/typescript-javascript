@@ -1,142 +1,90 @@
+export type PasswordStrengthType =
+	| "Very weak"
+	| "Weak"
+	| "Regular"
+	| "Strong"
+	| "Very strong"
+	| "Not classified";
+
+export type PasswordStrengthFunction = (
+	password: string,
+	passwordLength: number,
+) => boolean;
+
+export interface PasswordStrengthTesterOptions {
+	isVeryWeak: PasswordStrengthFunction;
+	isWeak: PasswordStrengthFunction;
+	isRegular: PasswordStrengthFunction;
+	isStrong: PasswordStrengthFunction;
+	isVeryStrong: PasswordStrengthFunction;
+}
+
 /**
- * @description Avalia a força de uma senha e retorna o tipo de força da senha.
- *
- * @returns O tipo de força da senha ('veryWeak', 'weak', 'regular', 'strong' ou 'veryStrong').
- *
- * @example
- * passwordStrengthTester('12345'); // Output: 'veryWeak'
- *
- * @example
- * passwordStrengthTester('abcdef'); // Output: 'weak'
- *
- * @example
- * passwordStrengthTester('abc12345'); // Output: 'regular'
+ * @param password - The password to test
+ * @param Options - An object containing functions to test the password strength
+ * @param Options.isVeryWeak - A function to test if the password is very weak
+ * @param Options.isWeak - A function to test if the password is weak
+ * @param Options.isRegular - A function to test if the password is regular
+ * @param Options.isStrong - A function to test if the password is strong
+ * @param Options.isVeryStrong - A function to test if the password is very strong
+ * @throws {TypeError} - If the input is not a string
  *
  * @example
- * passwordStrengthTester('Abc123awdasd'); // Output: 'strong'
+ * const options = {
+ * 	isVeryWeak: (password, passwordLength) => passwordLength < 6,
+ * 	isWeak: (password, passwordLength) => passwordLength < 8,
+ * 	isRegular: (password, passwordLength) => passwordLength < 10,
+ * 	isStrong: (password, passwordLength) => passwordLength < 12,
+ * 	isVeryStrong: (password, passwordLength) => passwordLength >= 12,
+ * }
  *
- * @example
- * passwordStrengthTester('SuperSecurePassword123!@'); // Output: 'veryStrong'
+ * passwordStrengthTester("12345", options); // Very weak
+ * passwordStrengthTester("1234567", options); // Weak
+ * @returns {string}
  */
-function passwordStrengthTester(password: string): string {
+function passwordStrengthTester(
+	password: string,
+	{
+		isVeryWeak,
+		isWeak,
+		isRegular,
+		isStrong,
+		isVeryStrong,
+	}: PasswordStrengthTesterOptions,
+): string {
 	if (typeof password !== "string") {
 		throw new TypeError("The input should be a string.");
 	}
 	const passwordLength: number = password.length;
-	let strengthType: string;
+	let strengthType: PasswordStrengthType;
 
 	switch (true) {
-		case isVeryWeak(password, passwordLength) || commonPassword(password):
-			strengthType = "veryWeak";
+		case isVeryWeak(password, passwordLength):
+			strengthType = "Very weak";
 			break;
 
 		case isWeak(password, passwordLength):
-			strengthType = "weak";
+			strengthType = "Weak";
 			break;
 
 		case isRegular(password, passwordLength):
-			strengthType = "regular";
-			break;
-
-		case isVeryStrong(password, passwordLength):
-			strengthType = "veryStrong";
+			strengthType = "Regular";
 			break;
 
 		case isStrong(password, passwordLength):
-			strengthType = "strong";
+			strengthType = "Strong";
 			break;
 
-		case isRegular2(password, passwordLength):
-			strengthType = "regular";
+		case isVeryStrong(password, passwordLength):
+			strengthType = "Very strong";
 			break;
 
 		default:
-			strengthType = "not classified";
+			strengthType = "Not classified";
 			break;
 	}
 
 	return strengthType;
-}
-
-function isVeryWeak(password: string, passwordLength: number): boolean {
-	return passwordLength <= 5 && /^\d+$/.test(password);
-}
-
-function isWeak(password: string, passwordLength: number): boolean {
-	return (
-		(passwordLength <= 5 && /^[a-zA-Z0-9]+$/.test(password)) ||
-		(passwordLength >= 6 &&
-			/^[a-zA-Z0-9]+$/.test(password) &&
-			passwordLength <= 7) ||
-		(passwordLength < 10 && /(.)\1{3,}/.test(password)) ||
-		(passwordLength >= 5 && passwordLength <= 8 && /^\d+$/.test(password))
-	);
-}
-
-function isRegular(password: string, passwordLength: number): boolean {
-	return /(.)\1{5,}/.test(password) && passwordLength > 10;
-}
-
-function isVeryStrong(password: string, passwordLength: number): boolean {
-	return (
-		passwordLength > 16 ||
-		(password.length >= 8 &&
-			/[A-Z]/.test(password) &&
-			/[a-z]/.test(password) &&
-			/\d/.test(password) &&
-			/[\W_]/.test(password))
-	);
-}
-
-function isRegular2(password: string, passwordLength: number): boolean {
-	return (
-		(passwordLength >= 9 && passwordLength <= 12) ||
-		(password.length >= 6 &&
-			password.length <= 8 &&
-			/\d/.test(password) &&
-			/[a-zA-Z]/.test(password))
-	);
-}
-
-function isStrong(password: string, passwordLength: number): boolean {
-	return (
-		(passwordLength >= 13 && passwordLength <= 16) ||
-		(password.length >= 8 &&
-			/[A-Z]/.test(password) &&
-			/[a-z]/.test(password) &&
-			/\d/.test(password))
-	);
-}
-
-function commonPassword(password: string): boolean {
-	const commonPasswords: string[] = [
-		"123",
-		"1234",
-		"12345",
-		"123456",
-		"1234567",
-		"12345678",
-		"123456789",
-		"password",
-		"password",
-		"password!",
-		"password!1",
-		"admin",
-		"admin!",
-		"Admin",
-		"Admin!",
-		"admin123",
-		"P@ssw0rd",
-		"Password",
-		"password123",
-		"password123!",
-		"Qwerty",
-		"Qwerty!",
-		"Qwerty123",
-		"Qwerty123!",
-	];
-
-	return commonPasswords.includes(password);
 }
 
 export default passwordStrengthTester;

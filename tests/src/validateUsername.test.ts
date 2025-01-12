@@ -46,9 +46,7 @@ describe("validateUsername", () => {
 				maxLength: 25,
 				errorMsg: ["Error message", 123] as any,
 			}),
-		).toThrow(
-			"All values within the array must be strings or null/undefined.",
-		);
+		).toThrow("All values within the array must be strings or null/undefined.");
 	});
 
 	it("should throw an error if minLength or maxLength is less than 1", () => {

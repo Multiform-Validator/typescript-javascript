@@ -23,7 +23,6 @@ import {
 	validateUSPhoneNumber,
 	validatePhoneNumber,
 	isNumber,
-	passwordStrengthTester,
 	validateName,
 	validateSurname,
 	validateTextarea,
@@ -150,11 +149,6 @@ describe("Testes para as funções de validação", () => {
 	test("isNumber should validate numbers correctly", () => {
 		expect(isNumber("123")).toBe(true);
 		expect(isNumber("NotANumber")).toBe(false);
-	});
-
-	test("passwordStrengthTester should assess password strength correctly", () => {
-		expect(passwordStrengthTester("Password123")).toBe("strong");
-		expect(passwordStrengthTester("weak")).toBe("weak");
 	});
 
 	test("validateName should validate names correctly", () => {

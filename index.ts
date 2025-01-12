@@ -33,6 +33,11 @@ import isValidPdf from "./src/isValidPdf";
 import isValidVideo from "./src/isValidVideo";
 import isValidTxt from "./src/isValidTxt";
 import type { ValidateFunctions, IsValidFunctions } from "./src/types";
+import type {
+	PasswordStrengthTesterOptions,
+	PasswordStrengthFunction,
+	PasswordStrengthType,
+} from "./src/passwordStrengthTester";
 
 export {
 	cpfIsValid,
@@ -108,4 +113,10 @@ export default {
 	isValidTxt,
 };
 
-export type { ValidateFunctions, IsValidFunctions };
+export type {
+	ValidateFunctions,
+	IsValidFunctions,
+	PasswordStrengthTesterOptions,
+	PasswordStrengthFunction,
+	PasswordStrengthType,
+};
