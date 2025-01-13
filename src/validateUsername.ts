@@ -4,13 +4,12 @@ const defaultErrorMsg: string[] = [
 	"Username cannot be empty",
 	"Username too short",
 	"This username is too long",
-	"Invalid username",
 ];
 
 interface OptionsParams {
 	minLength?: number;
 	maxLength?: number;
-	cbValidate?: (username: string) => boolean;
+	cbValidate?: (username: string) => ValidateFunctions;
 	errorMsg?: (string | null)[];
 }
 
@@ -31,7 +30,7 @@ const defaultOptionsParams: OptionsParams = {
  * @default maxLength number: Infinity
  * @default cbValidate function: undefined
  * @info minLength cannot be greater than maxLength
- * @description This function returns 4 errors in the following order,
+ * @description This function returns 3 errors in the following order,
  *
  * If you want to use a default parameter, use null.
  *
@@ -40,7 +39,6 @@ const defaultOptionsParams: OptionsParams = {
   "Username cannot be empty",
   "Username must be between ${maxLenthUsername} and ${maxLenthUsername} characters",
   "Username must be between ${maxLenthUsername} and ${maxLenthUsername} characters",
-  "Invalid username",
 ];
  *
  * Create a list of errors separated by commas in strings
@@ -101,16 +99,11 @@ function validateUsername(
 		};
 	}
 
-	if (cbValidate && !cbValidate(username)) {
-		return {
-			isValid: false,
-			errorMsg: getErrorMessage(
-				3,
-				errorMsg,
-				minLenthUsername,
-				maxLenthUsername,
-			),
-		};
+	const cbValidateResult: ValidateFunctions | undefined =
+		cbValidate?.(username);
+
+	if (cbValidateResult && !cbValidateResult.isValid) {
+		return cbValidateResult;
 	}
 
 	return {

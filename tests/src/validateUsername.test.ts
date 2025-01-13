@@ -118,11 +118,47 @@ describe("validateUsername", () => {
 		const result = validateUsername("User1232", {
 			minLength: 3,
 			maxLength: 25,
-			cbValidate: (username: string) => username === "User123",
+			cbValidate: (username: string) => {
+				if (username !== "User123") {
+					return {
+						isValid: false,
+						errorMsg: "Invalid username",
+					};
+				}
+
+				return {
+					isValid: true,
+					errorMsg: null,
+				};
+			},
 		});
 		expect(result).toEqual({
 			isValid: false,
 			errorMsg: "Invalid username",
+		});
+	});
+
+	it("should return true based on the cbValidation function", () => {
+		const result = validateUsername("User123", {
+			minLength: 3,
+			maxLength: 25,
+			cbValidate: (username: string) => {
+				if (username !== "User123") {
+					return {
+						isValid: false,
+						errorMsg: "Invalid username",
+					};
+				}
+
+				return {
+					isValid: true,
+					errorMsg: null,
+				};
+			},
+		});
+		expect(result).toEqual({
+			isValid: true,
+			errorMsg: null,
 		});
 	});
 
