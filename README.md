@@ -82,6 +82,12 @@ or
 yarn add multiform-validator
 ```
 
+or
+
+```bash
+pnpm add multiform-validator
+```
+
 ## Data Validator
 
 This package contains various modules for validating different types of data. Below are the available validation modules:
