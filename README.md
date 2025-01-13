@@ -153,71 +153,9 @@ const { FUNCTION_NAME } = require("multiform-validator");
 import { FUNCTION_NAME } from "multiform-validator";
 ```
 
-```javascript
-
-const validator = require('multiform-validator');
-// or
-import validator from 'multiform-validator';
-// then
-validator.FUNCTION_NAME
-// OBS: 'if the function is called validate, the return will be an object and not boolean'
-// When return object boolean
-validator.FUNCTION_NAME = true or false
-// When return object
-validator.FUNCTION_NAME = object = { isValid: true or false, errorMsg: 'stringError' }
-validator.FUNCTION_NAME.isValid = true or false
-validator.FUNCTION_NAME.errorMsg = 'ErrorMsg' // You can customize errors
-/**
-	* There are other returns in some functions, with strings etc, stay tuned
-*/
-```
-
 ## Documentation
 
 ### https://multiformvalidator.netlify.app
-
-```javascript
-const { validateEmail } = require("multiform-validator");
-// or
-import { validateEmail } from "multiform-validator";
-
-// It has many more validations, you can read the documentation or
-// do several tests to learn how to use the library in the best possible way.
-
-// Two last parameters are optional
-console.log(
-	validateEmail("email@email.com", { maxLength: 30, country: "br" }).isValid,
-); // returns false
-console.log(
-	validateEmail("email@email.com.br", { maxLength: 30, country: "br" }).isValid,
-); // returns true
-console.log(validateEmail("email@email.com", { maxLength: 30 }).isValid); // returns true
-
-// All examples return default messages, below is an example setting your own messages
-
-// If you want to use a default parameter, use null.
-
-const validationResult = validateEmail("email@email.com", { maxLength: 30 });
-
-if (validationResult.isValid) {
-	console.log("0 errors");
-} else {
-	console.log(validationResult.errorMsg); // returns the error
-}
-
-// or
-
-const validationResult = validateEmail("1email@email.com", {
-	maxLength: 30,
-	errorMsg: [null, "This is an invalid email with my own errors"],
-});
-
-if (validationResult.isValid) {
-	console.log("0 errors");
-} else {
-	console.log(validationResult.errorMsg); // Return  'This is an invalid email with my own errors'
-}
-```
 
 Feel free to explore the various functions and experiment with different inputs to understand their behavior. If you encounter any issues or have suggestions, don't hesitate to reach out to me. Your feedback is valuable and helps improve the package. Happy coding!
 
