@@ -13,8 +13,8 @@ fs.writeFileSync("fake87a.gif", fakeGIF);
 // Assinatura GIF89a: [0x47, 0x49, 0x46, 0x38, 0x39, 0x61]
 const gif89aSignature = [0x47, 0x49, 0x46, 0x38, 0x39, 0x61];
 const fakeGIF89a = new Uint8Array([
-	...gif89aSignature,
-	...new Array(100).fill(0),
+  ...gif89aSignature,
+  ...new Array(100).fill(0),
 ]); // 100 bytes extras vazios
 fs.writeFileSync("fake89a.gif", fakeGIF89a);
 
