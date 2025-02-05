@@ -6,11 +6,11 @@ import validateMp4 from "./validateMp4";
 type VideoMimeType = "mkv" | "mov" | "mp4";
 
 interface OptionsParams {
-	exclude: VideoMimeType[];
+  exclude: VideoMimeType[];
 }
 
 const defaultOptionsParams: OptionsParams = {
-	exclude: [],
+  exclude: [],
 };
 
 /**
@@ -27,34 +27,34 @@ const defaultOptionsParams: OptionsParams = {
  * @returns A boolean indicating whether the file is a valid video.
  */
 function isValidVideo(
-	fileBuffer: Buffer,
-	options = defaultOptionsParams,
+  fileBuffer: Buffer,
+  options = defaultOptionsParams,
 ): boolean {
-	const excludedMimeTypes: VideoMimeType[] = options.exclude;
+  const excludedMimeTypes: VideoMimeType[] = options.exclude;
 
-	if (excludedMimeTypes.length === 0) {
-		return validateAllVideos(fileBuffer);
-	}
+  if (excludedMimeTypes.length === 0) {
+    return validateAllVideos(fileBuffer);
+  }
 
-	const listToValidate: VideoMimeType[] = ["mkv", "mov", "mp4"];
+  const listToValidate: VideoMimeType[] = ["mkv", "mov", "mp4"];
 
-	const filteredList: VideoMimeType[] = listToValidate.filter(
-		(mimeType: VideoMimeType) => !excludedMimeTypes.includes(mimeType),
-	);
+  const filteredList: VideoMimeType[] = listToValidate.filter(
+    (mimeType: VideoMimeType) => !excludedMimeTypes.includes(mimeType),
+  );
 
-	if (filteredList.length === 0) {
-		return false;
-	}
+  if (filteredList.length === 0) {
+    return false;
+  }
 
-	const isMkv: boolean =
-		filteredList.includes("mkv") && validateMkv(fileBuffer);
+  const isMkv: boolean =
+    filteredList.includes("mkv") && validateMkv(fileBuffer);
 
-	const isMov: boolean =
-		filteredList.includes("mov") && validateMov(fileBuffer);
+  const isMov: boolean =
+    filteredList.includes("mov") && validateMov(fileBuffer);
 
-	const isMp4: boolean =
-		filteredList.includes("mp4") && validateMp4(fileBuffer);
+  const isMp4: boolean =
+    filteredList.includes("mp4") && validateMp4(fileBuffer);
 
-	return isMkv || isMov || isMp4;
+  return isMkv || isMov || isMp4;
 }
 export default isValidVideo;

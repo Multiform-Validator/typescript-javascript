@@ -1,22 +1,22 @@
 const CleanAfterDefaultDomain: string[] = [
-	".br",
-	".io",
-	".pt",
-	".us",
-	".org",
-	".com",
+  ".br",
+  ".io",
+  ".pt",
+  ".us",
+  ".org",
+  ".com",
 ];
 
 interface OptionsParams {
-	multiple?: boolean;
-	cleanDomain?: boolean | string[];
-	repeatEmail?: boolean;
+  multiple?: boolean;
+  cleanDomain?: boolean | string[];
+  repeatEmail?: boolean;
 }
 
 const defaultOptionsParams: OptionsParams = {
-	multiple: false,
-	cleanDomain: false,
-	repeatEmail: false,
+  multiple: false,
+  cleanDomain: false,
+  repeatEmail: false,
 };
 
 /**
@@ -41,61 +41,61 @@ const defaultOptionsParams: OptionsParams = {
  * @returns An email string if multiple is false, or an array of email strings if multiple is true.
  */
 function getOnlyEmail(
-	text: string,
-	{
-		multiple = defaultOptionsParams.multiple,
-		cleanDomain = defaultOptionsParams.cleanDomain,
-		repeatEmail = defaultOptionsParams.repeatEmail,
-	}: OptionsParams = defaultOptionsParams,
+  text: string,
+  {
+    multiple = defaultOptionsParams.multiple,
+    cleanDomain = defaultOptionsParams.cleanDomain,
+    repeatEmail = defaultOptionsParams.repeatEmail,
+  }: OptionsParams = defaultOptionsParams,
 ): string | string[] {
-	const emailPattern: RegExp =
-		/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g;
+  const emailPattern: RegExp =
+    /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g;
 
-	const matches: string | string[] | null = text.match(emailPattern);
+  const matches: string | string[] | null = text.match(emailPattern);
 
-	if (!matches) {
-		return "No email found";
-	}
+  if (!matches) {
+    return "No email found";
+  }
 
-	if (cleanDomain) {
-		const domainsToClean: string[] = Array.isArray(cleanDomain)
-			? cleanDomain
-			: CleanAfterDefaultDomain;
+  if (cleanDomain) {
+    const domainsToClean: string[] = Array.isArray(cleanDomain)
+      ? cleanDomain
+      : CleanAfterDefaultDomain;
 
-		const cleanedEmails: string[] = matches.map((email) => {
-			for (const domain of domainsToClean) {
-				const index: number = email.lastIndexOf(domain);
-				if (index !== -1) {
-					email = email.substring(0, index + domain.length);
-					break; // Break the loop once a match is found
-				}
-			}
+    const cleanedEmails: string[] = matches.map((email) => {
+      for (const domain of domainsToClean) {
+        const index: number = email.lastIndexOf(domain);
+        if (index !== -1) {
+          email = email.substring(0, index + domain.length);
+          break; // Break the loop once a match is found
+        }
+      }
 
-			for (const domain of domainsToClean) {
-				const index: number = email.indexOf(domain);
-				if (index !== -1) {
-					email = email.substring(0, index + domain.length);
-					break; // Break the loop once a match is found
-				}
-			}
+      for (const domain of domainsToClean) {
+        const index: number = email.indexOf(domain);
+        if (index !== -1) {
+          email = email.substring(0, index + domain.length);
+          break; // Break the loop once a match is found
+        }
+      }
 
-			return email;
-		});
+      return email;
+    });
 
-		if (!repeatEmail) {
-			const uniqueEmails: string[] = [...new Set(cleanedEmails)];
-			return multiple ? uniqueEmails : uniqueEmails[0];
-		}
+    if (!repeatEmail) {
+      const uniqueEmails: string[] = [...new Set(cleanedEmails)];
+      return multiple ? uniqueEmails : uniqueEmails[0];
+    }
 
-		return multiple ? cleanedEmails : cleanedEmails[0];
-	}
+    return multiple ? cleanedEmails : cleanedEmails[0];
+  }
 
-	if (!repeatEmail) {
-		const uniqueEmails: string[] = [...new Set(matches)];
-		return multiple ? uniqueEmails : uniqueEmails[0];
-	}
+  if (!repeatEmail) {
+    const uniqueEmails: string[] = [...new Set(matches)];
+    return multiple ? uniqueEmails : uniqueEmails[0];
+  }
 
-	return multiple ? matches : matches[0];
+  return multiple ? matches : matches[0];
 }
 
 export default getOnlyEmail;

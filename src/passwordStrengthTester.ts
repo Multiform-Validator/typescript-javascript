@@ -1,22 +1,22 @@
 export type PasswordStrengthType =
-	| "Very weak"
-	| "Weak"
-	| "Regular"
-	| "Strong"
-	| "Very strong"
-	| "Not classified";
+  | "Very weak"
+  | "Weak"
+  | "Regular"
+  | "Strong"
+  | "Very strong"
+  | "Not classified";
 
 export type PasswordStrengthFunction = (
-	password: string,
-	passwordLength: number,
+  password: string,
+  passwordLength: number,
 ) => boolean;
 
 export interface PasswordStrengthTesterOptions {
-	isVeryWeak: PasswordStrengthFunction;
-	isWeak: PasswordStrengthFunction;
-	isRegular: PasswordStrengthFunction;
-	isStrong: PasswordStrengthFunction;
-	isVeryStrong: PasswordStrengthFunction;
+  isVeryWeak: PasswordStrengthFunction;
+  isWeak: PasswordStrengthFunction;
+  isRegular: PasswordStrengthFunction;
+  isStrong: PasswordStrengthFunction;
+  isVeryStrong: PasswordStrengthFunction;
 }
 
 /**
@@ -43,48 +43,48 @@ export interface PasswordStrengthTesterOptions {
  * @returns {string}
  */
 function passwordStrengthTester(
-	password: string,
-	{
-		isVeryWeak,
-		isWeak,
-		isRegular,
-		isStrong,
-		isVeryStrong,
-	}: PasswordStrengthTesterOptions,
+  password: string,
+  {
+    isVeryWeak,
+    isWeak,
+    isRegular,
+    isStrong,
+    isVeryStrong,
+  }: PasswordStrengthTesterOptions,
 ): string {
-	if (typeof password !== "string") {
-		throw new TypeError("The input should be a string.");
-	}
-	const passwordLength: number = password.length;
-	let strengthType: PasswordStrengthType;
+  if (typeof password !== "string") {
+    throw new TypeError("The input should be a string.");
+  }
+  const passwordLength: number = password.length;
+  let strengthType: PasswordStrengthType;
 
-	switch (true) {
-		case isVeryWeak(password, passwordLength):
-			strengthType = "Very weak";
-			break;
+  switch (true) {
+    case isVeryWeak(password, passwordLength):
+      strengthType = "Very weak";
+      break;
 
-		case isWeak(password, passwordLength):
-			strengthType = "Weak";
-			break;
+    case isWeak(password, passwordLength):
+      strengthType = "Weak";
+      break;
 
-		case isRegular(password, passwordLength):
-			strengthType = "Regular";
-			break;
+    case isRegular(password, passwordLength):
+      strengthType = "Regular";
+      break;
 
-		case isStrong(password, passwordLength):
-			strengthType = "Strong";
-			break;
+    case isStrong(password, passwordLength):
+      strengthType = "Strong";
+      break;
 
-		case isVeryStrong(password, passwordLength):
-			strengthType = "Very strong";
-			break;
+    case isVeryStrong(password, passwordLength):
+      strengthType = "Very strong";
+      break;
 
-		default:
-			strengthType = "Not classified";
-			break;
-	}
+    default:
+      strengthType = "Not classified";
+      break;
+  }
 
-	return strengthType;
+  return strengthType;
 }
 
 export default passwordStrengthTester;

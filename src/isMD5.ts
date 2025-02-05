@@ -8,26 +8,26 @@
  * @returns true or false
  */
 function isMD5(value: string): boolean {
-	if (typeof value !== "string") {
-		throw new TypeError("Input value must be a string.");
-	}
+  if (typeof value !== "string") {
+    throw new TypeError("Input value must be a string.");
+  }
 
-	const trimmedValue: string = value.trim();
-	if (trimmedValue.length !== 32) {
-		return false;
-	}
+  const trimmedValue: string = value.trim();
+  if (trimmedValue.length !== 32) {
+    return false;
+  }
 
-	const allDigitsEqualRegex: RegExp = /^(\d)\1+$/;
-	if (allDigitsEqualRegex.test(trimmedValue)) {
-		return false;
-	}
+  const allDigitsEqualRegex: RegExp = /^(\d)\1+$/;
+  if (allDigitsEqualRegex.test(trimmedValue)) {
+    return false;
+  }
 
-	const weakHashes: string[] = ["d41d8cd98f00b204e9800998ecf8427e"];
-	if (weakHashes.includes(trimmedValue)) {
-		return false;
-	}
+  const weakHashes: string[] = ["d41d8cd98f00b204e9800998ecf8427e"];
+  if (weakHashes.includes(trimmedValue)) {
+    return false;
+  }
 
-	return true;
+  return true;
 }
 
 export default isMD5;
