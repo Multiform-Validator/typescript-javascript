@@ -1,4 +1,4 @@
-import { ValidateFunctions } from "../../src/types";
+import type { ValidateFunctions } from "../../src/types";
 import validateUsername from "../../src/validateUsername";
 
 describe("validateUsername", () => {

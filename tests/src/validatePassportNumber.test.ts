@@ -1,4 +1,4 @@
-import { ValidatePassportNumber } from "../../src/types";
+import type { ValidatePassportNumber } from "../../src/types";
 import validatePassportNumber from "../../src/validatePassportNumber";
 
 describe("validatePassportNumber", () => {

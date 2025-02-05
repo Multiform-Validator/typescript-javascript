@@ -1,5 +1,5 @@
 import { passwordStrengthTester } from "../../index";
-import { PasswordStrengthTesterOptions } from "../../src/passwordStrengthTester";
+import type { PasswordStrengthTesterOptions } from "../../src/passwordStrengthTester";
 
 describe("passwordStrengthTester function", () => {
   let options: PasswordStrengthTesterOptions;

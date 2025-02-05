@@ -1,4 +1,4 @@
-import { ValidatePassportNumber } from "./types";
+import type { ValidatePassportNumber } from "./types";
 
 /**
  * @example validatePassportNumber('A1234567');

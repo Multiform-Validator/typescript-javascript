@@ -1,4 +1,4 @@
-import { ValidateFunctions } from "../../src/types";
+import type { ValidateFunctions } from "../../src/types";
 import validateBRPhoneNumber from "../../src/validateBRPhoneNumber";
 
 describe("validateBRPhoneNumber", () => {

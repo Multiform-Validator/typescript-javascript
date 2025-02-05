@@ -1,4 +1,4 @@
-import { ValidateFunctions } from "./types";
+import type { ValidateFunctions } from "./types";
 
 const defaultErrorMsg: string[] = [
   "Surname cannot be empty",

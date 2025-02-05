@@ -1,4 +1,4 @@
-import { ValidateFunctions } from "./types";
+import type { ValidateFunctions } from "./types";
 import isEmail from "./isEmail";
 
 const defaultErrorMsg: string[] = [

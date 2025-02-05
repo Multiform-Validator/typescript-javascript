@@ -1,4 +1,4 @@
-import { ValidateFunctions } from "../../src/types";
+import type { ValidateFunctions } from "../../src/types";
 import validateTextarea from "../../src/validateTextarea";
 
 describe("validateTextarea", () => {
