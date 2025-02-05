@@ -1,5 +1,8 @@
 name: Typescript Pull Request Check
 
+permissions:
+  contents: read
+
 on:
   push:
     branches: [main]
