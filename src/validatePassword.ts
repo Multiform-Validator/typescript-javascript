@@ -122,7 +122,7 @@ function validatePassword(
   };
 }
 
-function validateErrorMsg(errorMsg: (string | null)[] | undefined) {
+function validateErrorMsg(errorMsg: (string | null)[] | undefined): void {
   if (errorMsg) {
     if (!Array.isArray(errorMsg))
       throw new Error("errorMsg must be an Array or null");
@@ -139,7 +139,7 @@ function validateErrorMsg(errorMsg: (string | null)[] | undefined) {
 function validateLengthParams(
   minLenthPassword: number,
   maxLenthPassword: number,
-) {
+): void {
   if (
     typeof minLenthPassword !== "number" ||
     typeof maxLenthPassword !== "number"

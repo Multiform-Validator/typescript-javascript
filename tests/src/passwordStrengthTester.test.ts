@@ -6,28 +6,31 @@ describe("passwordStrengthTester function", () => {
 
   beforeEach(() => {
     options = {
-      isVeryWeak: (password: string, passwordLength: number) => {
+      isVeryWeak: (password: string, passwordLength: number): boolean => {
         return passwordLength < 6 && password === "12345";
       },
-      isWeak: (password: string, passwordLength: number) => {
+      isWeak: (password: string, passwordLength: number): boolean => {
         return passwordLength < 8 && password === "1234567";
       },
-      isRegular: (password: string, passwordLength: number) => {
+      isRegular: (password: string, passwordLength: number): boolean => {
         return passwordLength < 10 && password === "123456789";
       },
-      isStrong: (password: string, passwordLength: number) => {
+      isStrong: (password: string, passwordLength: number): boolean => {
         return passwordLength < 12 && password === "12345678910";
       },
-      isVeryStrong: (password: string, passwordLength: number) => {
+      isVeryStrong: (password: string, passwordLength: number): boolean => {
         return passwordLength >= 12 && password === "1234567891011";
       },
     };
   });
 
   it("should throw an error if the input is not a string", () => {
-    expect(() => passwordStrengthTester(123 as any, {} as any)).toThrow(
-      "The input should be a string.",
-    );
+    expect(() =>
+      passwordStrengthTester(
+        123 as unknown as string,
+        {} as PasswordStrengthTesterOptions,
+      ),
+    ).toThrow("The input should be a string.");
   });
 
   it("should return 'Very weak' if the password is very weak", () => {

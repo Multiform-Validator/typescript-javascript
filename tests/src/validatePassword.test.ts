@@ -1,65 +1,66 @@
+import { ValidateFunctions } from "../../src/types";
 import validatePassword from "../../src/validatePassword";
 
 describe("validatePassword", () => {
   it("validates password with minimum length", () => {
-    const result = validatePassword("Passw0rd!", {
+    const result: ValidateFunctions = validatePassword("Passw0rd!", {
       minLength: 8,
     });
     expect(result).toEqual({ isValid: true, errorMsg: null });
   });
 
   it("should use default error message if errorMsg passed is not valid", () => {
-    const result = validatePassword("Passw0rd!", {
+    const result: ValidateFunctions = validatePassword("Passw0rd!", {
       minLength: 8,
-      errorMsg: null as any,
+      errorMsg: null as unknown as string[],
     });
     expect(result.isValid).toBe(true);
   });
 
   it("validates password with maximum length", () => {
-    const result = validatePassword("Passw0rd!", {
+    const result: ValidateFunctions = validatePassword("Passw0rd!", {
       maxLength: 10,
     });
     expect(result).toEqual({ isValid: true, errorMsg: null });
   });
 
   it("validates password with required uppercase", () => {
-    const result = validatePassword("Passw0rd!", {
+    const result: ValidateFunctions = validatePassword("Passw0rd!", {
       options: { requireUppercase: true },
     });
     expect(result).toEqual({ isValid: true, errorMsg: null });
   });
 
   it("validates password with required special character", () => {
-    const result = validatePassword("Passw0rd!", {
+    const result: ValidateFunctions = validatePassword("Passw0rd!", {
       options: { requireSpecialChar: true },
     });
     expect(result).toEqual({ isValid: true, errorMsg: null });
   });
 
   it("validates password with required number", () => {
-    const result = validatePassword("Passw0rd!", {
+    const result: ValidateFunctions = validatePassword("Passw0rd!", {
       options: { requireNumber: true },
     });
     expect(result).toEqual({ isValid: true, errorMsg: null });
   });
 
   it("validates password with required string", () => {
-    const result = validatePassword("Passw0rd!", {
+    const result: ValidateFunctions = validatePassword("Passw0rd!", {
       options: { requireString: true },
     });
     expect(result).toEqual({ isValid: true, errorMsg: null });
   });
 
   it("returns invalid for incorrect password", () => {
-    const result = validatePassword("password", {
+    const result: ValidateFunctions = validatePassword("password", {
       minLength: 8,
     });
     expect(result).toEqual({ isValid: true, errorMsg: null });
   });
 
   it("validates password with all required check modules", () => {
-    const result = validatePassword("Passw0rd2!", {
+    const result: ValidateFunctions = validatePassword("Passw0rd2!", {
       options: {
         requireString: true,
         requireNumber: true,
@@ -71,7 +72,7 @@ describe("validatePassword", () => {
   });
 
   it("validates password with all required check modules", () => {
-    const result = validatePassword("Passw0rd!", {
+    const result: ValidateFunctions = validatePassword("Passw0rd!", {
       options: {
         requireString: true,
         requireNumber: true,
@@ -83,14 +84,14 @@ describe("validatePassword", () => {
   });
 
   it("Returns correct error message for password too long or too short", () => {
-    const result1 = validatePassword("Passw0rd!", {
+    const result1: ValidateFunctions = validatePassword("Passw0rd!", {
       maxLength: 6,
     });
     expect(result1.errorMsg).toBe(
       "Password must be between 1 and 6 characters",
     );
 
-    const result2 = validatePassword("Passw0rd!", {
+    const result2: ValidateFunctions = validatePassword("Passw0rd!", {
       minLength: 20,
     });
     expect(result2.errorMsg).toBe(
@@ -99,7 +100,7 @@ describe("validatePassword", () => {
   });
 
   it("Returns correct error message for password without uppercase", () => {
-    const result = validatePassword("passw0rd!", {
+    const result: ValidateFunctions = validatePassword("passw0rd!", {
       options: { requireUppercase: true },
     });
     expect(result.errorMsg).toBe(
@@ -108,7 +109,7 @@ describe("validatePassword", () => {
   });
 
   it("Returns correct error message for password without special character", () => {
-    const result = validatePassword("Passw0rd", {
+    const result: ValidateFunctions = validatePassword("Passw0rd", {
       options: { requireSpecialChar: true },
     });
     expect(result.errorMsg).toBe(
@@ -117,14 +118,14 @@ describe("validatePassword", () => {
   });
 
   it("Returns correct error message for password without number", () => {
-    const result = validatePassword("Password!", {
+    const result: ValidateFunctions = validatePassword("Password!", {
       options: { requireNumber: true },
     });
     expect(result.errorMsg).toBe("Password requires at least one number");
   });
 
   it("Returns correct error message for password without string", () => {
-    const result = validatePassword("12345678!", {
+    const result: ValidateFunctions = validatePassword("12345678!", {
       options: { requireString: true },
     });
     expect(result.errorMsg).toBe("Password requires at least one letter");
@@ -132,12 +133,15 @@ describe("validatePassword", () => {
 
   it("should throw error for invalid errorMsg parameter", () => {
     expect(() =>
-      validatePassword("Passw0rd!", { minLength: 8, errorMsg: [123 as any] }),
+      validatePassword("Passw0rd!", {
+        minLength: 8,
+        errorMsg: [123 as unknown as string],
+      }),
     ).toThrow("All values within the array must be strings or null/undefined.");
   });
 
   it("should throw error for invalid password parameter", () => {
-    expect(() => validatePassword(123 as any)).toThrow(
+    expect(() => validatePassword(123 as unknown as string)).toThrow(
       "The input should be a string.",
     );
   });
@@ -153,7 +157,7 @@ describe("validatePassword", () => {
       validatePassword("Passw0rd!", {
         minLength: 8,
         maxLength: 20,
-        errorMsg: [123 as any],
+        errorMsg: [123 as unknown as string],
       }),
     ).toThrow("All values within the array must be strings or null/undefined.");
   });
@@ -163,7 +167,7 @@ describe("validatePassword", () => {
       validatePassword("Passw0rd!", {
         minLength: 8,
         maxLength: 20,
-        errorMsg: 123 as any,
+        errorMsg: 123 as unknown as string[],
       }),
     ).toThrow("errorMsg must be an Array or null");
   });
@@ -172,7 +176,7 @@ describe("validatePassword", () => {
     expect(() =>
       validatePassword("Passw0rd!", {
         minLength: 8,
-        maxLength: "20" as any,
+        maxLength: "20" as unknown as number,
       }),
     ).toThrow("maxLength and/or minLength must be a number");
   });
@@ -187,7 +191,7 @@ describe("validatePassword", () => {
   });
 
   it("should return default error messages when errorMsg is undefined", () => {
-    const result = validatePassword("Passw", {
+    const result: ValidateFunctions = validatePassword("Passw", {
       minLength: 8,
       maxLength: 20,
       errorMsg: undefined,
@@ -199,7 +203,7 @@ describe("validatePassword", () => {
   });
 
   it("should return default error messages when errorMsg['etc', null] is passed", () => {
-    const result = validatePassword("Passw", {
+    const result: ValidateFunctions = validatePassword("Passw", {
       minLength: 8,
       maxLength: 20,
       errorMsg: ["etc", null],

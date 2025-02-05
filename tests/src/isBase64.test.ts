@@ -2,22 +2,22 @@ import isBase64 from "../../src/isBase64";
 
 describe("isBase64", () => {
   it("should return true when the input is a valid Base64 string", () => {
-    const result = isBase64("SGVsbG8gV29ybGQh");
+    const result: boolean = isBase64("SGVsbG8gV29ybGQh");
     expect(result).toBe(true);
   });
 
   it("should return false when the input is not a valid Base64 string", () => {
-    const result = isBase64("こんにちは");
+    const result: boolean = isBase64("こんにちは");
     expect(result).toBe(false);
   });
 
   it("should return false when the input is not a valid Base64 string", () => {
-    const result = isBase64("12345");
+    const result: boolean = isBase64("12345");
     expect(result).toBe(false);
   });
 
   it("should throw an error when the input is not a string", () => {
-    expect(() => isBase64(12345678910 as any)).toThrow(
+    expect(() => isBase64(12345678910 as unknown as string)).toThrow(
       "Input value must be a string.",
     );
   });

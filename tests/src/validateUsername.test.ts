@@ -1,13 +1,17 @@
+import { ValidateFunctions } from "../../src/types";
 import validateUsername from "../../src/validateUsername";
 
 describe("validateUsername", () => {
   it("should throw an error for non-string inputs", () => {
-    expect(() => validateUsername(123 as any)).toThrow(
+    expect(() => validateUsername(123 as unknown as string)).toThrow(
       "The input should be a string.",
     );
   });
   it("validates username with correct length", () => {
-    const result = validateUsername("User123", { minLength: 3, maxLength: 25 });
+    const result: ValidateFunctions = validateUsername("User123", {
+      minLength: 3,
+      maxLength: 25,
+    });
     expect(result).toEqual({ isValid: true, errorMsg: null });
   });
 
@@ -16,7 +20,7 @@ describe("validateUsername", () => {
       validateUsername("User123", {
         minLength: 3,
         maxLength: 25,
-        errorMsg: "Error message" as any,
+        errorMsg: "Error message" as unknown as string[],
       }),
     ).toThrow("errorMsg must be an Array or null");
   });
@@ -33,7 +37,7 @@ describe("validateUsername", () => {
   it("should throw an error if minLength or maxLength is not a number", () => {
     expect(() =>
       validateUsername("User123", {
-        minLength: "3" as any,
+        minLength: "3" as unknown as number,
         maxLength: 25,
       }),
     ).toThrow("maxLength or minLength must be a number");
@@ -44,7 +48,7 @@ describe("validateUsername", () => {
       validateUsername("User123", {
         minLength: 3,
         maxLength: 25,
-        errorMsg: ["Error message", 123] as any,
+        errorMsg: ["Error message", 123] as unknown as string[],
       }),
     ).toThrow("All values within the array must be strings or null/undefined.");
   });
@@ -59,7 +63,7 @@ describe("validateUsername", () => {
   });
 
   it("should return default error message if errorMsg is not provided", () => {
-    const result = validateUsername("User123", {
+    const result: ValidateFunctions = validateUsername("User123", {
       minLength: 3,
       maxLength: 25,
     });
@@ -70,7 +74,7 @@ describe("validateUsername", () => {
   });
 
   it("should return custom error message if errorMsg is provided", () => {
-    const result = validateUsername("User123", {
+    const result: ValidateFunctions = validateUsername("User123", {
       minLength: 8,
       maxLength: 25,
       errorMsg: [null, "Error message"],
@@ -82,7 +86,7 @@ describe("validateUsername", () => {
   });
 
   it("should return false if username is empty", () => {
-    const result = validateUsername("", {
+    const result: ValidateFunctions = validateUsername("", {
       minLength: 3,
       maxLength: 25,
     });
@@ -93,7 +97,7 @@ describe("validateUsername", () => {
   });
 
   it("should return false if username.length > maxLength", () => {
-    const result = validateUsername("User123", {
+    const result: ValidateFunctions = validateUsername("User123", {
       minLength: 3,
       maxLength: 5,
     });
@@ -104,7 +108,7 @@ describe("validateUsername", () => {
   });
 
   it("should return false if username.length < minLength", () => {
-    const result = validateUsername("Us", {
+    const result: ValidateFunctions = validateUsername("Us", {
       minLength: 3,
       maxLength: 25,
     });
@@ -115,7 +119,7 @@ describe("validateUsername", () => {
   });
 
   it("should return false based on the cbValidation function", () => {
-    const result = validateUsername("User1232", {
+    const result: ValidateFunctions = validateUsername("User1232", {
       minLength: 3,
       maxLength: 25,
       cbValidate: (username: string) => {
@@ -139,7 +143,7 @@ describe("validateUsername", () => {
   });
 
   it("should return true based on the cbValidation function", () => {
-    const result = validateUsername("User123", {
+    const result: ValidateFunctions = validateUsername("User123", {
       minLength: 3,
       maxLength: 25,
       cbValidate: (username: string) => {
@@ -163,7 +167,7 @@ describe("validateUsername", () => {
   });
 
   it("should return defaultErrorMsg when passed null to errorMsg index", () => {
-    const result = validateUsername("", {
+    const result: ValidateFunctions = validateUsername("", {
       minLength: 3,
       maxLength: 25,
       errorMsg: [null, "Error message"],

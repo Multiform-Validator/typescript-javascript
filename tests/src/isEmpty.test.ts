@@ -18,9 +18,7 @@ describe("isEmpty", () => {
   });
 
   it("throws TypeError for non-string input", () => {
-    // @ts-ignore
-    expect(() => isEmpty(null)).toThrow(TypeError);
-    // @ts-ignore
-    expect(() => isEmpty(undefined)).toThrow(TypeError);
+    expect(() => isEmpty(null as unknown as string)).toThrow(TypeError);
+    expect(() => isEmpty(undefined as unknown as string)).toThrow(TypeError);
   });
 });

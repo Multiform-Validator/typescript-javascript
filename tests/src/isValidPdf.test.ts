@@ -15,18 +15,18 @@ describe("isValidPdf", () => {
   });
 
   it("should return false for an empty buffer", () => {
-    const fileBuffer = Buffer.from([]);
-    const result = isValidPdf(fileBuffer);
+    const fileBuffer: Buffer<ArrayBuffer> = Buffer.from([]);
+    const result: boolean = isValidPdf(fileBuffer);
     expect(result).toBe(false);
   });
 
   it("should return false for an invalid PDF", () => {
-    const result = isValidPdf(fileBuffer1);
+    const result: boolean = isValidPdf(fileBuffer1);
     expect(result).toBe(false);
   });
 
   it("should return true for a valid PDF", () => {
-    const result = isValidPdf(fileBuffer2);
+    const result: boolean = isValidPdf(fileBuffer2);
     expect(result).toBe(true);
   });
 });

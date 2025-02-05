@@ -13,12 +13,14 @@ describe("isTime function", () => {
   });
 
   it("should return false for invalid time", () => {
-    // @ts-ignore
-    expect(() => isTime(1)).toThrow("Input value must be a string.");
+    expect(() => isTime(1 as unknown as string)).toThrow(
+      "Input value must be a string.",
+    );
   });
 
   it("should return false for invalid time", () => {
-    // @ts-ignore
-    expect(() => isTime(null)).toThrow("Input value must be a string.");
+    expect(() => isTime(null as unknown as string)).toThrow(
+      "Input value must be a string.",
+    );
   });
 });

@@ -15,18 +15,18 @@ describe("isValidTxt", () => {
   });
 
   it("should return false for an empty buffer", () => {
-    const fileBuffer = Buffer.from([]);
-    const result = isValidTxt(fileBuffer);
+    const fileBuffer: Buffer<ArrayBuffer> = Buffer.from([]);
+    const result: boolean = isValidTxt(fileBuffer);
     expect(result).toBe(false);
   });
 
   it("should return false for an invalid TXT", () => {
-    const result = isValidTxt(fileBuffer1);
+    const result: boolean = isValidTxt(fileBuffer1);
     expect(result).toBe(false);
   });
 
   it("should return true for a valid TXT", () => {
-    const result = isValidTxt(fileBuffer2);
+    const result: boolean = isValidTxt(fileBuffer2);
     expect(result).toBe(true);
   });
 });

@@ -1,3 +1,5 @@
+import type { ValidateFunctions } from "./types";
+
 const defaultErrorMsg: string[] = [
   "CPF invalid",
   "CPF must have 11 numerical digits",
@@ -21,10 +23,7 @@ const defaultErrorMsg: string[] = [
 function cpfIsValid(
   cpf: string,
   errorMsg: (string | null)[] | null = defaultErrorMsg,
-): {
-  isValid: boolean;
-  errorMsg: string | null;
-} {
+): ValidateFunctions {
   if (typeof cpf !== "string") {
     throw new TypeError("The input should be a string.");
   }

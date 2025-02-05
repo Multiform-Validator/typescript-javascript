@@ -1,8 +1,9 @@
+import { ValidateFunctions } from "../../src/types";
 import validateTextarea from "../../src/validateTextarea";
 
 describe("validateTextarea", () => {
   it("should throw an error when the input is not a string", () => {
-    expect(() => validateTextarea(12345678 as any)).toThrow(
+    expect(() => validateTextarea(12345678 as unknown as string)).toThrow(
       "The input should be a string.",
     );
   });
@@ -12,7 +13,7 @@ describe("validateTextarea", () => {
       validateTextarea("This is a valid textarea.", {
         isRequired: true,
         maxLength: 50,
-        errorMsg: 123 as any,
+        errorMsg: 123 as unknown as string[],
       }),
     ).toThrow("errorMsg must be an Array or null");
   });
@@ -29,7 +30,7 @@ describe("validateTextarea", () => {
     expect(() =>
       validateTextarea("This is a valid textarea.", {
         isRequired: true,
-        maxLength: "a" as any,
+        maxLength: "a" as unknown as number,
       }),
     ).toThrow(
       "maxLength or minLength must be a number and cannot be less than 1",
@@ -37,20 +38,26 @@ describe("validateTextarea", () => {
   });
 
   it("validates textarea with correct length", () => {
-    const result = validateTextarea("This is a valid textarea.", {
-      isRequired: true,
-      maxLength: 50,
-    });
+    const result: ValidateFunctions = validateTextarea(
+      "This is a valid textarea.",
+      {
+        isRequired: true,
+        maxLength: 50,
+      },
+    );
     expect(result).toEqual({ isValid: true, errorMsg: null });
   });
 
   it("returns error for empty textarea when isRequired is true", () => {
-    const result = validateTextarea("", { isRequired: true, maxLength: 50 });
+    const result: ValidateFunctions = validateTextarea("", {
+      isRequired: true,
+      maxLength: 50,
+    });
     expect(result).toEqual({ isValid: false, errorMsg: "Can not be empty" });
   });
 
   it("returns error for textarea exceeding maxLength", () => {
-    const result = validateTextarea(
+    const result: ValidateFunctions = validateTextarea(
       "This is a very long textarea that exceeds the maximum length.",
       { isRequired: true, maxLength: 20 },
     );
@@ -61,7 +68,7 @@ describe("validateTextarea", () => {
   });
 
   it("returns custom error for textarea exceeding maxLength", () => {
-    const result = validateTextarea(
+    const result: ValidateFunctions = validateTextarea(
       "This is a very long textarea that exceeds the maximum length.",
       {
         isRequired: true,
@@ -77,26 +84,32 @@ describe("validateTextarea", () => {
       validateTextarea("This is a valid textarea.", {
         isRequired: true,
         maxLength: 50,
-        errorMsg: [123 as any],
+        errorMsg: [123 as unknown as string],
       }),
     ).toThrow("All values within the array must be strings or null/undefined.");
   });
 
   it("should return default error messages when errorMsg[null, 'etc'] is passed", () => {
-    const result = validateTextarea("This is a valid textarea.", {
-      isRequired: true,
-      maxLength: 15,
-      errorMsg: [null, "etc"],
-    });
+    const result: ValidateFunctions = validateTextarea(
+      "This is a valid textarea.",
+      {
+        isRequired: true,
+        maxLength: 15,
+        errorMsg: [null, "etc"],
+      },
+    );
     expect(result.errorMsg).toBe("This textarea is too big");
   });
 
   it("should return default error messages when errorMsg is null", () => {
-    const result = validateTextarea("This is a valid textarea.", {
-      isRequired: true,
-      maxLength: 15,
-      errorMsg: null as any,
-    });
+    const result: ValidateFunctions = validateTextarea(
+      "This is a valid textarea.",
+      {
+        isRequired: true,
+        maxLength: 15,
+        errorMsg: null as unknown as string[],
+      },
+    );
     expect(result.errorMsg).toBe("Textarea cannot exceed 15 characters");
   });
 });

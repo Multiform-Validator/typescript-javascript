@@ -1,3 +1,5 @@
+import type { ValidateFunctions } from "./types";
+
 // Função para calcular o primeiro dígito verificador
 function calculateFirstVerifier(cnpjBase: number[]): number {
   const weight: Array<number> = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
@@ -48,10 +50,7 @@ const defaultErrorMsg: string[] = [
 function cnpjIsValid(
   cnpj: string,
   errorMsg: (string | null)[] | null = defaultErrorMsg,
-): {
-  isValid: boolean;
-  errorMsg: string | null;
-} {
+): ValidateFunctions {
   if (typeof cnpj !== "string") {
     throw new TypeError("The input should be a string.");
   }

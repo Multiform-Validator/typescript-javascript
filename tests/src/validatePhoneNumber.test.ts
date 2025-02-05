@@ -1,13 +1,14 @@
+import { ValidateFunctions } from "../../src/types";
 import validatePhoneNumber from "../../src/validatePhoneNumber";
 
 describe("validatePhoneNumber", () => {
   it("validates phone number in correct format", () => {
-    const result = validatePhoneNumber("(555) 123-4567");
+    const result: ValidateFunctions = validatePhoneNumber("(555) 123-4567");
     expect(result).toEqual({ isValid: true, errorMsg: null });
   });
 
   it("returns error for empty phone number", () => {
-    const result = validatePhoneNumber("");
+    const result: ValidateFunctions = validatePhoneNumber("");
     expect(result).toEqual({
       isValid: false,
       errorMsg: "Phone number cannot be empty",
@@ -15,7 +16,7 @@ describe("validatePhoneNumber", () => {
   });
 
   it("returns error for invalid phone number", () => {
-    const result = validatePhoneNumber("1234567");
+    const result: ValidateFunctions = validatePhoneNumber("1234567");
     expect(result).toEqual({
       isValid: false,
       errorMsg: "Invalid phone number",
@@ -23,19 +24,25 @@ describe("validatePhoneNumber", () => {
   });
 
   it("returns custom error for invalid phone number", () => {
-    const result = validatePhoneNumber("1234567", [null, "Custom error 2"]);
+    const result: ValidateFunctions = validatePhoneNumber("1234567", [
+      null,
+      "Custom error 2",
+    ]);
     expect(result).toEqual({ isValid: false, errorMsg: "Custom error 2" });
   });
 
   it("throws error for invalid errorMsg parameter", () => {
-    expect(() => validatePhoneNumber("(555) 123-4567", [123 as any])).toThrow(
-      "All values within the array must be strings or null/undefined.",
-    );
+    expect(() =>
+      validatePhoneNumber("(555) 123-4567", [123 as unknown as string]),
+    ).toThrow("All values within the array must be strings or null/undefined.");
   });
 
   it("should throw an error when errorMsg is not an array or null", () => {
     expect(() =>
-      validatePhoneNumber("(555) 123-4567", "Custom error" as any),
+      validatePhoneNumber(
+        "(555) 123-4567",
+        "Custom error" as unknown as string[],
+      ),
     ).toThrow("errorMsg must be an Array or null");
   });
 
@@ -46,7 +53,10 @@ describe("validatePhoneNumber", () => {
   });
 
   it("should return default error messages when errorMsg['etc', null] is passed", () => {
-    const result = validatePhoneNumber("12345", ["etc", null]);
+    const result: ValidateFunctions = validatePhoneNumber("12345", [
+      "etc",
+      null,
+    ]);
     expect(result).toEqual({
       isValid: false,
       errorMsg: "Invalid phone number",
@@ -54,7 +64,7 @@ describe("validatePhoneNumber", () => {
   });
 
   it("should return default error messages when errorMsg is null", () => {
-    const result = validatePhoneNumber("12345", null);
+    const result: ValidateFunctions = validatePhoneNumber("12345", null);
     expect(result).toEqual({
       isValid: false,
       errorMsg: "Invalid phone number",

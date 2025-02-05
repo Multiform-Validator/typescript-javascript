@@ -52,68 +52,76 @@ describe("isValidAudio", () => {
   });
 
   it("should return false for an empty buffer", () => {
-    const fileBuffer = Buffer.from([]);
-    const result = isValidAudio(fileBuffer);
+    const fileBuffer: Buffer<ArrayBuffer> = Buffer.from([]);
+    const result: boolean = isValidAudio(fileBuffer);
     expect(result).toBe(false);
   });
 
   it("should return false for an invalid MP3 audio", () => {
-    const result = isValidAudio(fileBuffer1);
+    const result: boolean = isValidAudio(fileBuffer1);
     expect(result).toBe(false);
   });
 
   it("should return false for an invalid WAV audio", () => {
-    const result = isValidAudio(fileBuffer2);
+    const result: boolean = isValidAudio(fileBuffer2);
     expect(result).toBe(false);
   });
 
   it("should return true for a valid MP3 audio", () => {
-    const result = isValidAudio(fileBuffer3);
+    const result: boolean = isValidAudio(fileBuffer3);
     expect(result).toBe(true);
   });
 
   it("should return true for a valid WAV audio", () => {
-    const result = isValidAudio(fileBuffer4);
+    const result: boolean = isValidAudio(fileBuffer4);
     expect(result).toBe(true);
   });
 
   it("should return false when excluding WAV files", () => {
-    const result = isValidAudio(fileBuffer4, { exclude: ["wav"] });
+    const result: boolean = isValidAudio(fileBuffer4, { exclude: ["wav"] });
     expect(result).toBe(false);
   });
 
   it("should return false when excluding MP3 files", () => {
-    const result = isValidAudio(fileBuffer3, { exclude: ["mp3"] });
+    const result: boolean = isValidAudio(fileBuffer3, { exclude: ["mp3"] });
     expect(result).toBe(false);
   });
 
   it("should return true when excluding WAV files", () => {
-    const result = isValidAudio(fileBuffer3, { exclude: ["wav"] });
+    const result: boolean = isValidAudio(fileBuffer3, { exclude: ["wav"] });
     expect(result).toBe(true);
   });
 
   it("should return true when excluding MP3 files", () => {
-    const result = isValidAudio(fileBuffer4, { exclude: ["mp3"] });
+    const result: boolean = isValidAudio(fileBuffer4, { exclude: ["mp3"] });
     expect(result).toBe(true);
   });
 
   it("should return false when excluding WAV files and MP3 files", () => {
-    const result = isValidAudio(fileBuffer4, { exclude: ["wav", "mp3"] });
+    const result: boolean = isValidAudio(fileBuffer4, {
+      exclude: ["wav", "mp3"],
+    });
     expect(result).toBe(false);
   });
 
   it("should return false when excluding WAV files and MP3 files", () => {
-    const result = isValidAudio(fileBuffer3, { exclude: ["wav", "mp3"] });
+    const result: boolean = isValidAudio(fileBuffer3, {
+      exclude: ["wav", "mp3"],
+    });
     expect(result).toBe(false);
   });
 
   it("should return false when excluding WAV files and MP3 files", () => {
-    const result = isValidAudio(fileBuffer2, { exclude: ["wav", "mp3"] });
+    const result: boolean = isValidAudio(fileBuffer2, {
+      exclude: ["wav", "mp3"],
+    });
     expect(result).toBe(false);
   });
 
   it("should return false when excluding WAV files and MP3 files", () => {
-    const result = isValidAudio(fileBuffer1, { exclude: ["wav", "mp3"] });
+    const result: boolean = isValidAudio(fileBuffer1, {
+      exclude: ["wav", "mp3"],
+    });
     expect(result).toBe(false);
   });
 });

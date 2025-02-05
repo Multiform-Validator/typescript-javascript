@@ -1,8 +1,10 @@
 import getOnlyEmail from "../../src/getOnlyEmail";
 
+type GetOnlyEmailReturn = string | string[];
+
 describe("getOnlyEmail", () => {
   it("should return the first email when multiple is false", () => {
-    const result = getOnlyEmail(
+    const result: GetOnlyEmailReturn = getOnlyEmail(
       "Entre em contato com a equipe: joao@empresa.com, maria@empresa.com, contato@empresa.com",
       { multiple: false },
     );
@@ -10,7 +12,7 @@ describe("getOnlyEmail", () => {
   });
 
   it("should return all emails when multiple is true", () => {
-    const result = getOnlyEmail(
+    const result: GetOnlyEmailReturn = getOnlyEmail(
       "Entre em contato com a equipe: joao@empresa.com, maria@empresa.com, contato@empresa.com",
       { multiple: true },
     );
@@ -22,7 +24,7 @@ describe("getOnlyEmail", () => {
   });
 
   it("should return cleaned emails when cleanDomain is true", () => {
-    const result = getOnlyEmail(
+    const result: GetOnlyEmailReturn = getOnlyEmail(
       "Entre em contato com a equipe: joao@empresa.com.br, maria@empresa.com.io, contato@empresa.com.pt jonyjony@gmail.comAwaodiawdoi",
       { multiple: true, cleanDomain: true },
     );
@@ -36,7 +38,7 @@ describe("getOnlyEmail", () => {
 
   // multiple true, cleanDomain false
   test("multiple true, cleanDomain false", () => {
-    const result = getOnlyEmail(
+    const result: GetOnlyEmailReturn = getOnlyEmail(
       "Entre em contato com a equipe: john@gmail.com, jon2@gmail.com,",
       { multiple: true, cleanDomain: false },
     );
@@ -46,7 +48,7 @@ describe("getOnlyEmail", () => {
 
   // multiple false, cleanDomain true
   test("multiple false, cleanDomain true", () => {
-    const result = getOnlyEmail(
+    const result: GetOnlyEmailReturn = getOnlyEmail(
       "Entre em contato com a equipe: john@gmail.com, jon2@gmail.com,",
       { multiple: false, cleanDomain: true },
     );
@@ -55,7 +57,7 @@ describe("getOnlyEmail", () => {
   });
 
   it("should return unique emails when repeatEmail is false", () => {
-    const result = getOnlyEmail(
+    const result: GetOnlyEmailReturn = getOnlyEmail(
       "Entre em contato com a equipe: joao@empresa.com, joao@empresa.com, joao@empresa.com",
       { multiple: true, cleanDomain: false, repeatEmail: false },
     );
@@ -63,7 +65,7 @@ describe("getOnlyEmail", () => {
   });
 
   it("should return repeated emails when repeatEmail is true", () => {
-    const result = getOnlyEmail(
+    const result: GetOnlyEmailReturn = getOnlyEmail(
       "Entre em contato com a equipe: joao@empresa.com, joao@empresa.com, joao@empresa.com",
       { multiple: true, cleanDomain: false, repeatEmail: true },
     );
@@ -75,26 +77,31 @@ describe("getOnlyEmail", () => {
   });
 
   it('should return "No email found" when no email is present', () => {
-    const result = getOnlyEmail("Entre em contato com a equipe", {
-      multiple: false,
-    });
+    const result: GetOnlyEmailReturn = getOnlyEmail(
+      "Entre em contato com a equipe",
+      {
+        multiple: false,
+      },
+    );
     expect(result).toBe("No email found");
   });
 
   it('should return "No email found" even if non of the options are passed', () => {
-    const result = getOnlyEmail("Entre em contato com a equipe");
+    const result: GetOnlyEmailReturn = getOnlyEmail(
+      "Entre em contato com a equipe",
+    );
     expect(result).toBe("No email found");
   });
 
   it("should return an email even if non of the options are passed", () => {
-    const result = getOnlyEmail(
+    const result: GetOnlyEmailReturn = getOnlyEmail(
       "Entre em contato com a equipe:	alexa@google.com",
     );
     expect(result).toBe("alexa@google.com");
   });
 
   it("should clean the domain from the email when cleanDomain is true", () => {
-    const result = getOnlyEmail(
+    const result: GetOnlyEmailReturn = getOnlyEmail(
       "Entre em contato com a equipe:	alexa@google.com.br",
       { cleanDomain: true },
     );
@@ -102,7 +109,7 @@ describe("getOnlyEmail", () => {
   });
 
   it("should clean the domain from the email using a custom domain list", () => {
-    const result = getOnlyEmail(
+    const result: GetOnlyEmailReturn = getOnlyEmail(
       "Entre em contato com a equipe:	alexa@google.custom",
       { cleanDomain: [".custom"] },
     );
@@ -110,7 +117,7 @@ describe("getOnlyEmail", () => {
   });
 
   it("should return the first email when repeatEmail is true and multiple is false", () => {
-    const result = getOnlyEmail(
+    const result: GetOnlyEmailReturn = getOnlyEmail(
       "Entre em contato com a equipe: john@gmail.com, john@gmail.com",
       { multiple: false, cleanDomain: false, repeatEmail: true },
     );
@@ -118,7 +125,7 @@ describe("getOnlyEmail", () => {
   });
 
   it("should return the first cleaned email when repeatEmail is true and multiple is false", () => {
-    const result = getOnlyEmail(
+    const result: GetOnlyEmailReturn = getOnlyEmail(
       "Entre em contato com a equipe: john@gmail.comXTRA, alexa@gmail.comXTRA",
       { multiple: false, cleanDomain: true, repeatEmail: true },
     );
@@ -126,7 +133,7 @@ describe("getOnlyEmail", () => {
   });
 
   it("should return all cleaned emails when repeatEmail is true and multiple is true", () => {
-    const result = getOnlyEmail(
+    const result: GetOnlyEmailReturn = getOnlyEmail(
       "Entre em contato com a equipe: john@gmail.comXTRA, alexa@gmail.comXTRA",
       { multiple: true, cleanDomain: true, repeatEmail: true },
     );

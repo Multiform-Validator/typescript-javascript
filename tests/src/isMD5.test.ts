@@ -14,8 +14,7 @@ describe("isMD5", () => {
   });
 
   it("returns false for non-string input", () => {
-    // @ts-ignore
-    expect(() => isMD5(123)).toThrow(TypeError);
+    expect(() => isMD5(123 as unknown as string)).toThrow(TypeError);
   });
 
   it("returns false for null or empty input", () => {

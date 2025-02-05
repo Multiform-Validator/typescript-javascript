@@ -22,21 +22,25 @@ describe("isEmail", () => {
   });
 
   it("returns throw for non-string input", () => {
-    expect(() => isEmail(123 as any)).toThrow(
+    expect(() => isEmail(123 as unknown as string)).toThrow(
       "Invalid input, must be a string",
     );
   });
 
   it("returns throw for array input", () => {
-    expect(() => isEmail([] as any)).toThrow("Invalid input, must be a string");
+    expect(() => isEmail([] as unknown as string)).toThrow(
+      "Invalid input, must be a string",
+    );
   });
 
   it("returns throw for object input", () => {
-    expect(() => isEmail({} as any)).toThrow("Invalid input, must be a string");
+    expect(() => isEmail({} as unknown as string)).toThrow(
+      "Invalid input, must be a string",
+    );
   });
 
   it("returns throw for boolean input", () => {
-    expect(() => isEmail(true as any)).toThrow(
+    expect(() => isEmail(true as unknown as string)).toThrow(
       "Invalid input, must be a string",
     );
   });
