@@ -18,6 +18,7 @@ export default tseslint.config(
       "dist/",
       "tests/generateFakeImage.js",
       "types/",
+      "internalTests/",
     ],
     rules: {
       "no-else-return": ["error", { allowElseIf: false }],
