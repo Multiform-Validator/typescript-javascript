@@ -15,7 +15,7 @@
 	"scripts": {
 		"test": "jest --verbose",
 		"test:cov": "jest --coverage",
-		"test:complete": "jest --verbose --coverage",
+		"test:full": "jest --verbose --coverage",
 		"test:file": "jest tests/src/isDecimal.test --watch",
 		"test:watch": "jest --watch",
 		"build:types": "tsc -p tsconfig.types.json",
