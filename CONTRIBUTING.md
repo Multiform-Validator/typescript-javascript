@@ -18,7 +18,7 @@ The multiform-validator is a powerful Multilanguage library for validating form 
    - Commit your changes and push them to the forked repository:
      ```
      git add .
-     git commit -m "Concise description of the changes"
+     git commit -m "feat: concise description of the changes"
      git push origin my-feature
      ```
 
@@ -27,36 +27,36 @@ The multiform-validator is a powerful Multilanguage library for validating form 
 
 ## Contribution Guidelines
 
-feat: Adds a new feature to the project. For example:
+feat: adds a new feature to the project. For example:
 
-feat: Add controller for user management
-fix: Fixes an existing bug or issue. For example:
+feat: add controller for user management
+fix: fixes an existing bug or issue. For example:
 
-fix: Fix validation error in the controller
-refactor: Restructures existing code without changing its functionality. For example:
+fix: fix validation error in the controller
+refactor: restructures existing code without changing its functionality. For example:
 
-refactor: Rearrange methods in the controller for better readability
-docs: Updates the project's documentation. For example:
+refactor: rearrange methods in the controller for better readability
+docs: updates the project's documentation. For example:
 
-docs: Update documentation for the user controller
-style: Makes code style-related changes, such as formatting, indentation, etc. For example:
+docs: update documentation for the user controller
+style: makes code style-related changes, such as formatting, indentation, etc. For example:
 
-style: Format code in the controller according to project guidelines
-test: Adds or modifies tests in the project. For example:
+style: format code in the controller according to project guidelines
+test: adds or modifies tests in the project. For example:
 
-test: Add tests for the user controller
-chore: Performs maintenance tasks or other activities not directly related to code. For example:
+test: add tests for the user controller
+chore: performs maintenance tasks or other activities not directly related to code. For example:
 
-chore: Update project dependencies for compatibility with new versions
-perf: Makes performance improvements in the code. For example:
+chore: update project dependencies for compatibility with new versions
+perf: makes performance improvements in the code. For example:
 
-perf: Optimize data query in the controller
-revert: Reverts a previous change. For example:
+perf: optimize data query in the controller
+revert: reverts a previous change. For example:
 
-revert: Revert changes in the controller due to implementation issues
-ci: Makes modifications related to continuous integration (CI) and deployment. For example:
+revert: revert changes in the controller due to implementation issues
+ci: makes modifications related to continuous integration (CI) and deployment. For example:
 
-ci: Configure CI pipeline to automatically test the controller
+ci: configure CI pipeline to automatically test the controller
 
 - Follow the coding standards of the language you're contributing to (JavaScript, TypeScript, Java, etc.).
 - Keep the code clean and readable.
