@@ -49,7 +49,7 @@ function getOnlyEmail(
 	}: OptionsParams = defaultOptionsParams,
 ): string | string[] {
 	const emailPattern: RegExp =
-		/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
+		/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g;
 
 	const matches: string | string[] | null = text.match(emailPattern);
 
