@@ -12,6 +12,10 @@
 			"types": "./types/index.d.ts"
 		}
 	},
+	"files": [
+		"dist",
+		"types"
+	],
 	"scripts": {
 		"test": "jest --verbose",
 		"test:cov": "jest --coverage",
