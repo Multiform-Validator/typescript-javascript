@@ -13,7 +13,12 @@ export default tseslint.config(
         tsconfigRootDir: ".",
       },
     },
-    ignores: ["webpack.config.js", "dist/", "tests/generateFakeImage.js"],
+    ignores: [
+      "webpack.config.js",
+      "dist/",
+      "tests/generateFakeImage.js",
+      "types/",
+    ],
     rules: {
       "no-else-return": ["error", { allowElseIf: false }],
       "consistent-return": "error",
