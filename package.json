@@ -22,7 +22,8 @@
 		"build:src": "npx tsup index.ts --format esm --legacy-output",
 		"build:browser": "webpack",
 		"build": "yarn build:types && yarn build:browser",
-		"lint": "eslint . --ext .ts",
+		"lint": "eslint **/*.ts",
+		"lint:fix": "eslint **/*.ts --fix",
 		"prettier": "prettier --write '**/*.{ts,js}'",
 		"pr-check": "yarn prettier && yarn lint && yarn build && yarn test"
 	},
