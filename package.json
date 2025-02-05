@@ -55,7 +55,10 @@
 		"isEmail",
 		"image"
 	],
-	"author": "Gabriel Logan",
+	"author": {
+		"name": "Gabriel Logan",
+		"url": "https://github.com/gabriel-logan"
+	},
 	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/Multiform-Validator/typescript-javascript/issues"
