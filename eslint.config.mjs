@@ -3,6 +3,17 @@ import tseslint from "typescript-eslint";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 
 export default tseslint.config(
+  {
+    ignores: [
+      "webpack.config.js",
+      "dist/",
+      "tests/generateFakeImage.js",
+      "types/",
+      "internalTests/",
+      "jest.config.js",
+      "node_modules/",
+    ],
+  },
   eslint.configs.recommended,
   tseslint.configs.strictTypeChecked,
   eslintPluginPrettierRecommended,
@@ -13,13 +24,6 @@ export default tseslint.config(
         tsconfigRootDir: ".",
       },
     },
-    ignores: [
-      "webpack.config.js",
-      "dist/",
-      "tests/generateFakeImage.js",
-      "types/",
-      "internalTests/",
-    ],
     rules: {
       "no-else-return": ["error", { allowElseIf: false }],
       "consistent-return": "error",
