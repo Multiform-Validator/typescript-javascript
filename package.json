@@ -39,7 +39,7 @@
 		"build": "yarn build:clean && yarn build:types && yarn build:dist",
 		"lint": "eslint src/**/*.ts tests/**/*.ts",
 		"lint:fix": "yarn lint --fix",
-		"prettier": "prettier --write '**/*.{ts,js}'",
+		"format": "prettier --write '**/*.{ts,js}'",
 		"pr-check": "yarn prettier && yarn lint && yarn build && yarn test"
 	},
 	"repository": {
