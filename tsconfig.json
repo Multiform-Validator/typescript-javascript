@@ -8,8 +8,7 @@
 		"strict": true,
 		"skipLibCheck": true,
 		"strictNullChecks": true,
-		"removeComments": true,
-		"moduleResolution": "node",
+		"removeComments": true
 	},
 	"include": ["src/**/*", "index.ts"],
 }
