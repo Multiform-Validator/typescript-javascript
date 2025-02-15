@@ -20,12 +20,12 @@ Feel free to find bugs and report them to me. Your feedback is highly appreciate
 jsDelivr:
 
 ```bash
-https://cdn.jsdelivr.net/npm/multiform-validator@2.5.2/+esm
+https://cdn.jsdelivr.net/npm/multiform-validator@2.6.0/+esm
 ```
 
 ```html
 <script type="module">
-	import multiform-validator from "https://cdn.jsdelivr.net/npm/multiform-validator@2.5.2/+esm"
+	import multiform-validator from "https://cdn.jsdelivr.net/npm/multiform-validator@2.6.0/+esm"
 </script>
 ```
 
@@ -34,11 +34,11 @@ https://cdn.jsdelivr.net/npm/multiform-validator@2.5.2/+esm
 unpkg:
 
 ```bash
-https://unpkg.com/multiform-validator@2.5.2/dist/cjs/index.cjs
+https://unpkg.com/multiform-validator@2.6.0/dist/cjs/index.cjs
 ```
 
 ```html
-<script src="https://unpkg.com/multiform-validator@2.5.2/dist/cjs/index.cjs"></script>
+<script src="https://unpkg.com/multiform-validator@2.6.0/dist/cjs/index.cjs"></script>
 ```
 
 ### Example of use with CDN
@@ -46,7 +46,7 @@ https://unpkg.com/multiform-validator@2.5.2/dist/cjs/index.cjs
 using cjs:
 
 ```html
-<script src="https://unpkg.com/multiform-validator@2.5.2/dist/cjs/index.cjs"></script>
+<script src="https://unpkg.com/multiform-validator@2.6.0/dist/cjs/index.cjs"></script>
 <script>
 	const emailResult = isEmail("123456");
 	const cpfResult = cpfIsValid("123456");
@@ -61,9 +61,9 @@ using esm:
 
 ```html
 <script type="module">
-	import multiformValidator from "https://cdn.jsdelivr.net/npm/multiform-validator@2.5.2/+esm";
-	const emailResult = multiformValidator.isEmail("123456");
-	const cpfResult = multiformValidator.cpfIsValid("123456");
+	import mv from "https://cdn.jsdelivr.net/npm/multiform-validator@2.6.0/+esm";
+	const emailResult = mv.isEmail("123456");
+	const cpfResult = mv.cpfIsValid("123456");
 
 	console.log(emailResult); // returns false
 	console.log(cpfResult.isValid); // returns false
@@ -140,9 +140,9 @@ This package contains various modules for validating different types of data. Be
 ### For better information, read the documentation
 
 ```javascript
-const validator = require("multiform-validator");
+const mv = require("multiform-validator");
 // or
-import validator from "multiform-validator";
+import mv from "multiform-validator";
 
 or;
 
