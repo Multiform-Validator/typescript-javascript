@@ -25,11 +25,21 @@ https://cdn.jsdelivr.net/npm/multiform-validator@2.6.0/+esm
 
 ```html
 <script type="module">
-	import multiform-validator from "https://cdn.jsdelivr.net/npm/multiform-validator@2.6.0/+esm"
+	import mv from "https://cdn.jsdelivr.net/npm/multiform-validator@2.6.0/+esm"
 </script>
 ```
 
 ### CJS:
+
+jsDelivr:
+
+```bash
+https://cdn.jsdelivr.net/npm/multiform-validator@2.6.0/dist/index.min.js
+```
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/multiform-validator@2.6.0/dist/index.min.js"></script>
+```
 
 unpkg:
 
@@ -61,6 +71,8 @@ using esm:
 
 ```html
 <script type="module">
+	// You can also import only the functions you need
+	// like: import { isEmail, cpfIsValid } from "https://cdn.jsdelivr.net/npm/multiform-validator@2.6.0/+esm";
 	import mv from "https://cdn.jsdelivr.net/npm/multiform-validator@2.6.0/+esm";
 	const emailResult = mv.isEmail("123456");
 	const cpfResult = mv.cpfIsValid("123456");

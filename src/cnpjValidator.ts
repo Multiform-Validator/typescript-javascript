@@ -34,7 +34,7 @@ const defaultErrorMsg: string[] = [
 /**
  * @param cnpj
  * @param errorMsg optional
- * @example cpfIsValid('72.501.263/0001-40');
+ * @example cnpjIsValid('72.501.263/0001-40');
  * @description This function returns four errors in the following order,
  *
  * If you want to use a default parameter, use null or leave Empty.
