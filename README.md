@@ -15,49 +15,48 @@ Feel free to find bugs and report them to me. Your feedback is highly appreciate
 
 ## CDNs
 
-### ESM:
+### Default:
 
 jsDelivr:
 
 ```bash
-https://cdn.jsdelivr.net/npm/multiform-validator@2.6.0/+esm
+https://cdn.jsdelivr.net/npm/multiform-validator@2.6.1/dist/index.min.js
 ```
 
 ```html
-<script type="module">
-	import mv from "https://cdn.jsdelivr.net/npm/multiform-validator@2.6.0/+esm"
-</script>
-```
-
-### CJS:
-
-jsDelivr:
-
-```bash
-https://cdn.jsdelivr.net/npm/multiform-validator@2.6.0/dist/index.min.js
-```
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/multiform-validator@2.6.0/dist/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/multiform-validator@2.6.1/dist/index.min.js"></script>
 ```
 
 unpkg:
 
 ```bash
-https://unpkg.com/multiform-validator@2.6.0/dist/index.js
+https://unpkg.com/multiform-validator@2.6.1/dist/index.js
 ```
 
 ```html
-<script src="https://unpkg.com/multiform-validator@2.6.0/dist/index.js"></script>
+<script src="https://unpkg.com/multiform-validator@2.6.1/dist/index.js"></script>
+```
+
+### ESM:
+
+jsDelivr:
+
+```bash
+https://cdn.jsdelivr.net/npm/multiform-validator@2.6.1/+esm
+```
+
+```html
+<script type="module">
+	import mv from "https://cdn.jsdelivr.net/npm/multiform-validator@2.6.1/+esm"
+</script>
 ```
 
 ### Example of use with CDN
 
-using cjs:
-
 ```html
-<script src="https://unpkg.com/multiform-validator@2.6.0/dist/index.js"></script>
+<script src="https://unpkg.com/multiform-validator@2.6.1/dist/index.js"></script>
 <script>
+	// Multiform-validator is available in the global scope
 	const emailResult = isEmail("123456");
 	const cpfResult = cpfIsValid("123456");
 
@@ -65,15 +64,12 @@ using cjs:
 	console.log(cpfResult.isValid); // returns false
 </script>
 ```
-or
-
-using esm:
 
 ```html
 <script type="module">
 	// You can also import only the functions you need
-	// like: import { isEmail, cpfIsValid } from "https://cdn.jsdelivr.net/npm/multiform-validator@2.6.0/+esm";
-	import mv from "https://cdn.jsdelivr.net/npm/multiform-validator@2.6.0/+esm";
+	// like: import { isEmail, cpfIsValid } from "https://cdn.jsdelivr.net/npm/multiform-validator@2.6.1/+esm";
+	import mv from "https://cdn.jsdelivr.net/npm/multiform-validator@2.6.1/+esm";
 	const emailResult = mv.isEmail("123456");
 	const cpfResult = mv.cpfIsValid("123456");
 
