@@ -137,7 +137,7 @@ This package contains various modules for validating different types of data. Be
 - **validateUsername**: Username validation.
 - **validateUSPhoneNumber**: US phone number validation.
 
-### You can use it in React Native, Angular, any javascript framework or any javascript or typescript code.
+### You can use it in React Native, Nextjs, Nestjs, Angular, any javascript framework or any javascript or typescript code.
 
 #### Example using Reactjs:
 
