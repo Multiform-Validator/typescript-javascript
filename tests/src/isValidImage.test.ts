@@ -1,5 +1,6 @@
-import path from "path";
 import isValidImage from "../../src/isValidImage";
+
+import * as path from "path";
 import * as fs from "fs";
 
 describe("isValidImage", () => {

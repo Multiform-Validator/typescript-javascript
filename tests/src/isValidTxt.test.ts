@@ -1,5 +1,6 @@
 import isValidTxt from "../../src/isValidTxt";
-import path from "path";
+
+import * as path from "path";
 import * as fs from "fs";
 
 describe("isValidTxt", () => {
