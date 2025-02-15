@@ -34,11 +34,11 @@ https://cdn.jsdelivr.net/npm/multiform-validator@2.6.0/+esm
 unpkg:
 
 ```bash
-https://unpkg.com/multiform-validator@2.6.0/dist/cjs/index.cjs
+https://unpkg.com/multiform-validator@2.6.0/dist/index.js
 ```
 
 ```html
-<script src="https://unpkg.com/multiform-validator@2.6.0/dist/cjs/index.cjs"></script>
+<script src="https://unpkg.com/multiform-validator@2.6.0/dist/index.js"></script>
 ```
 
 ### Example of use with CDN
@@ -46,7 +46,7 @@ https://unpkg.com/multiform-validator@2.6.0/dist/cjs/index.cjs
 using cjs:
 
 ```html
-<script src="https://unpkg.com/multiform-validator@2.6.0/dist/cjs/index.cjs"></script>
+<script src="https://unpkg.com/multiform-validator@2.6.0/dist/index.js"></script>
 <script>
 	const emailResult = isEmail("123456");
 	const cpfResult = cpfIsValid("123456");
