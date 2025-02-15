@@ -40,7 +40,7 @@
 		"lint": "eslint src/**/*.ts tests/**/*.ts",
 		"lint:fix": "yarn lint --fix",
 		"format": "prettier --write '**/*.{ts,js}'",
-		"pr-check": "yarn prettier && yarn lint && yarn build && yarn test"
+		"pr-check": "yarn format && yarn lint && yarn build && yarn test"
 	},
 	"repository": {
 		"type": "git",
