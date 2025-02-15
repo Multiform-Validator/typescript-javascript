@@ -2,9 +2,9 @@
 	"name": "multiform-validator",
 	"version": "2.5.2",
 	"description": "Javascript library made to validate, several form fields, such as: email, images, phone, password, cpf etc.",
-	"main": "dist/index.js",
-	"module": "dist/index.mjs",
-	"types": "types/index.d.ts",
+	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
+	"types": "./types/index.d.ts",
 	"exports": {
 		".": {
 			"import": "./dist/index.mjs",
@@ -34,7 +34,7 @@
 		"test:watch": "jest --watch",
 		"build:types": "tsc -p tsconfig.types.json",
 		"build:src": "npx tsup index.ts --format esm --legacy-output",
-		"build:dist": "webpack",
+		"build:dist": "webpack --progress",
 		"build:clean": "rm -rf dist && rm -rf types",
 		"build": "yarn build:clean && yarn build:types && yarn build:dist",
 		"lint": "eslint src/**/*.ts tests/**/*.ts",
