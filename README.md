@@ -47,7 +47,7 @@ https://cdn.jsdelivr.net/npm/multiform-validator@2.6.1/+esm
 
 ```html
 <script type="module">
-	import mv from "https://cdn.jsdelivr.net/npm/multiform-validator@2.6.1/+esm"
+  import mv from "https://cdn.jsdelivr.net/npm/multiform-validator@2.6.1/+esm";
 </script>
 ```
 
@@ -56,25 +56,25 @@ https://cdn.jsdelivr.net/npm/multiform-validator@2.6.1/+esm
 ```html
 <script src="https://unpkg.com/multiform-validator@2.6.1/dist/index.js"></script>
 <script>
-	// Multiform-validator is available in the global scope
-	const emailResult = isEmail("123456");
-	const cpfResult = cpfIsValid("123456");
+  // Multiform-validator is available in the global scope
+  const emailResult = isEmail("123456");
+  const cpfResult = cpfIsValid("123456");
 
-	console.log(emailResult); // returns false
-	console.log(cpfResult.isValid); // returns false
+  console.log(emailResult); // returns false
+  console.log(cpfResult.isValid); // returns false
 </script>
 ```
 
 ```html
 <script type="module">
-	// You can also import only the functions you need
-	// like: import { isEmail, cpfIsValid } from "https://cdn.jsdelivr.net/npm/multiform-validator@2.6.1/+esm";
-	import mv from "https://cdn.jsdelivr.net/npm/multiform-validator@2.6.1/+esm";
-	const emailResult = mv.isEmail("123456");
-	const cpfResult = mv.cpfIsValid("123456");
+  // You can also import only the functions you need
+  // like: import { isEmail, cpfIsValid } from "https://cdn.jsdelivr.net/npm/multiform-validator@2.6.1/+esm";
+  import mv from "https://cdn.jsdelivr.net/npm/multiform-validator@2.6.1/+esm";
+  const emailResult = mv.isEmail("123456");
+  const cpfResult = mv.cpfIsValid("123456");
 
-	console.log(emailResult); // returns false
-	console.log(cpfResult.isValid); // returns false
+  console.log(emailResult); // returns false
+  console.log(cpfResult.isValid); // returns false
 </script>
 ```
 

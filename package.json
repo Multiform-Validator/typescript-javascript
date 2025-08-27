@@ -1,94 +1,94 @@
 {
-	"name": "multiform-validator",
-	"version": "2.6.1",
-	"description": "Javascript library made to validate, several form fields, such as: email, images, phone, password, cpf etc.",
-	"main": "./dist/index.js",
-	"types": "./types/index.d.ts",
-	"files": [
-		"dist",
-		"types"
-	],
-	"funding": [
-		{
-			"type": "github",
-			"url": "https://github.com/sponsors/gabriel-logan"
-		},
-		{
-			"type": "buy-me-a-coffee",
-			"url": "https://buymeacoffee.com/gabriellogan"
-		}
-	],
-	"scripts": {
-		"test": "jest --verbose",
-		"test:cov": "jest --coverage",
-		"test:full": "jest --verbose --coverage",
-		"test:file": "jest tests/src/isDecimal.test --watch",
-		"test:watch": "jest --watch",
-		"build:types": "tsc -p tsconfig.types.json",
-		"build:dist": "tsc",
-		"build:clean": "rm -rf dist && rm -rf types",
-		"build": "yarn build:clean && yarn build:types && yarn build:dist",
-		"lint": "eslint src/**/*.ts tests/**/*.ts",
-		"lint:fix": "yarn lint --fix",
-		"format": "prettier --write '**/*.{ts,js}'",
-		"pr-check": "yarn format && yarn lint && yarn build && yarn test"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/Multiform-Validator/typescript-javascript.git"
-	},
-	"keywords": [
-		"validator",
-		"multiform",
-		"validação",
-		"email-validator",
-		"multiform-validator",
-		"javascript",
-		"npm",
-		"security",
-		"safe",
-		"pentest",
-		"security-tools",
-		"Validator",
-		"validate",
-		"magic number",
-		"magic number validator",
-		"magic numbers",
-		"cpf",
-		"cnpj",
-		"email validator",
-		"password",
-		"email",
-		"isEmail",
-		"image"
-	],
-	"author": {
-		"name": "Gabriel Logan",
-		"url": "https://github.com/gabriel-logan"
-	},
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/Multiform-Validator/typescript-javascript/issues"
-	},
-	"homepage": "https://multiformvalidator.netlify.app",
-	"contributors": [
-		"Gabriel Logan",
-		"Breno A"
-	],
-	"devDependencies": {
-		"@eslint/js": "^9.20.0",
-		"@types/jest": "^29.5.14",
-		"@types/node": "^22.13.4",
-		"eslint": "^9.20.1",
-		"eslint-config-prettier": "^10.0.1",
-		"eslint-plugin-prettier": "^5.2.3",
-		"jest": "^29.7.0",
-		"prettier": "^3.5.1",
-		"ts-jest": "^29.2.5",
-		"ts-loader": "^9.5.2",
-		"ts-node": "^10.9.2",
-		"typescript": "^5.7.3",
-		"typescript-eslint": "^8.24.0"
-	},
-	"packageManager": "yarn@4.9.4"
+  "name": "multiform-validator",
+  "version": "2.6.1",
+  "description": "Javascript library made to validate, several form fields, such as: email, images, phone, password, cpf etc.",
+  "main": "./dist/index.js",
+  "types": "./types/index.d.ts",
+  "files": [
+    "dist",
+    "types"
+  ],
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/gabriel-logan"
+    },
+    {
+      "type": "buy-me-a-coffee",
+      "url": "https://buymeacoffee.com/gabriellogan"
+    }
+  ],
+  "scripts": {
+    "test": "jest --verbose",
+    "test:cov": "jest --coverage",
+    "test:full": "jest --verbose --coverage",
+    "test:file": "jest tests/src/isDecimal.test --watch",
+    "test:watch": "jest --watch",
+    "build:types": "tsc -p tsconfig.types.json",
+    "build:dist": "tsc",
+    "build:clean": "rm -rf dist && rm -rf types",
+    "build": "yarn build:clean && yarn build:types && yarn build:dist",
+    "lint": "eslint src/**/*.ts tests/**/*.ts",
+    "lint:fix": "yarn lint --fix",
+    "format": "prettier --write **/*.{ts,js,json,md,yml}",
+    "pr-check": "yarn format && yarn lint && yarn build && yarn test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Multiform-Validator/typescript-javascript.git"
+  },
+  "keywords": [
+    "validator",
+    "multiform",
+    "validação",
+    "email-validator",
+    "multiform-validator",
+    "javascript",
+    "npm",
+    "security",
+    "safe",
+    "pentest",
+    "security-tools",
+    "Validator",
+    "validate",
+    "magic number",
+    "magic number validator",
+    "magic numbers",
+    "cpf",
+    "cnpj",
+    "email validator",
+    "password",
+    "email",
+    "isEmail",
+    "image"
+  ],
+  "author": {
+    "name": "Gabriel Logan",
+    "url": "https://github.com/gabriel-logan"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Multiform-Validator/typescript-javascript/issues"
+  },
+  "homepage": "https://multiformvalidator.netlify.app",
+  "contributors": [
+    "Gabriel Logan",
+    "Breno A"
+  ],
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.13.4",
+    "eslint": "^9.20.1",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "jest": "^29.7.0",
+    "prettier": "^3.5.1",
+    "ts-jest": "^29.2.5",
+    "ts-loader": "^9.5.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.0"
+  },
+  "packageManager": "yarn@4.9.4"
 }
