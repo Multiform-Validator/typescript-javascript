@@ -31,6 +31,7 @@
     "lint": "eslint src/**/*.ts tests/**/*.ts",
     "lint:fix": "yarn lint --fix",
     "format": "prettier --write **/*.{ts,js,json,md,yml}",
+    "format:check": "yarn format --check",
     "pr-check": "yarn format && yarn lint && yarn build && yarn test"
   },
   "repository": {
