@@ -1,4 +1,4 @@
-import type { ValidateFunctions } from "./types";
+import type { ValidateFunctions } from "../types";
 
 // Função para calcular o primeiro dígito verificador
 function calculateFirstVerifier(cnpjBase: number[]): number {
