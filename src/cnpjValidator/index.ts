@@ -33,13 +33,13 @@ function cnpjIsValid(
     return cnpjIsValid2(cnpj, errorMsg);
   }
 
-  const isOnlyNumbers: boolean = /^\d+$/.test(cnpj.replace(/\D/g, ""));
+  const isCnpjOnlyNumbers: boolean = /^\d+$/.test(cnpj);
 
-  if (isOnlyNumbers) {
-    return cnpjIsValid1(cnpj, errorMsg);
+  if (isCnpjOnlyNumbers) {
+    return cnpjIsValid2(cnpj, errorMsg);
   }
 
-  return cnpjIsValid2(cnpj, errorMsg);
+  return cnpjIsValid1(cnpj, errorMsg);
 }
 
 export default cnpjIsValid;
