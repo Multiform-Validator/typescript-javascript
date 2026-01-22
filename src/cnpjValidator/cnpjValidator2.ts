@@ -2,7 +2,7 @@ import type { ValidateFunctions } from "../types";
 
 const defaultErrorMsg: string[] = [
   "CNPJ invalid",
-  "CNPJ must have 14 numerical digits",
+  "CNPJ must have 14 alphanumerical digits",
   "CNPJ is not valid",
 ];
 
@@ -73,22 +73,6 @@ function cnpjIsValid(
   cnpj: string,
   errorMsg: (string | null)[] | null = defaultErrorMsg,
 ): ValidateFunctions {
-  if (typeof cnpj !== "string") {
-    throw new TypeError("The input should be a string.");
-  }
-  // Check para saber se as mensagens que sao passadas sao validas
-  // caso contrario retorna um ERRO
-  if (errorMsg) {
-    if (!Array.isArray(errorMsg)) throw new Error("Must be an Array");
-    for (const element of errorMsg) {
-      if (element != null && typeof element !== "string") {
-        throw new TypeError(
-          "All values within the array must be strings or null/undefined.",
-        );
-      }
-    }
-  }
-
   // Função interna para obter a mensagem de erro
   function getErrorMessage(index: number): string {
     const errorMessage: string | null = errorMsg ? errorMsg[index] : null;
