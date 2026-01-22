@@ -36,10 +36,10 @@ function cnpjIsValid(
   const isCnpjOnlyNumbers: boolean = /^\d+$/.test(cnpj);
 
   if (isCnpjOnlyNumbers) {
-    return cnpjIsValid2(cnpj, errorMsg);
+    return cnpjIsValid1(cnpj, errorMsg);
   }
 
-  return cnpjIsValid1(cnpj, errorMsg);
+  return cnpjIsValid2(cnpj, errorMsg);
 }
 
 export default cnpjIsValid;
