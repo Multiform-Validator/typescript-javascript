@@ -109,10 +109,17 @@ function cnpjIsValid(
     };
   }
 
-  if (isValid(cnpj)) {
+  try {
+    if (isValid(cnpj)) {
+      return {
+        isValid: true,
+        errorMsg: null,
+      };
+    }
+  } catch {
     return {
-      isValid: true,
-      errorMsg: null,
+      isValid: false,
+      errorMsg: getErrorMessage(2), // 'CNPJ is not valid'
     };
   }
 
