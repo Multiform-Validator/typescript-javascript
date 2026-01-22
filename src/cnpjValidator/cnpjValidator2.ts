@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-extraneous-class */
-
 import type { ValidateFunctions } from "../types";
 
 const defaultErrorMsg: string[] = [
@@ -8,67 +6,67 @@ const defaultErrorMsg: string[] = [
   "CNPJ is not valid",
 ];
 
-export class CNPJ {
-  private static readonly tamanhoCNPJSemDV: number = 12;
-  private static readonly regexCNPJSemDV: RegExp = /^([A-Z\d]){12}$/;
-  private static readonly regexCNPJ: RegExp = /^([A-Z\d]){12}(\d){2}$/;
-  private static readonly regexCaracteresMascara: RegExp = /[./-]/g;
-  private static readonly regexCaracteresNaoPermitidos: RegExp = /[^A-Z\d./-]/i;
-  private static readonly valorBase: number = "0".charCodeAt(0); // nosonar
-  private static readonly pesosDV: number[] = [
-    6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2,
-  ];
-  private static readonly cnpjZerado: string = "00000000000000";
-  public static isValid(cnpj: string): boolean {
-    if (!this.regexCaracteresNaoPermitidos.test(cnpj)) {
-      const cnpjSemMascara: string = this.removeMascaraCNPJ(cnpj);
-      if (
-        this.regexCNPJ.test(cnpjSemMascara) &&
-        cnpjSemMascara !== CNPJ.cnpjZerado
-      ) {
-        const dvInformado: string = cnpjSemMascara.substring(
-          this.tamanhoCNPJSemDV,
-        );
-        const dvCalculado: string = this.calculaDV(
-          cnpjSemMascara.substring(0, this.tamanhoCNPJSemDV),
-        );
-        return dvInformado === dvCalculado;
-      }
-    }
-    return false;
-  }
-  public static calculaDV(cnpj: string): string {
-    if (!this.regexCaracteresNaoPermitidos.test(cnpj)) {
-      const cnpjSemMascara: string = this.removeMascaraCNPJ(cnpj);
-      if (
-        this.regexCNPJSemDV.test(cnpjSemMascara) &&
-        cnpjSemMascara !== this.cnpjZerado.substring(0, this.tamanhoCNPJSemDV)
-      ) {
-        let somatorioDV1: number = 0;
-        let somatorioDV2: number = 0;
-        for (let i: number = 0; i < this.tamanhoCNPJSemDV; i++) {
-          const asciiDigito: number =
-            cnpjSemMascara.charCodeAt(i) - this.valorBase; // nosonar
-          somatorioDV1 += asciiDigito * this.pesosDV[i + 1];
-          somatorioDV2 += asciiDigito * this.pesosDV[i];
-        }
-        const dv1: number =
-          somatorioDV1 % 11 < 2 ? 0 : 11 - (somatorioDV1 % 11);
-        somatorioDV2 += dv1 * this.pesosDV[this.tamanhoCNPJSemDV];
+const tamanhoCNPJSemDV: number = 12;
+const regexCNPJSemDV: RegExp = /^([A-Z\d]){12}$/;
+const regexCNPJ: RegExp = /^([A-Z\d]){12}(\d){2}$/;
+const regexCaracteresMascara: RegExp = /[./-]/g;
+const regexCaracteresNaoPermitidos: RegExp = /[^A-Z\d./-]/i;
+const valorBase: number = "0".charCodeAt(0); // nosonar
+const pesosDV: number[] = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+const cnpjZerado: string = "00000000000000";
 
-        const dv2: number =
-          somatorioDV2 % 11 < 2 ? 0 : 11 - (somatorioDV2 % 11);
+function isValid(cnpj: string): boolean {
+  if (!regexCaracteresNaoPermitidos.test(cnpj)) {
+    const cnpjSemMascara: string = removeMascaraCNPJ(cnpj);
 
-        return `${String(dv1)}${String(dv2)}`;
-      }
+    if (regexCNPJ.test(cnpjSemMascara) && cnpjSemMascara !== cnpjZerado) {
+      const dvInformado: string = cnpjSemMascara.substring(tamanhoCNPJSemDV);
+
+      const dvCalculado: string = calculaDV(
+        cnpjSemMascara.substring(0, tamanhoCNPJSemDV),
+      );
+
+      return dvInformado === dvCalculado;
     }
-    throw new Error(
-      "Não é possível calcular o DV pois o CNPJ fornecido é inválido",
-    );
   }
-  private static removeMascaraCNPJ(cnpj: string): string {
-    return cnpj.replace(this.regexCaracteresMascara, "");
+
+  return false;
+}
+
+function calculaDV(cnpj: string): string {
+  if (!regexCaracteresNaoPermitidos.test(cnpj)) {
+    const cnpjSemMascara: string = removeMascaraCNPJ(cnpj);
+
+    if (
+      regexCNPJSemDV.test(cnpjSemMascara) &&
+      cnpjSemMascara !== cnpjZerado.substring(0, tamanhoCNPJSemDV)
+    ) {
+      let somatorioDV1: number = 0;
+      let somatorioDV2: number = 0;
+
+      for (let i: number = 0; i < tamanhoCNPJSemDV; i++) {
+        const asciiDigito: number = cnpjSemMascara.charCodeAt(i) - valorBase; // nosonar
+
+        somatorioDV1 += asciiDigito * pesosDV[i + 1];
+        somatorioDV2 += asciiDigito * pesosDV[i];
+      }
+
+      const dv1: number = somatorioDV1 % 11 < 2 ? 0 : 11 - (somatorioDV1 % 11);
+      somatorioDV2 += dv1 * pesosDV[tamanhoCNPJSemDV];
+
+      const dv2: number = somatorioDV2 % 11 < 2 ? 0 : 11 - (somatorioDV2 % 11);
+
+      return `${String(dv1)}${String(dv2)}`;
+    }
   }
+
+  throw new Error(
+    "Não é possível calcular o DV pois o CNPJ fornecido é inválido",
+  );
+}
+
+function removeMascaraCNPJ(cnpj: string): string {
+  return cnpj.replace(regexCaracteresMascara, ""); // nosonar
 }
 
 function cnpjIsValid(
@@ -111,7 +109,7 @@ function cnpjIsValid(
     };
   }
 
-  if (CNPJ.isValid(cnpj)) {
+  if (isValid(cnpj)) {
     return {
       isValid: true,
       errorMsg: null,
